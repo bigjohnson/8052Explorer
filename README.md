@@ -86,7 +86,6 @@ Insert command, h for help.
 
 # 0, 1, 2, 3
 ```
-Insert command, h for help:
 Which pin from 0 to 7 of port 0?
 Pin 7 of port 0: 0 off, 1 on.
 Setting pin 7 of port 0 on.
