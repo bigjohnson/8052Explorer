@@ -42,7 +42,7 @@ Connect to pc from the serial, at the same serial speed of the compiled firmware
 - r reset the microcontroller.
 - H print this help.
 
-![FCP-024 breakout photo ](https://raw.githubusercontent.com/bigjohnson/bigjohnson.github.io/master/8052Explorer/8052Explorer.jpg)
+![8052Explorer](https://raw.githubusercontent.com/bigjohnson/bigjohnson.github.io/master/8052Explorer/8052Explorer.jpg)
 
 ## Boot screen:
 ```
