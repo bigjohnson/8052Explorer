@@ -16,9 +16,9 @@ Connect to pc from the serial line and has a menu with some apps that you can ch
 - H print this help.
 
 ##
-```
-Boot screen:
 
+Boot screen:
+```
               iWs                                 ,W[
               W@@W.                              g@@[
              i@@@@@s                           g@@@@W
