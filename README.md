@@ -13,10 +13,15 @@ You should connect three led to:
 - port 2_2 blink when a charcter is transmitted from serial line.
 
 The connection scheme is the classic for 8051 +V to anode ----|>---- katode to PORT
+
 If you connect led to all ports yo can power them on/off.
+
 Don't connect led to pin 0 and 1 of port 3, that are used for serial port.
+
 Serial port connection is
+
 - P3_0 receive data from pc, connect it to the tx of a 5v TTL usb serial converter.
+
 - P3_1 transmit data to pc, connect it to the rx of a 5v TTL usb serial converter.
 
 Connect to pc from the serial line and has a menu with some apps that you can choose with a single key press:
