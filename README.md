@@ -5,7 +5,7 @@
 Writed in c program language and compiled with SDCC 4.2.0, the cpu selection, oscillator clock and serial speed are choosed in the makefile.
 Connect to pc from the serial line and has a menu with some apps that you can choose with a single key press: 
 
-- 0, 1, 2 or 3 to change pin ports status.
+- 0, 1, 2 or 3 to change pin ports status 1/0.
 - c dump code memory.
 - C dump code memory in hex format.
 - e dump eeprom memory.
