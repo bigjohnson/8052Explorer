@@ -4,6 +4,10 @@
 
 Writed in c program language and compiled with SDCC 4.2.0, the cpu selection, oscillator clock and serial speed are choosed in the makefile.
 
+You need also the gnu make command to compile the firmware.
+
+Sdcc binary and make must be in command path.
+
 If you want burn a micro with the copiled file, without compiling yourelf, use the firmware build/8052Explorer.hex
 
 You should connect three led to: 
