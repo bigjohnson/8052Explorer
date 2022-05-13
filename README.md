@@ -24,7 +24,9 @@ Serial port connection is
 
 - P3_1 transmit data to pc, connect it to the rx of a 5v TTL usb serial converter.
 
-Connect to pc from the serial line and has a menu with some apps that you can choose with a single key press:
+Serial port speed is fixed ad selectable from some values in combination with oscillator frequency.
+
+Connect to pc from the serial, at the same serial speed of the compiled firmware, line and after reset the micro should compare a menu with some apps that you can choose with a single key press:
 
 - 0, 1, 2 or 3 to change pin ports status 1/0.
 - c dump code memory.
