@@ -291,7 +291,7 @@ void dumpCODE () {
 void dumpRAM () {
   unsigned char *puntatore = dati;
 
-  puts("Dumping code:");
+  puts("Dumping ram memory:");
   for (unsigned int indirizzo = 0; indirizzo <= 0xFF; indirizzo += 16 ) {
       if (indirizzo < 0x10) {
         printf_tiny("000%x  ", indirizzo);
