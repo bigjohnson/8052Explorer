@@ -15,9 +15,7 @@ Connect to pc from the serial line and has a menu with some apps that you can ch
 - r reset the microcontroller.
 - H print this help.
 
-##
-
-Boot screen:
+## Boot screen:
 ```
               iWs                                 ,W[
               W@@W.                              g@@[
@@ -52,7 +50,7 @@ W@@@@@@@@b          '~~      ,Z Yi      '~~          ,@@@@@@@@@
                 'V=_          -@@D         ,gY~ '
                     ~=__.           ,__z=~`
                          '~~~*==Y*f~~~ 
-```
+
 Cpu 89S8253 running at 50MHz
 Double system clock
 Warm reset
@@ -66,8 +64,20 @@ Print a string from code memory:
 Hello World...
 This is a test string.
 Insert command, h for help.
+```
 
 ## command output examples:
 
-#c:
+- c:
+```
+Dumping code:
+0000  02 00 29 32 FF FF FF FF FF FF FF 02 10 71 FF FF  |..)2.........q..|
+0010  FF FF FF 32 FF FF FF FF FF FF FF 32 FF FF FF FF  |...2.......2....|
+0020  FF FF FF 02 0F 96 02 0E 0B 75 81 59 12 12 B4 E5  |.........u.Y....|
+0030  82 60 03 02 00 26 79 00 E9 44 00 60 1B 7A 00 90  |.`...&y..D.`.z..|
+0040  1F 3A 78 01 75 A0 00 E4 93 F2 A3 08 B8 00 02 05  |.:x.u...........|
+0050  A0 D9 F4 DA F2 75 A0 FF E4 78 FF F6 D8 FD 78 00  |.....u...x....x.|
+0060  E8 44 00 60 0A 79 01 75 A0 00 E4 F3 09 D8 FC 78  |.D.`.y.u.......x|
+...
+```
 
