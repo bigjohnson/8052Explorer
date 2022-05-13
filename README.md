@@ -16,7 +16,7 @@ Connect to pc from the serial line and has a menu with some apps that you can ch
 - H print this help.
 
 ##
-
+```
 Boot screen:
 
               iWs                                 ,W[
@@ -52,7 +52,7 @@ W@@@@@@@@b          '~~      ,Z Yi      '~~          ,@@@@@@@@@
                 'V=_          -@@D         ,gY~ '
                     ~=__.           ,__z=~`
                          '~~~*==Y*f~~~ 
-
+```
 Cpu 89S8253 running at 50MHz
 Double system clock
 Warm reset
