@@ -75,7 +75,7 @@ Which pin from 0 to 7 of port 0?
 Pin 7 of port 0: 0 off, 1 on.
 Setting pin 7 of port 0 on.
 ```
-# c:
+# c
 ```
 Dumping code:
 0000  02 00 29 32 FF FF FF FF FF FF FF 02 10 71 FF FF  |..)2.........q..|
