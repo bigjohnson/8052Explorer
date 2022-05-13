@@ -50,3 +50,7 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# Vscode files
+seriale_eeprom.code-workspace
+.vscode/
