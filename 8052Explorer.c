@@ -516,7 +516,7 @@ void HELP ( void ) {
   #ifdef HASWATCHDOG
     puts("r reset the microcontroller.");
   #endif
-  puts("H print this help.");
+  puts("h print this help.");
 }
 
 void main( void ) {
