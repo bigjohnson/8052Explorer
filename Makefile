@@ -30,8 +30,7 @@ SDCCCFLAGS = --model-small -DMICRO_AT89S8253 -DCLOCK_11059200 -DDOUBLECLOCK -DBP
 all: build/8052Explorer.hex
 
 build/8052Explorer.hex: build/8052Explorer.rel build/eeprom.rel build/serial.rel build/timer0.rel
-	sdcc $(SDCCCFLAGS) build/8052Explorer.rel build/eeprom.rel build//serial.rel build//timer0.rel -o build/
-	#sdcc $(SDCCCFLAGS) 8052Explorer.rel library/serial.rel library/timer0.rel
+	sdcc $(SDCCCFLAGS) build/8052Explorer.rel build/eeprom.rel build/serial.rel build/timer0.rel -o build/
 	packihx build/8052Explorer.ihx > build/8052Explorer.hex
 
 build/serial.rel: library/serial.c library/serial.h
