@@ -72,7 +72,7 @@ void writeEepromAssembler (void) __naked
     __endasm;
 }
 
-void writeEeprom (unsigned char datavalue, unsigned short addres)
+unsigned char writeEeprom (unsigned char datavalue, unsigned short addres)
 {
    // Enable internal EEPROM
     //WMCON |= 8;
@@ -105,5 +105,6 @@ void writeEeprom (unsigned char datavalue, unsigned short addres)
     EECON &= ~8;
 
 
-    while (readEeprom(addres) != datavalue);
+    //while (readEeprom(addres) != datavalue);
+    return readEeprom(addres);
 }

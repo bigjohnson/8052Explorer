@@ -495,7 +495,7 @@ _writeEepromAssembler:
 ;addres                    Allocated with name '_writeEeprom_PARM_2'
 ;datavalue                 Allocated to registers r7 
 ;------------------------------------------------------------
-;	library/eeprom.c:75: void writeEeprom (unsigned char datavalue, unsigned short addres)
+;	library/eeprom.c:75: unsigned char writeEeprom (unsigned char datavalue, unsigned short addres)
 ;	-----------------------------------------
 ;	 function writeEeprom
 ;	-----------------------------------------
@@ -518,18 +518,11 @@ _writeEeprom:
 	anl	_EECON,#0xef
 ;	library/eeprom.c:105: EECON &= ~8;
 	anl	_EECON,#0xf7
-;	library/eeprom.c:108: while (readEeprom(addres) != datavalue);
-00104$:
+;	library/eeprom.c:109: return readEeprom(addres);
 	mov	dpl,_writeEeprom_PARM_2
 	mov	dph,(_writeEeprom_PARM_2 + 1)
-	push	ar7
-	lcall	_readEeprom
-	mov	r6,dpl
-	pop	ar7
-	mov	a,r6
-	cjne	a,ar7,00104$
-;	library/eeprom.c:109: }
-	ret
+;	library/eeprom.c:110: }
+	ljmp	_readEeprom
 	.area CSEG    (CODE)
 	.area CONST   (CODE)
 	.area XINIT   (CODE)

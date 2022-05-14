@@ -426,7 +426,7 @@
                                     426 ;	-----------------------------------------
                                     427 ;	 function init_timer0
                                     428 ;	-----------------------------------------
-      001077                        429 _init_timer0:
+      001010                        429 _init_timer0:
                            000007   430 	ar7 = 0x07
                            000006   431 	ar6 = 0x06
                            000005   432 	ar5 = 0x05
@@ -435,24 +435,24 @@
                            000002   435 	ar2 = 0x02
                            000001   436 	ar1 = 0x01
                            000000   437 	ar0 = 0x00
-      001077 AF 82            [24]  438 	mov	r7,dpl
+      001010 AF 82            [24]  438 	mov	r7,dpl
                                     439 ;	library/timer0.c:7: TMOD &= 0xF0; /* Timer 0 mode 0 with software gate */
-      001079 53 89 F0         [24]  440 	anl	_TMOD,#0xf0
+      001012 53 89 F0         [24]  440 	anl	_TMOD,#0xf0
                                     441 ;	library/timer0.c:12: TH0 = th; /* init values */
-      00107C 8F 8C            [24]  442 	mov	_TH0,r7
+      001015 8F 8C            [24]  442 	mov	_TH0,r7
                                     443 ;	library/timer0.c:13: TL0 = tl;
-      00107E 85 0E 8A         [24]  444 	mov	_TL0,_init_timer0_PARM_2
+      001017 85 0E 8A         [24]  444 	mov	_TL0,_init_timer0_PARM_2
                                     445 ;	library/timer0.c:17: ET0 = 1; /* enable timer0 interrupt */
                                     446 ;	assignBit
-      001081 D2 A9            [12]  447 	setb	_ET0
+      00101A D2 A9            [12]  447 	setb	_ET0
                                     448 ;	library/timer0.c:18: EA = 1; /* enable interrupts */
                                     449 ;	assignBit
-      001083 D2 AF            [12]  450 	setb	_EA
+      00101C D2 AF            [12]  450 	setb	_EA
                                     451 ;	library/timer0.c:19: TR0 = 1; /* timer0 run */
                                     452 ;	assignBit
-      001085 D2 8C            [12]  453 	setb	_TR0
+      00101E D2 8C            [12]  453 	setb	_TR0
                                     454 ;	library/timer0.c:20: }
-      001087 22               [24]  455 	ret
+      001020 22               [24]  455 	ret
                                     456 ;------------------------------------------------------------
                                     457 ;Allocation info for local variables in function 'millis'
                                     458 ;------------------------------------------------------------
@@ -460,12 +460,12 @@
                                     460 ;	-----------------------------------------
                                     461 ;	 function millis
                                     462 ;	-----------------------------------------
-      001088                        463 _millis:
+      001021                        463 _millis:
                                     464 ;	library/timer0.c:23: return millisx;
-      001088 85 56 82         [24]  465 	mov	dpl,_millisx
-      00108B 85 57 83         [24]  466 	mov	dph,(_millisx + 1)
+      001021 85 56 82         [24]  465 	mov	dpl,_millisx
+      001024 85 57 83         [24]  466 	mov	dph,(_millisx + 1)
                                     467 ;	library/timer0.c:24: }
-      00108E 22               [24]  468 	ret
+      001027 22               [24]  468 	ret
                                     469 ;------------------------------------------------------------
                                     470 ;Allocation info for local variables in function 'it_timer0'
                                     471 ;------------------------------------------------------------
@@ -473,7 +473,7 @@
                                     473 ;	-----------------------------------------
                                     474 ;	 function it_timer0
                                     475 ;	-----------------------------------------
-      00108F                        476 _it_timer0:
+      001028                        476 _it_timer0:
                            00001F   477 	ar7 = 0x1f
                            00001E   478 	ar6 = 0x1e
                            00001D   479 	ar5 = 0x1d
@@ -482,81 +482,81 @@
                            00001A   482 	ar2 = 0x1a
                            000019   483 	ar1 = 0x19
                            000018   484 	ar0 = 0x18
-      00108F C0 21            [24]  485 	push	bits
-      001091 C0 E0            [24]  486 	push	acc
-      001093 C0 F0            [24]  487 	push	b
-      001095 C0 82            [24]  488 	push	dpl
-      001097 C0 83            [24]  489 	push	dph
-      001099 C0 07            [24]  490 	push	(0+7)
-      00109B C0 06            [24]  491 	push	(0+6)
-      00109D C0 05            [24]  492 	push	(0+5)
-      00109F C0 04            [24]  493 	push	(0+4)
-      0010A1 C0 03            [24]  494 	push	(0+3)
-      0010A3 C0 02            [24]  495 	push	(0+2)
-      0010A5 C0 01            [24]  496 	push	(0+1)
-      0010A7 C0 00            [24]  497 	push	(0+0)
-      0010A9 C0 D0            [24]  498 	push	psw
-      0010AB 75 D0 18         [24]  499 	mov	psw,#0x18
+      001028 C0 21            [24]  485 	push	bits
+      00102A C0 E0            [24]  486 	push	acc
+      00102C C0 F0            [24]  487 	push	b
+      00102E C0 82            [24]  488 	push	dpl
+      001030 C0 83            [24]  489 	push	dph
+      001032 C0 07            [24]  490 	push	(0+7)
+      001034 C0 06            [24]  491 	push	(0+6)
+      001036 C0 05            [24]  492 	push	(0+5)
+      001038 C0 04            [24]  493 	push	(0+4)
+      00103A C0 03            [24]  494 	push	(0+3)
+      00103C C0 02            [24]  495 	push	(0+2)
+      00103E C0 01            [24]  496 	push	(0+1)
+      001040 C0 00            [24]  497 	push	(0+0)
+      001042 C0 D0            [24]  498 	push	psw
+      001044 75 D0 18         [24]  499 	mov	psw,#0x18
                                     500 ;	library/timer0.c:33: millisx++;
-      0010AE AE 56            [24]  501 	mov	r6,_millisx
-      0010B0 AF 57            [24]  502 	mov	r7,(_millisx + 1)
-      0010B2 74 01            [12]  503 	mov	a,#0x01
-      0010B4 2E               [12]  504 	add	a,r6
-      0010B5 F5 56            [12]  505 	mov	_millisx,a
-      0010B7 E4               [12]  506 	clr	a
-      0010B8 3F               [12]  507 	addc	a,r7
-      0010B9 F5 57            [12]  508 	mov	(_millisx + 1),a
+      001047 AE 56            [24]  501 	mov	r6,_millisx
+      001049 AF 57            [24]  502 	mov	r7,(_millisx + 1)
+      00104B 74 01            [12]  503 	mov	a,#0x01
+      00104D 2E               [12]  504 	add	a,r6
+      00104E F5 56            [12]  505 	mov	_millisx,a
+      001050 E4               [12]  506 	clr	a
+      001051 3F               [12]  507 	addc	a,r7
+      001052 F5 57            [12]  508 	mov	(_millisx + 1),a
                                     509 ;	library/timer0.c:35: if ( millisx < prima ) {
-      0010BB C3               [12]  510 	clr	c
-      0010BC E5 56            [12]  511 	mov	a,_millisx
-      0010BE 95 58            [12]  512 	subb	a,_prima
-      0010C0 E5 57            [12]  513 	mov	a,(_millisx + 1)
-      0010C2 95 59            [12]  514 	subb	a,(_prima + 1)
-      0010C4 50 06            [24]  515 	jnc	00102$
+      001054 C3               [12]  510 	clr	c
+      001055 E5 56            [12]  511 	mov	a,_millisx
+      001057 95 58            [12]  512 	subb	a,_prima
+      001059 E5 57            [12]  513 	mov	a,(_millisx + 1)
+      00105B 95 59            [12]  514 	subb	a,(_prima + 1)
+      00105D 50 06            [24]  515 	jnc	00102$
                                     516 ;	library/timer0.c:36: prima = millisx;
-      0010C6 85 56 58         [24]  517 	mov	_prima,_millisx
-      0010C9 85 57 59         [24]  518 	mov	(_prima + 1),(_millisx + 1)
-      0010CC                        519 00102$:
+      00105F 85 56 58         [24]  517 	mov	_prima,_millisx
+      001062 85 57 59         [24]  518 	mov	(_prima + 1),(_millisx + 1)
+      001065                        519 00102$:
                                     520 ;	library/timer0.c:38: if (millisx % ONE_SECOND_DIVISOR == 0 && millisx > prima) {
-      0010CC 75 0E 97         [24]  521 	mov	__moduint_PARM_2,#0x97
-      0010CF 75 0F 01         [24]  522 	mov	(__moduint_PARM_2 + 1),#0x01
-      0010D2 85 56 82         [24]  523 	mov	dpl,_millisx
-      0010D5 85 57 83         [24]  524 	mov	dph,(_millisx + 1)
-      0010D8 75 D0 00         [24]  525 	mov	psw,#0x00
-      0010DB 12 12 23         [24]  526 	lcall	__moduint
-      0010DE 75 D0 18         [24]  527 	mov	psw,#0x18
-      0010E1 E5 82            [12]  528 	mov	a,dpl
-      0010E3 85 83 F0         [24]  529 	mov	b,dph
-      0010E6 45 F0            [12]  530 	orl	a,b
-      0010E8 70 13            [24]  531 	jnz	00106$
-      0010EA C3               [12]  532 	clr	c
-      0010EB E5 58            [12]  533 	mov	a,_prima
-      0010ED 95 56            [12]  534 	subb	a,_millisx
-      0010EF E5 59            [12]  535 	mov	a,(_prima + 1)
-      0010F1 95 57            [12]  536 	subb	a,(_millisx + 1)
-      0010F3 50 08            [24]  537 	jnc	00106$
+      001065 75 0E 97         [24]  521 	mov	__moduint_PARM_2,#0x97
+      001068 75 0F 01         [24]  522 	mov	(__moduint_PARM_2 + 1),#0x01
+      00106B 85 56 82         [24]  523 	mov	dpl,_millisx
+      00106E 85 57 83         [24]  524 	mov	dph,(_millisx + 1)
+      001071 75 D0 00         [24]  525 	mov	psw,#0x00
+      001074 12 11 BC         [24]  526 	lcall	__moduint
+      001077 75 D0 18         [24]  527 	mov	psw,#0x18
+      00107A E5 82            [12]  528 	mov	a,dpl
+      00107C 85 83 F0         [24]  529 	mov	b,dph
+      00107F 45 F0            [12]  530 	orl	a,b
+      001081 70 13            [24]  531 	jnz	00106$
+      001083 C3               [12]  532 	clr	c
+      001084 E5 58            [12]  533 	mov	a,_prima
+      001086 95 56            [12]  534 	subb	a,_millisx
+      001088 E5 59            [12]  535 	mov	a,(_prima + 1)
+      00108A 95 57            [12]  536 	subb	a,(_millisx + 1)
+      00108C 50 08            [24]  537 	jnc	00106$
                                     538 ;	library/timer0.c:39: prima = millisx;
-      0010F5 85 56 58         [24]  539 	mov	_prima,_millisx
-      0010F8 85 57 59         [24]  540 	mov	(_prima + 1),(_millisx + 1)
+      00108E 85 56 58         [24]  539 	mov	_prima,_millisx
+      001091 85 57 59         [24]  540 	mov	(_prima + 1),(_millisx + 1)
                                     541 ;	library/timer0.c:40: P2_0 = !P2_0;
-      0010FB B2 A0            [12]  542 	cpl	_P2_0
-      0010FD                        543 00106$:
+      001094 B2 A0            [12]  542 	cpl	_P2_0
+      001096                        543 00106$:
                                     544 ;	library/timer0.c:43: }
-      0010FD D0 D0            [24]  545 	pop	psw
-      0010FF D0 00            [24]  546 	pop	(0+0)
-      001101 D0 01            [24]  547 	pop	(0+1)
-      001103 D0 02            [24]  548 	pop	(0+2)
-      001105 D0 03            [24]  549 	pop	(0+3)
-      001107 D0 04            [24]  550 	pop	(0+4)
-      001109 D0 05            [24]  551 	pop	(0+5)
-      00110B D0 06            [24]  552 	pop	(0+6)
-      00110D D0 07            [24]  553 	pop	(0+7)
-      00110F D0 83            [24]  554 	pop	dph
-      001111 D0 82            [24]  555 	pop	dpl
-      001113 D0 F0            [24]  556 	pop	b
-      001115 D0 E0            [24]  557 	pop	acc
-      001117 D0 21            [24]  558 	pop	bits
-      001119 32               [24]  559 	reti
+      001096 D0 D0            [24]  545 	pop	psw
+      001098 D0 00            [24]  546 	pop	(0+0)
+      00109A D0 01            [24]  547 	pop	(0+1)
+      00109C D0 02            [24]  548 	pop	(0+2)
+      00109E D0 03            [24]  549 	pop	(0+3)
+      0010A0 D0 04            [24]  550 	pop	(0+4)
+      0010A2 D0 05            [24]  551 	pop	(0+5)
+      0010A4 D0 06            [24]  552 	pop	(0+6)
+      0010A6 D0 07            [24]  553 	pop	(0+7)
+      0010A8 D0 83            [24]  554 	pop	dph
+      0010AA D0 82            [24]  555 	pop	dpl
+      0010AC D0 F0            [24]  556 	pop	b
+      0010AE D0 E0            [24]  557 	pop	acc
+      0010B0 D0 21            [24]  558 	pop	bits
+      0010B2 32               [24]  559 	reti
                                     560 	.area CSEG    (CODE)
                                     561 	.area CONST   (CODE)
                                     562 	.area XINIT   (CODE)

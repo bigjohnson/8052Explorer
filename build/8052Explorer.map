@@ -79,10 +79,10 @@ C:   00000082  s_GSINIT5
 C:   00000085  s_CSEG                          
 C:   000000A6  l_SSEG                          
 C:   00000100  l_IRAM                          
-C:   00000C9C  l_CONST                         
-C:   0000124B  l_CSEG                          
-C:   000012D0  s_CONST                         
-C:   00001F6C  s_XINIT                         
+C:   00000C44  l_CONST                         
+C:   000011E4  l_CSEG                          
+C:   00001269  s_CONST                         
+C:   00001EAD  s_XINIT                         
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 3.
 Hexadecimal  [32-Bits]
@@ -154,6 +154,7 @@ Area                                    Addr        Size        Decimal Bytes (A
       -----  --------------------------------   ------------------------
      00000096  _MISO                              timer0
      00000096  _P1_6                              timer0
+     00000096  _WMCON                             8052Explorer
      00000097  _P1_7                              timer0
      00000097  _SCK                               timer0
      00000098  _RI                                timer0
@@ -202,7 +203,6 @@ Area                                    Addr        Size        Decimal Bytes (A
      000000B5  _P3_5                              timer0
      000000B5  _T1                                timer0
      000000B6  _P3_6                              timer0
-     000000B6  _WR                                timer0
 ASxxxx Linker V03.00 + NoICE + sdld,  page 5.
 Hexadecimal  [32-Bits]
 
@@ -212,6 +212,7 @@ Area                                    Addr        Size        Decimal Bytes (A
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
+     000000B6  _WR                                timer0
      000000B7  _IPH                               timer0
      000000B7  _P3_7                              timer0
      000000B7  _RD                                timer0
@@ -262,7 +263,6 @@ Area                                    Addr        Size        Decimal Bytes (A
      000000F1  _BREG_F1                           timer0
      000000F2  _BREG_F2                           timer0
      000000F3  _BREG_F3                           timer0
-     000000F4  _BREG_F4                           timer0
 ASxxxx Linker V03.00 + NoICE + sdld,  page 6.
 Hexadecimal  [32-Bits]
 
@@ -272,13 +272,13 @@ Area                                    Addr        Size        Decimal Bytes (A
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
+     000000F4  _BREG_F4                           timer0
      000000F5  _BREG_F5                           timer0
      000000F5  _B_5                               _gptrget
      000000F6  _BREG_F6                           timer0
      000000F6  _B_6                               _gptrget
      000000F7  _BREG_F7                           timer0
      000000F7  _B_7                               _gptrget
-
 ASxxxx Linker V03.00 + NoICE + sdld,  page 7.
 Hexadecimal  [32-Bits]
 
@@ -438,52 +438,50 @@ Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-CSEG                                00000085    0000124B =        4683. bytes (REL,CON,CODE)
+CSEG                                00000085    000011E4 =        4580. bytes (REL,CON,CODE)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-C:   00000085  _watchdogRESET                     8052Explorer
-C:   0000008C  _felix                             8052Explorer
-C:   000000A1  _dumpEEPROM                        8052Explorer
-C:   0000026E  _hexEEPROM                         8052Explorer
-C:   000004A9  _dumpCODE                          8052Explorer
-C:   0000069D  _dumpRAM                           8052Explorer
-C:   00000890  _hexCODE                           8052Explorer
-C:   00000AC8  _reset                             8052Explorer
-C:   00000AD3  _start                             8052Explorer
-C:   00000BCE  _p                                 8052Explorer
-C:   00000E02  _HELP                              8052Explorer
-C:   00000E0B  _main                              8052Explorer
-C:   00000F0E  _readEepromAssembler               eeprom
-C:   00000F28  _readEeprom                        eeprom
-C:   00000F3D  _writeEepromAssembler              eeprom
-C:   00000F57  _writeEeprom                       eeprom
-C:   00000F84  _init_ser                          serial
-C:   00000FB4  _SerInt                            serial
-C:   00001005  _ser_write_byte                    serial
-C:   0000102A  _ser_byte_avail                    serial
-C:   00001041  _ser_read_byte                     serial
-C:   0000105B  _putchar                           serial
-C:   0000106F  _getchar                           serial
-C:   00001077  _init_timer0                       timer0
-C:   00001088  _millis                            timer0
-C:   0000108F  _it_timer0                         timer0
-C:   0000111A  _printf_tiny                       printf_tiny
-C:   00001223  __moduint                          _moduint
-C:   00001270  _puts                              puts
-C:   000012B0  __gptrget                          _gptrget
-C:   000012CC  __sdcc_external_startup            _startup
-
+C:   00000085  _felix                             8052Explorer
+C:   0000009A  _dumpEEPROM                        8052Explorer
+C:   00000267  _hexEEPROM                         8052Explorer
+C:   000004A2  _dumpCODE                          8052Explorer
+C:   00000696  _dumpRAM                           8052Explorer
+C:   00000889  _hexCODE                           8052Explorer
+C:   00000AC1  _reset                             8052Explorer
+C:   00000ACC  _start                             8052Explorer
+C:   00000B82  _p                                 8052Explorer
+C:   00000DB6  _HELP                              8052Explorer
+C:   00000DBF  _main                              8052Explorer
+C:   00000EB2  _readEepromAssembler               eeprom
+C:   00000ECC  _readEeprom                        eeprom
+C:   00000EE1  _writeEepromAssembler              eeprom
+C:   00000EFB  _writeEeprom                       eeprom
+C:   00000F1D  _init_ser                          serial
+C:   00000F4D  _SerInt                            serial
+C:   00000F9E  _ser_write_byte                    serial
+C:   00000FC3  _ser_byte_avail                    serial
+C:   00000FDA  _ser_read_byte                     serial
+C:   00000FF4  _putchar                           serial
+C:   00001008  _getchar                           serial
+C:   00001010  _init_timer0                       timer0
+C:   00001021  _millis                            timer0
+C:   00001028  _it_timer0                         timer0
+C:   000010B3  _printf_tiny                       printf_tiny
+C:   000011BC  __moduint                          _moduint
+C:   00001209  _puts                              puts
+C:   00001249  __gptrget                          _gptrget
+C:   00001265  __sdcc_external_startup            _startup
 ASxxxx Linker V03.00 + NoICE + sdld,  page 22.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-CONST                               000012D0    00000C9C =        3228. bytes (REL,CON,CODE)
+CONST                               00001269    00000C44 =        3140. bytes (REL,CON,CODE)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-C:   000012D0  _acTestString                      8052Explorer
+C:   00001269  _acTestString                      8052Explorer
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 23.
 

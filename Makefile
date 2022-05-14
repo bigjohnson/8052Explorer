@@ -18,12 +18,12 @@
 #SDCCCFLAGS = --model-small -DMICRO_AT89S8253 -DCLOCK_20000000 -DBPS14400
 #SDCCCFLAGS = --model-small -DMICRO_AT89S8253 -DCLOCK_20000000 -DBPS9600
 #SDCCCFLAGS = --model-small -DMICRO_AT89S8253 -DCLOCK_11059200 -DBPS115200
-SDCCCFLAGS = --model-small -DMICRO_AT89S8253 -DCLOCK_11059200 -DDOUBLECLOCK -DBPS115200
+#SDCCCFLAGS = --model-small -DMICRO_AT89S8253 -DCLOCK_11059200 -DDOUBLECLOCK -DBPS115200
 #SDCCCFLAGS = --model-small -DMICRO_AT89S8252 -DCLOCK_40000000 -DBPS28800
 #SDCCCFLAGS = --model-small -DMICRO_AT89S8252 -DCLOCK_40000000 -DBPS19200
 #SDCCCFLAGS = --model-small -DMICRO_AT89S8252 -DCLOCK_20000000 -DBPS14400
 #SDCCCFLAGS = --model-small -DMICRO_AT89S8252 -DCLOCK_20000000 -DBPS9600
-#SDCCCFLAGS = --model-small -DMICRO_AT89S8252 -DCLOCK_11059200 -DBPS115200
+SDCCCFLAGS = --model-small -DMICRO_AT89S8252 -DCLOCK_11059200 -DBPS115200
 #SDCCCFLAGS = --model-small -DMICRO_AT89X52 -DCLOCK_11059200 -DBPS115200
 
 
@@ -46,8 +46,12 @@ build/timer0.rel: library/timer0.c library/timer0.h
 build/8052Explorer.rel: 8052Explorer.c microsetup.h
 	sdcc $(SDCCCFLAGS) -c 8052Explorer.c -o build/
 
-writeeeprom: all
+writeeeprom3: all
 	C:\Users\alberto\Documents\GitHub\at89s8252-arduino\programfast3.sh C:\Users\alberto\Documents\GitHub\at89s8252-arduino\
+
+writeeeprom: all
+	C:\Users\alberto\Documents\GitHub\at89s8252-arduino\program.sh C:\Users\alberto\Documents\GitHub\at89s8252-arduino\
+
 
 .PHONY: clean
 clean:

@@ -4,6 +4,6 @@
 #include <at89S8253.h>
 
 extern unsigned char readEeprom( unsigned short addres );
-extern void writeEeprom (unsigned char datavalue, unsigned short addres);
+extern unsigned char writeEeprom (unsigned char datavalue, unsigned short addres);
 
 #endif

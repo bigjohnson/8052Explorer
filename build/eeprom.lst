@@ -495,7 +495,7 @@
                                     495 ;addres                    Allocated with name '_writeEeprom_PARM_2'
                                     496 ;datavalue                 Allocated to registers r7 
                                     497 ;------------------------------------------------------------
-                                    498 ;	library/eeprom.c:75: void writeEeprom (unsigned char datavalue, unsigned short addres)
+                                    498 ;	library/eeprom.c:75: unsigned char writeEeprom (unsigned char datavalue, unsigned short addres)
                                     499 ;	-----------------------------------------
                                     500 ;	 function writeEeprom
                                     501 ;	-----------------------------------------
@@ -518,19 +518,12 @@
       00005C 53 96 EF         [24]  518 	anl	_EECON,#0xef
                                     519 ;	library/eeprom.c:105: EECON &= ~8;
       00005F 53 96 F7         [24]  520 	anl	_EECON,#0xf7
-                                    521 ;	library/eeprom.c:108: while (readEeprom(addres) != datavalue);
-      000062                        522 00104$:
-      000062 85*03 82         [24]  523 	mov	dpl,_writeEeprom_PARM_2
-      000065 85*04 83         [24]  524 	mov	dph,(_writeEeprom_PARM_2 + 1)
-      000068 C0 07            [24]  525 	push	ar7
-      00006A 12r00r1A         [24]  526 	lcall	_readEeprom
-      00006D AE 82            [24]  527 	mov	r6,dpl
-      00006F D0 07            [24]  528 	pop	ar7
-      000071 EE               [12]  529 	mov	a,r6
-      000072 B5 07 ED         [24]  530 	cjne	a,ar7,00104$
-                                    531 ;	library/eeprom.c:109: }
-      000075 22               [24]  532 	ret
-                                    533 	.area CSEG    (CODE)
-                                    534 	.area CONST   (CODE)
-                                    535 	.area XINIT   (CODE)
-                                    536 	.area CABS    (ABS,CODE)
+                                    521 ;	library/eeprom.c:109: return readEeprom(addres);
+      000062 85*03 82         [24]  522 	mov	dpl,_writeEeprom_PARM_2
+      000065 85*04 83         [24]  523 	mov	dph,(_writeEeprom_PARM_2 + 1)
+                                    524 ;	library/eeprom.c:110: }
+      000068 02r00r1A         [24]  525 	ljmp	_readEeprom
+                                    526 	.area CSEG    (CODE)
+                                    527 	.area CONST   (CODE)
+                                    528 	.area XINIT   (CODE)
+                                    529 	.area CABS    (ABS,CODE)

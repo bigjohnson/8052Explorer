@@ -393,11 +393,6 @@ void start( void )
       WDTRST = 0xE1;
     #endif
     #ifdef HASDOUBLECLOCK
-      /*if ( MYCLKREG ) {
-        CLKREG |= MYCLKREG;
-      } else {
-        CLKREG &= MYCLKREG;
-      }*/
       #if MYCLKREG  == CLKREG_X2
         CLKREG |= CLKREG_X2;
       #else
@@ -567,9 +562,11 @@ void main( void ) {
             case 'm':
               dumpRAM();
               break;
+#ifdef HASWATCHDOG
             case 'r':
               reset();
               break;
+#endif
             case 'h':
             case 'H':
               HELP();

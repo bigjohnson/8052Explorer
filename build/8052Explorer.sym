@@ -234,7 +234,7 @@ Symbol Table
     _EXF2                                                       =  0000CE G
     _F0                                                         =  0000D5 G
     _FL                                                         =  0000D1 G
- 17 _HELP                                                          000D7D GR
+ 17 _HELP                                                          000D31 GR
     _IE                                                         =  0000A8 G
     _IE0                                                        =  000089 G
     _IE1                                                        =  00008B G
@@ -365,23 +365,20 @@ Symbol Table
 
     _WDTCON                                                     =  0000A7 G
     _WDTRST                                                     =  0000A6 G
+    _WMCON                                                      =  000096 G
     _WR                                                         =  0000B6 G
- 18 ___str_100                                                     000954 R
- 18 ___str_101                                                     00099B R
- 18 ___str_102                                                     0009BE R
- 18 ___str_103                                                     0009E1 R
- 18 ___str_104                                                     000A04 R
- 18 ___str_105                                                     000A18 R
- 18 ___str_106                                                     000A25 R
- 18 ___str_107                                                     000A44 R
- 18 ___str_108                                                     000A64 R
- 18 ___str_112                                                     000A74 R
- 18 ___str_113                                                     000AAE R
- 18 ___str_115                                                     000ABB R
- 18 ___str_134                                                     000B4D R
- 18 ___str_135                                                     000C4F R
- 18 ___str_136                                                     000C6B R
- 18 ___str_137                                                     000C80 R
+ 18 ___str_100                                                     0009C9 R
+ 18 ___str_101                                                     0009DD R
+ 18 ___str_102                                                     0009EA R
+ 18 ___str_103                                                     000A09 R
+ 18 ___str_104                                                     000A29 R
+ 18 ___str_108                                                     000A39 R
+ 18 ___str_109                                                     000A73 R
+ 18 ___str_111                                                     000A80 R
+ 18 ___str_128                                                     000B12 R
+ 18 ___str_129                                                     000BF7 R
+ 18 ___str_130                                                     000C13 R
+ 18 ___str_131                                                     000C28 R
  18 ___str_64                                                      000027 R
  18 ___str_65                                                      000778 R
  18 ___str_66                                                      0007AD R
@@ -409,61 +406,60 @@ Symbol Table
  18 ___str_88                                                      000894 R
  18 ___str_89                                                      00089C R
  18 ___str_90                                                      0008A4 R
- 18 ___str_91                                                      0008B8 R
- 18 ___str_92                                                      0008C3 R
- 18 ___str_93                                                      0008CE R
- 18 ___str_94                                                      0008DF R
- 18 ___str_95                                                      000909 R
- 18 ___str_96                                                      000923 R
- 18 ___str_97                                                      00092A R
+ 18 ___str_91                                                      0008CE R
+ 18 ___str_92                                                      0008E8 R
+ 18 ___str_93                                                      0008EF R
+ 18 ___str_96                                                      000919 R
+ 18 ___str_97                                                      000960 R
+ 18 ___str_98                                                      000983 R
+ 18 ___str_99                                                      0009A6 R
     __gptrget                                                      ****** GX
   E __interrupt_vect                                               000000 R
+    __mcs51_genRAMCLEAR                                            ****** GX
+    __mcs51_genXINIT                                               ****** GX
+    __mcs51_genXRAMCLEAR                                           ****** GX
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Intel 8051), page 8.
 Hexadecimal [24-Bits]
 
 Symbol Table
 
-    __mcs51_genRAMCLEAR                                            ****** GX
-    __mcs51_genXINIT                                               ****** GX
-    __mcs51_genXRAMCLEAR                                           ****** GX
     __sdcc_gsinit_startup                                          ****** GX
   E __sdcc_program_startup                                         000026 GR
   6 __start__stack                                                 000000 GR
  18 _acTestString                                                  000000 GR
     _codice                                                     =  000000 G
     _dati                                                       =  000000 G
- 17 _dumpCODE                                                      000424 GR
-  5 _dumpCODE_indirizzo_131072_58                                  000000 R
-  5 _dumpCODE_posto_262144_64                                      000002 R
-  5 _dumpCODE_posto_262144_67                                      000004 R
- 17 _dumpEEPROM                                                    00001C GR
- 17 _dumpRAM                                                       000618 GR
-  5 _dumpRAM_indirizzo_131072_72                                   000005 R
-  5 _dumpRAM_posto_262144_78                                       000007 R
-  5 _dumpRAM_posto_262144_81                                       000009 R
- 17 _felix                                                         000007 GR
+ 17 _dumpCODE                                                      00041D GR
+  5 _dumpCODE_indirizzo_131072_56                                  000000 R
+  5 _dumpCODE_posto_262144_62                                      000002 R
+  5 _dumpCODE_posto_262144_65                                      000004 R
+ 17 _dumpEEPROM                                                    000015 GR
+ 17 _dumpRAM                                                       000611 GR
+  5 _dumpRAM_indirizzo_131072_70                                   000005 R
+  5 _dumpRAM_posto_262144_76                                       000007 R
+  5 _dumpRAM_posto_262144_79                                       000009 R
+ 17 _felix                                                         000000 GR
     _getchar                                                       ****** GX
- 17 _hexCODE                                                       00080B GR
-  5 _hexCODE_checksum_65537_86                                     00000D R
-  5 _hexCODE_puntatore_65536_85                                    00000A R
- 17 _hexEEPROM                                                     0001E9 GR
+ 17 _hexCODE                                                       000804 GR
+  5 _hexCODE_checksum_65537_84                                     00000D R
+  5 _hexCODE_puntatore_65536_83                                    00000A R
+ 17 _hexEEPROM                                                     0001E2 GR
     _init_ser                                                      ****** GX
     _init_ser_PARM_2                                               ****** GX
     _init_timer0                                                   ****** GX
     _init_timer0_PARM_2                                            ****** GX
     _it_timer0                                                     ****** GX
- 17 _main                                                          000D86 GR
+ 17 _main                                                          000D3A GR
   9 _main_sloc0_1_0                                                000000 R
- 17 _p                                                             000B49 GR
-  5 _p_pin_65537_110                                               00000F R
+ 17 _p                                                             000AFD GR
+  5 _p_pin_65537_105                                               00000F R
     _printf_tiny                                                   ****** GX
     _putchar                                                       ****** GX
     _puts                                                          ****** GX
     _readEeprom                                                    ****** GX
- 17 _reset                                                         000A43 GR
+ 17 _reset                                                         000A3C GR
     _ser_byte_avail                                                ****** GX
- 17 _start                                                         000A4E GR
- 17 _watchdogRESET                                                 000000 GR
+ 17 _start                                                         000A47 GR
     _writeEeprom                                                   ****** GX
     _writeEeprom_PARM_2                                            ****** GX
     a                                                           =  0000E0 L
@@ -478,15 +474,15 @@ Symbol Table
     ac                                                          =  0000D6 L
     acc                                                         =  0000E0 L
     acc.0                                                       =  0000E0 L
+    acc.1                                                       =  0000E1 L
+    acc.2                                                       =  0000E2 L
+    acc.3                                                       =  0000E3 L
+    acc.4                                                       =  0000E4 L
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Intel 8051), page 9.
 Hexadecimal [24-Bits]
 
 Symbol Table
 
-    acc.1                                                       =  0000E1 L
-    acc.2                                                       =  0000E2 L
-    acc.3                                                       =  0000E3 L
-    acc.4                                                       =  0000E4 L
     acc.5                                                       =  0000E5 L
     acc.6                                                       =  0000E6 L
     acc.7                                                       =  0000E7 L
@@ -538,15 +534,15 @@ Symbol Table
     ip.0                                                        =  0000B8 L
     ip.1                                                        =  0000B9 L
     ip.2                                                        =  0000BA L
+    ip.3                                                        =  0000BB L
+    ip.4                                                        =  0000BC L
+    ip.5                                                        =  0000BD L
+    it0                                                         =  000088 L
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Intel 8051), page 10.
 Hexadecimal [24-Bits]
 
 Symbol Table
 
-    ip.3                                                        =  0000BB L
-    ip.4                                                        =  0000BC L
-    ip.5                                                        =  0000BD L
-    it0                                                         =  000088 L
     it1                                                         =  00008A L
     ov                                                          =  0000D2 L
     p                                                           =  0000D0 L
@@ -598,15 +594,15 @@ Symbol Table
     psw.6                                                       =  0000D6 L
     psw.7                                                       =  0000D7 L
     pt0                                                         =  0000B9 L
+    pt1                                                         =  0000BB L
+    pt2                                                         =  0000BD L
+    px0                                                         =  0000B8 L
+    px1                                                         =  0000BA L
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Intel 8051), page 11.
 Hexadecimal [24-Bits]
 
 Symbol Table
 
-    pt1                                                         =  0000BB L
-    pt2                                                         =  0000BD L
-    px0                                                         =  0000B8 L
-    px1                                                         =  0000BA L
     rb8                                                         =  00009A L
     rcap2h                                                      =  0000CB L
     rcap2l                                                      =  0000CA L
@@ -658,18 +654,19 @@ Symbol Table
     th2                                                         =  0000CD L
     ti                                                          =  000099 L
     tl0                                                         =  00008A L
+    tl1                                                         =  00008B L
+    tl2                                                         =  0000CC L
+    tmod                                                        =  000089 L
+    tr0                                                         =  00008C L
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Intel 8051), page 12.
 Hexadecimal [24-Bits]
 
 Symbol Table
 
-    tl1                                                         =  00008B L
-    tl2                                                         =  0000CC L
-    tmod                                                        =  000089 L
-    tr0                                                         =  00008C L
     tr1                                                         =  00008E L
     tr2                                                         =  0000CA L
     txd                                                         =  0000B1 L
+
 
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Intel 8051), page 13.
 Hexadecimal [24-Bits]
@@ -699,8 +696,8 @@ Area Table
   14 GSINIT5                                    size      0   flags   20
   15 GSINIT                                     size      0   flags   20
   16 GSFINAL                                    size      3   flags   20
-  17 CSEG                                       size    E89   flags   20
-  18 CONST                                      size    C9C   flags   20
+  17 CSEG                                       size    E2D   flags   20
+  18 CONST                                      size    C44   flags   20
   19 XINIT                                      size      0   flags   20
   1A CABS                                       size      0   flags   28
 
