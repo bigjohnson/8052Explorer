@@ -1,3 +1,13 @@
 # Vscode files
 seriale_eeprom.code-workspace
 .vscode/
+build/*.asm
+build/*.lk
+build/*.lst
+build/*.map
+build/*.mem
+build/*.rel
+build/*.sym
+build/*.rst
+build/*.ihx
+build/*.hex
