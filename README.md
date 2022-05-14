@@ -1,6 +1,6 @@
 # 8052Explorer
 
-## An 8052 firmware to gain experiences with the micro, for 89s8252, 89s8253
+## An 8052 firmware to gain experiences with the micro, for 89s8252, 89s8253, at89c52
 
 Writed in c program language and compiled with SDCC 4.2.0, the cpu selection, oscillator clock and serial speed are choosed in the makefile.
 
