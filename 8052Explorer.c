@@ -9,7 +9,6 @@
 // Includes.
 // ---------------------------------------------------------------------------
 //
-
 #include "library/eeprom.h"
 #include "library/serial.h"
 #include "library/timer0.h"
@@ -114,14 +113,15 @@ __data __at (0x00) unsigned char dati[];
 //TH0 = 0x1B; /* init values */
 //TL0 = 0xE8;
 
-//------------------------------------------------------------------
+//------------------------------------------------------------------
 // Main routine here
 //------------------------------------------------------------------
-
-void watchdogRESET ( void ) {
-  WDTRST = 0x1E;
-  WDTRST = 0xE1;
-}
+#ifdef HASWATCHDOG
+  void watchdogRESET ( void ) {
+    WDTRST = 0x1E;
+    WDTRST = 0xE1;
+  }
+#endif
 
 void felix (void) {
 putchar('\r');
@@ -161,6 +161,7 @@ puts("                         '~~~*==Y*f~~~ ");
 putchar('\r');
 }
 
+#ifdef HASEEPROM
 void dumpEEPROM () {
   puts("Dumping eeprom content and changing first character:");
 
@@ -249,6 +250,7 @@ void hexEEPROM () {
   putchar('\r');
 
 }
+#endif
 
 void dumpCODE () {
   unsigned char *puntatore = codice;
@@ -383,40 +385,55 @@ void reset( void ) {
 
 void start( void )
 {
-    WDTCON |= 0xE0; // 2048 ms at 12MHz
-    WDTCON |= 0x8; // no hardware pin low on reset
-    WDTCON |= 0x4; // enable Watchdog
-    WDTRST = 0x1E;
-    WDTRST = 0xE1;
-    #ifdef MYCLKREG
-      CLKREG |= MYCLKREG;
+    #ifdef HASWATCHDOG
+      WDTCON |= 0xE0; // 2048 ms at 12MHz
+      WDTCON |= 0x8; // no hardware pin low on reset
+      WDTCON |= 0x4; // enable Watchdog
+      WDTRST = 0x1E;
+      WDTRST = 0xE1;
     #endif
+    #ifdef HASDOUBLECLOCK
+      /*if ( MYCLKREG ) {
+        CLKREG |= MYCLKREG;
+      } else {
+        CLKREG &= MYCLKREG;
+      }*/
+      #if MYCLKREG  == CLKREG_X2
+        CLKREG |= CLKREG_X2;
+      #else
+        CLKREG &= !CLKREG_X2;
+      #endif
+    #endif
+    P0=0xFF;
+    P1=0xFF;
+    P2=0xFF;
+    P3=0xFF;
     init_ser(MYTH2, MYTL2);
     felix();
     printf_tiny("Cpu %s running at %sMHz\r", CPU,  MHZ);
-    #ifdef MYCLKREG
+    #ifdef HASDOUBLECLOCK
       if (CLKREG & CLKREG_X2) {
         puts("Double system clock");
       }
     #endif
+    #ifdef HASCOLDWARM
     if (PCON & 0x10) {
       puts("Cold reset");
       PCON &= ~0x10;
     } else {
       puts("Warm reset");
     }
-    puts("Enabled watchdog");
-    P0=0xFF;
-    P1=0xFF;
-    P2=0xFF;
-    P3=0xFF;
+    #endif
+    #ifdef HASWATCHDOG
+      puts("Enabled watchdog");
+    #endif
     printf_tiny("Started timer 2 with th = %x and tl = %x\r",MYTH2, MYTL2);
     printf_tiny("Started serial at %s bps\r", BPS);
     init_timer0(0xDE, 0xED);
     printf_tiny("Started timer 0 with th = %x and tl = %x\r", 0xDE, 0xED);
     puts("Hello World...\rThis is a test string.");
     puts("Print a string from code memory:");
-    puts(acTestString);
+    puts(acTestString); 
 }
 
 void p( unsigned char porta ) {
@@ -495,11 +512,15 @@ void HELP ( void ) {
   puts("0, 1, 2 or 3 to change pin ports status.");
   puts("c dump code memory.");
   puts("C dump code memory in hex format.");
-  puts("e dump eeprom memory.");
-  puts("E dump eeprom memory in hex format.");
+  #ifdef HASEEPROM
+    puts("e dump eeprom memory.");
+    puts("E dump eeprom memory in hex format.");
+  #endif
   puts("m dump ram memory.");
   puts("f print felix");
-  puts("r reset the microcontroller.");
+  #ifdef HASWATCHDOG
+    puts("r reset the microcontroller.");
+  #endif
   puts("H print this help.");
 }
 
@@ -509,7 +530,9 @@ void main( void ) {
 
     while( 1 )							// forever.
     {
-        watchdogRESET();
+        #ifdef HASWATCHDOG
+          watchdogRESET();
+        #endif
         unsigned char carattere = 0;
         if ( ser_byte_avail() )	{				// if data coming in...
           carattere = getchar();
@@ -518,6 +541,10 @@ void main( void ) {
           /*if ( carattere == '\r' ) {
             putchar('\n');
           }*/
+          if ( carattere >= 0x30 && carattere <= 0x7A ) {
+            putchar(carattere);
+          }
+          putchar('\r');
           switch (carattere)
           {
             case 'c':
@@ -526,12 +553,14 @@ void main( void ) {
             case 'C':
               hexCODE();
               break;
+#ifdef HASEEPROM
             case 'e':
               dumpEEPROM();
               break;
             case 'E':
               hexEEPROM();
               break;
+#endif
             case 'f':
               felix();
               break;

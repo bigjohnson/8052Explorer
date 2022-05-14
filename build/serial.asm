@@ -442,8 +442,6 @@ _init_ser:
 	ar1 = 0x01
 	ar0 = 0x00
 	mov	r7,dpl
-;	library/serial.c:21: P2 = 0;
-	mov	_P2,#0x00
 ;	library/serial.c:22: rx_head = 0;                  	// Default head/tail pointers.
 	mov	_rx_head,#0x00
 ;	library/serial.c:23: rx_tail = 0;
@@ -563,11 +561,11 @@ _SerInt:
 ;	library/serial.c:94: tx_tail = 0;
 	mov	_tx_tail,#0x00
 00111$:
-;	library/serial.c:97: WDTRST = 0x1E;
+;	library/serial.c:98: WDTRST = 0x1E;
 	mov	_WDTRST,#0x1e
-;	library/serial.c:98: WDTRST = 0xE1;
+;	library/serial.c:99: WDTRST = 0xE1;
 	mov	_WDTRST,#0xe1
-;	library/serial.c:99: }
+;	library/serial.c:101: }
 	pop	psw
 	pop	acc
 	reti
@@ -580,7 +578,7 @@ _SerInt:
 ;buf                       Allocated to registers r7 
 ;next_head                 Allocated to registers r6 
 ;------------------------------------------------------------
-;	library/serial.c:104: char ser_write_byte( unsigned char buf )
+;	library/serial.c:106: char ser_write_byte( unsigned char buf )
 ;	-----------------------------------------
 ;	 function ser_write_byte
 ;	-----------------------------------------
@@ -594,53 +592,53 @@ _ser_write_byte:
 	ar1 = 0x01
 	ar0 = 0x00
 	mov	r7,dpl
-;	library/serial.c:110: tx_buf[ tx_head ] = buf;
+;	library/serial.c:112: tx_buf[ tx_head ] = buf;
 	mov	a,_tx_head
 	add	a,#_tx_buf
 	mov	r0,a
 	mov	@r0,ar7
-;	library/serial.c:111: next_head = tx_head + 1;
+;	library/serial.c:113: next_head = tx_head + 1;
 	mov	r6,_tx_head
 	inc	r6
-;	library/serial.c:113: if( next_head >= BUFFER_SIZE)
+;	library/serial.c:115: if( next_head >= BUFFER_SIZE)
 	cjne	r6,#0x10,00126$
 00126$:
 	jc	00103$
-;	library/serial.c:114: next_head = 0;
+;	library/serial.c:116: next_head = 0;
 	mov	r6,#0x00
-;	library/serial.c:118: while( next_head == tx_tail );
+;	library/serial.c:120: while( next_head == tx_tail );
 00103$:
 	mov	a,r6
 	cjne	a,_tx_tail,00128$
 	sjmp	00103$
 00128$:
-;	library/serial.c:120: tx_head = next_head;
+;	library/serial.c:122: tx_head = next_head;
 	mov	_tx_head,r6
-;	library/serial.c:121: if( is_txing == FALSE )
+;	library/serial.c:123: if( is_txing == FALSE )
 	jb	_is_txing,00107$
-;	library/serial.c:122: TI = TRUE;
+;	library/serial.c:124: TI = TRUE;
 ;	assignBit
 	setb	_TI
 00107$:
-;	library/serial.c:124: P2_1 = !P2_1;
+;	library/serial.c:126: P2_1 = !P2_1;
 	cpl	_P2_1
-;	library/serial.c:125: return buf;
+;	library/serial.c:127: return buf;
 	mov	dpl,r7
-;	library/serial.c:126: }
+;	library/serial.c:128: }
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'ser_byte_avail'
 ;------------------------------------------------------------
-;	library/serial.c:132: char ser_byte_avail( void )
+;	library/serial.c:134: char ser_byte_avail( void )
 ;	-----------------------------------------
 ;	 function ser_byte_avail
 ;	-----------------------------------------
 _ser_byte_avail:
-;	library/serial.c:134: WDTRST = 0x1E;
+;	library/serial.c:137: WDTRST = 0x1E;
 	mov	_WDTRST,#0x1e
-;	library/serial.c:135: WDTRST = 0xE1;
+;	library/serial.c:138: WDTRST = 0xE1;
 	mov	_WDTRST,#0xe1
-;	library/serial.c:136: return(rx_head != rx_tail);
+;	library/serial.c:140: return(rx_head != rx_tail);
 	mov	a,_rx_tail
 	cjne	a,_rx_head,00103$
 	setb	c
@@ -653,19 +651,19 @@ _ser_byte_avail:
 	clr	a
 	rlc	a
 	mov	dpl,a
-;	library/serial.c:143: }
+;	library/serial.c:147: }
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'ser_read_byte'
 ;------------------------------------------------------------
 ;buf                       Allocated to registers r7 
 ;------------------------------------------------------------
-;	library/serial.c:149: unsigned char ser_read_byte( void )
+;	library/serial.c:153: unsigned char ser_read_byte( void )
 ;	-----------------------------------------
 ;	 function ser_read_byte
 ;	-----------------------------------------
 _ser_read_byte:
-;	library/serial.c:155: buf = rx_buf[ rx_tail++ ];
+;	library/serial.c:159: buf = rx_buf[ rx_tail++ ];
 	mov	a,_rx_tail
 	mov	r7,a
 	inc	a
@@ -674,30 +672,30 @@ _ser_read_byte:
 	add	a,#_rx_buf
 	mov	r1,a
 	mov	ar7,@r1
-;	library/serial.c:157: if( rx_tail >= BUFFER_SIZE)		// rx_tail %= BUFFER_SIZE;
+;	library/serial.c:161: if( rx_tail >= BUFFER_SIZE)		// rx_tail %= BUFFER_SIZE;
 	mov	a,#0x100 - 0x10
 	add	a,_rx_tail
 	jnc	00102$
-;	library/serial.c:158: rx_tail = 0;
+;	library/serial.c:162: rx_tail = 0;
 	mov	_rx_tail,#0x00
 00102$:
-;	library/serial.c:160: P2_2 = !P2_2;
+;	library/serial.c:164: P2_2 = !P2_2;
 	cpl	_P2_2
-;	library/serial.c:161: return( buf );
+;	library/serial.c:165: return( buf );
 	mov	dpl,r7
-;	library/serial.c:162: }
+;	library/serial.c:166: }
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'putchar'
 ;------------------------------------------------------------
 ;buf                       Allocated to registers r6 r7 
 ;------------------------------------------------------------
-;	library/serial.c:164: int putchar(int buf) {
+;	library/serial.c:168: int putchar(int buf) {
 ;	-----------------------------------------
 ;	 function putchar
 ;	-----------------------------------------
 _putchar:
-;	library/serial.c:165: ser_write_byte((char)buf);
+;	library/serial.c:169: ser_write_byte((char)buf);
 	mov	r6,dpl
 	mov	r7,dph
 	push	ar7
@@ -705,27 +703,27 @@ _putchar:
 	lcall	_ser_write_byte
 	pop	ar6
 	pop	ar7
-;	library/serial.c:166: return buf;
+;	library/serial.c:170: return buf;
 	mov	dpl,r6
 	mov	dph,r7
-;	library/serial.c:167: }
+;	library/serial.c:171: }
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'getchar'
 ;------------------------------------------------------------
 ;buf                       Allocated to registers r7 r6 
 ;------------------------------------------------------------
-;	library/serial.c:169: int getchar(void) {
+;	library/serial.c:173: int getchar(void) {
 ;	-----------------------------------------
 ;	 function getchar
 ;	-----------------------------------------
 _getchar:
-;	library/serial.c:170: int buf=ser_read_byte();
+;	library/serial.c:174: int buf=ser_read_byte();
 	lcall	_ser_read_byte
-;	library/serial.c:171: return buf;
+;	library/serial.c:175: return buf;
 	mov	r6,#0x00
 	mov	dph,r6
-;	library/serial.c:172: }
+;	library/serial.c:176: }
 	ret
 	.area CSEG    (CODE)
 	.area CONST   (CODE)

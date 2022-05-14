@@ -497,11 +497,7 @@ _it_timer0:
 	push	(0+0)
 	push	psw
 	mov	psw,#0x18
-;	library/timer0.c:29: WDTCON |= 0x8; // no hardware pin low on reset
-	orl	_WDTCON,#0x08
-;	library/timer0.c:30: WDTCON |= 0x4; // enable Watchdog
-	orl	_WDTCON,#0x04
-;	library/timer0.c:31: millisx++;
+;	library/timer0.c:33: millisx++;
 	mov	r6,_millisx
 	mov	r7,(_millisx + 1)
 	mov	a,#0x01
@@ -510,20 +506,20 @@ _it_timer0:
 	clr	a
 	addc	a,r7
 	mov	(_millisx + 1),a
-;	library/timer0.c:33: if ( millisx < prima ) {
+;	library/timer0.c:35: if ( millisx < prima ) {
 	clr	c
 	mov	a,_millisx
 	subb	a,_prima
 	mov	a,(_millisx + 1)
 	subb	a,(_prima + 1)
 	jnc	00102$
-;	library/timer0.c:34: prima = millisx;
+;	library/timer0.c:36: prima = millisx;
 	mov	_prima,_millisx
 	mov	(_prima + 1),(_millisx + 1)
 00102$:
-;	library/timer0.c:36: if (millisx % ONE_SECOND_DIVISOR == 0 && millisx > prima) {
-	mov	__moduint_PARM_2,#0x2e
-	mov	(__moduint_PARM_2 + 1),#0x03
+;	library/timer0.c:38: if (millisx % ONE_SECOND_DIVISOR == 0 && millisx > prima) {
+	mov	__moduint_PARM_2,#0x97
+	mov	(__moduint_PARM_2 + 1),#0x01
 	mov	dpl,_millisx
 	mov	dph,(_millisx + 1)
 	mov	psw,#0x00
@@ -539,13 +535,13 @@ _it_timer0:
 	mov	a,(_prima + 1)
 	subb	a,(_millisx + 1)
 	jnc	00106$
-;	library/timer0.c:37: prima = millisx;
+;	library/timer0.c:39: prima = millisx;
 	mov	_prima,_millisx
 	mov	(_prima + 1),(_millisx + 1)
-;	library/timer0.c:38: P2_0 = !P2_0;
+;	library/timer0.c:40: P2_0 = !P2_0;
 	cpl	_P2_0
 00106$:
-;	library/timer0.c:41: }
+;	library/timer0.c:43: }
 	pop	psw
 	pop	(0+0)
 	pop	(0+1)

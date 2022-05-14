@@ -18,7 +18,7 @@ static unsigned char tx_buf[ BUFFER_SIZE ]; // Transmit queue.
 
 void init_ser( unsigned char th2, unsigned char tl2 )
 {
-	P2 = 0;
+	//P2 = 0;
 	rx_head = 0;                  	// Default head/tail pointers.
 	rx_tail = 0;
 	tx_tail = 0;
@@ -94,8 +94,10 @@ void SerInt( void ) __interrupt 4 __using 2
 				tx_tail = 0;
      	}
   	}
+	#ifdef HASWATCHDOG
 		WDTRST = 0x1E;
-	  WDTRST = 0xE1;
+		WDTRST = 0xE1;
+	#endif
 }
 //
 //// ---------------------------------------------------------------------------
@@ -131,8 +133,10 @@ char ser_write_byte( unsigned char buf )
 // ---------------------------------------------------------------------------
 char ser_byte_avail( void )
 {
-	WDTRST = 0x1E;
-  WDTRST = 0xE1;
+	#ifdef HASWATCHDOG
+		WDTRST = 0x1E;
+  		WDTRST = 0xE1;
+	#endif
 	return(rx_head != rx_tail);
 /*
 	if( rx_head == rx_tail )	// return(rx_head != rx_tail);

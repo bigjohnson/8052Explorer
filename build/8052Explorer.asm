@@ -395,6 +395,8 @@ __start__stack:
 ; bit data
 ;--------------------------------------------------------
 	.area BSEG    (BIT)
+_main_sloc0_1_0:
+	.ds 1
 ;--------------------------------------------------------
 ; paged external ram data
 ;--------------------------------------------------------
@@ -466,7 +468,7 @@ __sdcc_program_startup:
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'watchdogRESET'
 ;------------------------------------------------------------
-;	8052Explorer.c:121: void watchdogRESET ( void ) {
+;	8052Explorer.c:120: void watchdogRESET ( void ) {
 ;	-----------------------------------------
 ;	 function watchdogRESET
 ;	-----------------------------------------
@@ -479,11 +481,11 @@ _watchdogRESET:
 	ar2 = 0x02
 	ar1 = 0x01
 	ar0 = 0x00
-;	8052Explorer.c:122: WDTRST = 0x1E;
+;	8052Explorer.c:121: WDTRST = 0x1E;
 	mov	_WDTRST,#0x1e
-;	8052Explorer.c:123: WDTRST = 0xE1;
+;	8052Explorer.c:122: WDTRST = 0xE1;
 	mov	_WDTRST,#0xe1
-;	8052Explorer.c:124: }
+;	8052Explorer.c:123: }
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'felix'
@@ -514,34 +516,34 @@ _felix:
 ;lettura                   Allocated to registers r4 
 ;posto                     Allocated to registers r5 
 ;------------------------------------------------------------
-;	8052Explorer.c:164: void dumpEEPROM () {
+;	8052Explorer.c:165: void dumpEEPROM () {
 ;	-----------------------------------------
 ;	 function dumpEEPROM
 ;	-----------------------------------------
 _dumpEEPROM:
-;	8052Explorer.c:165: puts("Dumping eeprom content and changing first character:");
+;	8052Explorer.c:166: puts("Dumping eeprom content and changing first character:");
 	mov	dptr,#___str_65
 	mov	b,#0x80
 	lcall	_puts
-;	8052Explorer.c:167: unsigned char eepromchar = readEeprom(0);
+;	8052Explorer.c:168: unsigned char eepromchar = readEeprom(0);
 	mov	dptr,#0x0000
 	lcall	_readEeprom
 	mov	a,dpl
-;	8052Explorer.c:168: eepromchar++;
+;	8052Explorer.c:169: eepromchar++;
 	inc	a
 	mov	r7,a
-;	8052Explorer.c:169: if (0x5B == eepromchar) {
+;	8052Explorer.c:170: if (0x5B == eepromchar) {
 	cjne	r7,#0x5b,00102$
-;	8052Explorer.c:170: eepromchar = 0x41;
+;	8052Explorer.c:171: eepromchar = 0x41;
 	mov	r7,#0x41
 00102$:
-;	8052Explorer.c:172: writeEeprom (eepromchar, 0);
+;	8052Explorer.c:173: writeEeprom (eepromchar, 0);
 	clr	a
 	mov	_writeEeprom_PARM_2,a
 	mov	(_writeEeprom_PARM_2 + 1),a
 	mov	dpl,r7
 	lcall	_writeEeprom
-;	8052Explorer.c:174: for (unsigned short indirizzo = 0; indirizzo <= EEPROMSIZE; indirizzo +=16){
+;	8052Explorer.c:175: for (unsigned short indirizzo = 0; indirizzo <= EEPROMSIZE; indirizzo +=16){
 	mov	r6,#0x00
 	mov	r7,#0x00
 00127$:
@@ -555,14 +557,14 @@ _dumpEEPROM:
 	jnc	00195$
 	ljmp	00119$
 00195$:
-;	8052Explorer.c:175: if (indirizzo < 0x10) {
+;	8052Explorer.c:176: if (indirizzo < 0x10) {
 	clr	c
 	mov	a,r4
 	subb	a,#0x10
 	mov	a,r5
 	subb	a,#0x00
 	jnc	00110$
-;	8052Explorer.c:176: printf_tiny("000%x  ", indirizzo);
+;	8052Explorer.c:177: printf_tiny("000%x  ", indirizzo);
 	push	ar7
 	push	ar6
 	push	ar6
@@ -579,11 +581,11 @@ _dumpEEPROM:
 	pop	ar7
 	sjmp	00138$
 00110$:
-;	8052Explorer.c:177: } else if (indirizzo < 0x100) {
+;	8052Explorer.c:178: } else if (indirizzo < 0x100) {
 	mov	a,#0x100 - 0x01
 	add	a,r5
 	jc	00107$
-;	8052Explorer.c:178: printf_tiny("00%x  ", indirizzo);
+;	8052Explorer.c:179: printf_tiny("00%x  ", indirizzo);
 	push	ar7
 	push	ar6
 	push	ar6
@@ -600,11 +602,11 @@ _dumpEEPROM:
 	pop	ar7
 	sjmp	00138$
 00107$:
-;	8052Explorer.c:179: } else if (indirizzo < 0x1000) {
+;	8052Explorer.c:180: } else if (indirizzo < 0x1000) {
 	mov	a,#0x100 - 0x10
 	add	a,r5
 	jc	00104$
-;	8052Explorer.c:180: printf_tiny("0%x  ", indirizzo);
+;	8052Explorer.c:181: printf_tiny("0%x  ", indirizzo);
 	push	ar7
 	push	ar6
 	push	ar6
@@ -621,7 +623,7 @@ _dumpEEPROM:
 	pop	ar7
 	sjmp	00138$
 00104$:
-;	8052Explorer.c:182: printf_tiny("%x  ", indirizzo);
+;	8052Explorer.c:183: printf_tiny("%x  ", indirizzo);
 	push	ar7
 	push	ar6
 	push	ar6
@@ -636,14 +638,14 @@ _dumpEEPROM:
 	mov	sp,a
 	pop	ar6
 	pop	ar7
-;	8052Explorer.c:184: for (unsigned char posto = 0; posto < 16; posto++) {
+;	8052Explorer.c:185: for (unsigned char posto = 0; posto < 16; posto++) {
 00138$:
 	mov	r5,#0x00
 00121$:
 	cjne	r5,#0x10,00199$
 00199$:
 	jnc	00114$
-;	8052Explorer.c:185: unsigned char lettura = readEeprom(indirizzo + (unsigned int)posto);
+;	8052Explorer.c:186: unsigned char lettura = readEeprom(indirizzo + (unsigned int)posto);
 	mov	ar3,r5
 	mov	r4,#0x00
 	mov	ar1,r6
@@ -664,11 +666,11 @@ _dumpEEPROM:
 	pop	ar5
 	pop	ar6
 	pop	ar7
-;	8052Explorer.c:186: if ( lettura < 0x10 ) {
+;	8052Explorer.c:187: if ( lettura < 0x10 ) {
 	cjne	r4,#0x10,00201$
 00201$:
 	jnc	00113$
-;	8052Explorer.c:187: putchar('0');
+;	8052Explorer.c:188: putchar('0');
 	mov	dptr,#0x0030
 	push	ar7
 	push	ar6
@@ -680,7 +682,7 @@ _dumpEEPROM:
 	pop	ar6
 	pop	ar7
 00113$:
-;	8052Explorer.c:189: printf_tiny("%x ", lettura);
+;	8052Explorer.c:190: printf_tiny("%x ", lettura);
 	mov	r3,#0x00
 	push	ar7
 	push	ar6
@@ -698,11 +700,11 @@ _dumpEEPROM:
 	pop	ar5
 	pop	ar6
 	pop	ar7
-;	8052Explorer.c:184: for (unsigned char posto = 0; posto < 16; posto++) {
+;	8052Explorer.c:185: for (unsigned char posto = 0; posto < 16; posto++) {
 	inc	r5
 	sjmp	00121$
 00114$:
-;	8052Explorer.c:192: printf_tiny(" |");
+;	8052Explorer.c:193: printf_tiny(" |");
 	push	ar7
 	push	ar6
 	mov	a,#___str_71
@@ -714,13 +716,13 @@ _dumpEEPROM:
 	dec	sp
 	pop	ar6
 	pop	ar7
-;	8052Explorer.c:194: for (unsigned char posto=0; posto < 16; posto++) {
+;	8052Explorer.c:195: for (unsigned char posto=0; posto < 16; posto++) {
 	mov	r5,#0x00
 00124$:
 	cjne	r5,#0x10,00203$
 00203$:
 	jnc	00118$
-;	8052Explorer.c:195: lettura = readEeprom(indirizzo+(short)posto);
+;	8052Explorer.c:196: lettura = readEeprom(indirizzo+(short)posto);
 	mov	ar3,r5
 	mov	r4,#0x00
 	mov	a,r3
@@ -737,7 +739,7 @@ _dumpEEPROM:
 	pop	ar5
 	pop	ar6
 	pop	ar7
-;	8052Explorer.c:196: if ( lettura < 0x20 || lettura > 0x7E ) {
+;	8052Explorer.c:197: if ( lettura < 0x20 || lettura > 0x7E ) {
 	cjne	r4,#0x20,00205$
 00205$:
 	jc	00115$
@@ -745,10 +747,10 @@ _dumpEEPROM:
 	add	a,#0xff - 0x7e
 	jnc	00116$
 00115$:
-;	8052Explorer.c:197: lettura = '.';
+;	8052Explorer.c:198: lettura = '.';
 	mov	r4,#0x2e
 00116$:
-;	8052Explorer.c:199: printf_tiny("%c", lettura);
+;	8052Explorer.c:200: printf_tiny("%c", lettura);
 	mov	r3,#0x00
 	push	ar7
 	push	ar6
@@ -766,21 +768,21 @@ _dumpEEPROM:
 	pop	ar5
 	pop	ar6
 	pop	ar7
-;	8052Explorer.c:194: for (unsigned char posto=0; posto < 16; posto++) {
+;	8052Explorer.c:195: for (unsigned char posto=0; posto < 16; posto++) {
 	inc	r5
 	sjmp	00124$
 00118$:
-;	8052Explorer.c:202: putchar('|');
+;	8052Explorer.c:203: putchar('|');
 	mov	dptr,#0x007c
 	push	ar7
 	push	ar6
 	lcall	_putchar
-;	8052Explorer.c:203: putchar('\r');
+;	8052Explorer.c:204: putchar('\r');
 	mov	dptr,#0x000d
 	lcall	_putchar
 	pop	ar6
 	pop	ar7
-;	8052Explorer.c:174: for (unsigned short indirizzo = 0; indirizzo <= EEPROMSIZE; indirizzo +=16){
+;	8052Explorer.c:175: for (unsigned short indirizzo = 0; indirizzo <= EEPROMSIZE; indirizzo +=16){
 	mov	ar4,r6
 	mov	ar5,r7
 	mov	a,#0x10
@@ -793,12 +795,12 @@ _dumpEEPROM:
 	mov	ar7,r5
 	ljmp	00127$
 00119$:
-;	8052Explorer.c:206: putchar('\r');
-	mov	dptr,#0x000d
-	lcall	_putchar
 ;	8052Explorer.c:207: putchar('\r');
 	mov	dptr,#0x000d
-;	8052Explorer.c:209: }
+	lcall	_putchar
+;	8052Explorer.c:208: putchar('\r');
+	mov	dptr,#0x000d
+;	8052Explorer.c:210: }
 	ljmp	_putchar
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'hexEEPROM'
@@ -808,16 +810,16 @@ _dumpEEPROM:
 ;posto                     Allocated to registers r3 
 ;lettura                   Allocated to registers r2 
 ;------------------------------------------------------------
-;	8052Explorer.c:211: void hexEEPROM () {
+;	8052Explorer.c:212: void hexEEPROM () {
 ;	-----------------------------------------
 ;	 function hexEEPROM
 ;	-----------------------------------------
 _hexEEPROM:
-;	8052Explorer.c:213: puts("Dumping eeprom content in hex format:");
+;	8052Explorer.c:214: puts("Dumping eeprom content in hex format:");
 	mov	dptr,#___str_73
 	mov	b,#0x80
 	lcall	_puts
-;	8052Explorer.c:214: for (unsigned short indirizzo = 0; indirizzo <= EEPROMSIZE; indirizzo += 16){
+;	8052Explorer.c:215: for (unsigned short indirizzo = 0; indirizzo <= EEPROMSIZE; indirizzo += 16){
 	mov	r6,#0x00
 	mov	r7,#0x00
 00120$:
@@ -831,7 +833,7 @@ _hexEEPROM:
 	jnc	00170$
 	ljmp	00115$
 00170$:
-;	8052Explorer.c:215: printf_tiny(":10");
+;	8052Explorer.c:216: printf_tiny(":10");
 	push	ar7
 	push	ar6
 	push	ar5
@@ -847,17 +849,17 @@ _hexEEPROM:
 	pop	ar5
 	pop	ar6
 	pop	ar7
-;	8052Explorer.c:216: checksum = 0x10;
+;	8052Explorer.c:217: checksum = 0x10;
 	mov	r2,#0x10
 	mov	r3,#0x00
-;	8052Explorer.c:217: if (indirizzo < 0x10) {
+;	8052Explorer.c:218: if (indirizzo < 0x10) {
 	clr	c
 	mov	a,r4
 	subb	a,#0x10
 	mov	a,r5
 	subb	a,#0x00
 	jnc	00108$
-;	8052Explorer.c:218: printf_tiny("000%x", indirizzo);
+;	8052Explorer.c:219: printf_tiny("000%x", indirizzo);
 	push	ar7
 	push	ar6
 	push	ar3
@@ -878,11 +880,11 @@ _hexEEPROM:
 	pop	ar7
 	ljmp	00109$
 00108$:
-;	8052Explorer.c:219: } else if (indirizzo < 0x100) {
+;	8052Explorer.c:220: } else if (indirizzo < 0x100) {
 	mov	a,#0x100 - 0x01
 	add	a,r5
 	jc	00105$
-;	8052Explorer.c:220: printf_tiny("00%x", indirizzo);
+;	8052Explorer.c:221: printf_tiny("00%x", indirizzo);
 	push	ar7
 	push	ar6
 	push	ar3
@@ -903,11 +905,11 @@ _hexEEPROM:
 	pop	ar7
 	sjmp	00109$
 00105$:
-;	8052Explorer.c:221: } else if (indirizzo < 0x1000) {
+;	8052Explorer.c:222: } else if (indirizzo < 0x1000) {
 	mov	a,#0x100 - 0x10
 	add	a,r5
 	jc	00102$
-;	8052Explorer.c:222: printf_tiny("0%x", indirizzo);
+;	8052Explorer.c:223: printf_tiny("0%x", indirizzo);
 	push	ar7
 	push	ar6
 	push	ar3
@@ -928,7 +930,7 @@ _hexEEPROM:
 	pop	ar7
 	sjmp	00109$
 00102$:
-;	8052Explorer.c:224: printf_tiny("%x", indirizzo);
+;	8052Explorer.c:225: printf_tiny("%x", indirizzo);
 	push	ar7
 	push	ar6
 	push	ar3
@@ -948,7 +950,7 @@ _hexEEPROM:
 	pop	ar6
 	pop	ar7
 00109$:
-;	8052Explorer.c:226: checksum += (indirizzo >> 8 ) & 0xFF ;
+;	8052Explorer.c:227: checksum += (indirizzo >> 8 ) & 0xFF ;
 	mov	ar5,r7
 	mov	r4,#0x00
 	mov	a,r5
@@ -957,7 +959,7 @@ _hexEEPROM:
 	mov	a,r4
 	addc	a,r3
 	mov	r4,a
-;	8052Explorer.c:227: checksum += (indirizzo & 0xFF);
+;	8052Explorer.c:228: checksum += (indirizzo & 0xFF);
 	mov	ar2,r6
 	mov	r3,#0x00
 	mov	a,r2
@@ -966,7 +968,7 @@ _hexEEPROM:
 	mov	a,r3
 	addc	a,r4
 	mov	r4,a
-;	8052Explorer.c:228: printf_tiny("00");
+;	8052Explorer.c:229: printf_tiny("00");
 	push	ar7
 	push	ar6
 	push	ar5
@@ -982,7 +984,7 @@ _hexEEPROM:
 	pop	ar5
 	pop	ar6
 	pop	ar7
-;	8052Explorer.c:231: for (unsigned char posto = 0; posto < 16; posto++) {
+;	8052Explorer.c:232: for (unsigned char posto = 0; posto < 16; posto++) {
 	mov	r3,#0x00
 00117$:
 	cjne	r3,#0x10,00174$
@@ -990,7 +992,7 @@ _hexEEPROM:
 	jc	00175$
 	ljmp	00112$
 00175$:
-;	8052Explorer.c:232: unsigned char lettura = readEeprom(indirizzo+(unsigned short)posto);
+;	8052Explorer.c:233: unsigned char lettura = readEeprom(indirizzo+(unsigned short)posto);
 	mov	ar1,r3
 	mov	r2,#0x00
 	mov	a,r1
@@ -1011,11 +1013,11 @@ _hexEEPROM:
 	pop	ar5
 	pop	ar6
 	pop	ar7
-;	8052Explorer.c:233: if ( lettura < 0x10 ) {
+;	8052Explorer.c:234: if ( lettura < 0x10 ) {
 	cjne	r2,#0x10,00176$
 00176$:
 	jnc	00111$
-;	8052Explorer.c:234: putchar('0');
+;	8052Explorer.c:235: putchar('0');
 	mov	dptr,#0x0030
 	push	ar7
 	push	ar6
@@ -1031,7 +1033,7 @@ _hexEEPROM:
 	pop	ar6
 	pop	ar7
 00111$:
-;	8052Explorer.c:236: printf_tiny("%x", lettura);
+;	8052Explorer.c:237: printf_tiny("%x", lettura);
 	mov	ar1,r2
 	mov	r2,#0x00
 	push	ar7
@@ -1058,30 +1060,30 @@ _hexEEPROM:
 	pop	ar5
 	pop	ar6
 	pop	ar7
-;	8052Explorer.c:237: checksum += lettura;
+;	8052Explorer.c:238: checksum += lettura;
 	mov	a,r1
 	add	a,r5
 	mov	r5,a
 	mov	a,r2
 	addc	a,r4
 	mov	r4,a
-;	8052Explorer.c:231: for (unsigned char posto = 0; posto < 16; posto++) {
+;	8052Explorer.c:232: for (unsigned char posto = 0; posto < 16; posto++) {
 	inc	r3
 	ljmp	00117$
 00112$:
-;	8052Explorer.c:240: checksum = ((~checksum) & 0xFF);
+;	8052Explorer.c:241: checksum = ((~checksum) & 0xFF);
 	mov	a,r5
 	cpl	a
 	mov	r5,a
 	mov	a,r4
 	cpl	a
 	mov	r4,#0x00
-;	8052Explorer.c:241: checksum++;
+;	8052Explorer.c:242: checksum++;
 	inc	r5
 	cjne	r5,#0x00,00178$
 	inc	r4
 00178$:
-;	8052Explorer.c:242: if ( (checksum & 0xFF) < 16 ) {
+;	8052Explorer.c:243: if ( (checksum & 0xFF) < 16 ) {
 	mov	ar2,r5
 	mov	r3,#0x00
 	clr	c
@@ -1090,7 +1092,7 @@ _hexEEPROM:
 	mov	a,r3
 	subb	a,#0x00
 	jnc	00114$
-;	8052Explorer.c:243: putchar('0');
+;	8052Explorer.c:244: putchar('0');
 	mov	dptr,#0x0030
 	push	ar7
 	push	ar6
@@ -1102,7 +1104,7 @@ _hexEEPROM:
 	pop	ar6
 	pop	ar7
 00114$:
-;	8052Explorer.c:245: printf_tiny("%x\r", checksum & 0xFF);
+;	8052Explorer.c:246: printf_tiny("%x\r", checksum & 0xFF);
 	mov	r4,#0x00
 	push	ar7
 	push	ar6
@@ -1118,7 +1120,7 @@ _hexEEPROM:
 	mov	sp,a
 	pop	ar6
 	pop	ar7
-;	8052Explorer.c:214: for (unsigned short indirizzo = 0; indirizzo <= EEPROMSIZE; indirizzo += 16){
+;	8052Explorer.c:215: for (unsigned short indirizzo = 0; indirizzo <= EEPROMSIZE; indirizzo += 16){
 	mov	ar4,r6
 	mov	ar5,r7
 	mov	a,#0x10
@@ -1131,7 +1133,7 @@ _hexEEPROM:
 	mov	ar7,r5
 	ljmp	00120$
 00115$:
-;	8052Explorer.c:247: printf_tiny("%s", ":00000001FF");
+;	8052Explorer.c:248: printf_tiny("%s", ":00000001FF");
 	mov	a,#___str_82
 	push	acc
 	mov	a,#(___str_82 >> 8)
@@ -1146,12 +1148,12 @@ _hexEEPROM:
 	mov	a,sp
 	add	a,#0xfb
 	mov	sp,a
-;	8052Explorer.c:248: putchar('\r');
-	mov	dptr,#0x000d
-	lcall	_putchar
 ;	8052Explorer.c:249: putchar('\r');
 	mov	dptr,#0x000d
-;	8052Explorer.c:251: }
+	lcall	_putchar
+;	8052Explorer.c:250: putchar('\r');
+	mov	dptr,#0x000d
+;	8052Explorer.c:252: }
 	ljmp	_putchar
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'dumpCODE'
@@ -1161,16 +1163,16 @@ _hexEEPROM:
 ;posto                     Allocated with name '_dumpCODE_posto_262144_64'
 ;posto                     Allocated with name '_dumpCODE_posto_262144_67'
 ;------------------------------------------------------------
-;	8052Explorer.c:253: void dumpCODE () {
+;	8052Explorer.c:255: void dumpCODE () {
 ;	-----------------------------------------
 ;	 function dumpCODE
 ;	-----------------------------------------
 _dumpCODE:
-;	8052Explorer.c:254: unsigned char *puntatore = codice;
+;	8052Explorer.c:256: unsigned char *puntatore = codice;
 	mov	r5,#_codice
 	mov	r6,#(_codice >> 8)
 	mov	r7,#0x80
-;	8052Explorer.c:256: puts("Dumping code:");
+;	8052Explorer.c:258: puts("Dumping code:");
 	mov	dptr,#___str_83
 	mov	b,#0x80
 	push	ar7
@@ -1180,7 +1182,7 @@ _dumpCODE:
 	pop	ar5
 	pop	ar6
 	pop	ar7
-;	8052Explorer.c:257: for (unsigned int indirizzo = 0; indirizzo <= CODESIZE; indirizzo += 16 ) {
+;	8052Explorer.c:259: for (unsigned int indirizzo = 0; indirizzo <= CODESIZE; indirizzo += 16 ) {
 	clr	a
 	mov	_dumpCODE_indirizzo_131072_58,a
 	mov	(_dumpCODE_indirizzo_131072_58 + 1),a
@@ -1193,14 +1195,14 @@ _dumpCODE:
 	jnc	00188$
 	ljmp	00118$
 00188$:
-;	8052Explorer.c:258: if (indirizzo < 0x10) {
+;	8052Explorer.c:260: if (indirizzo < 0x10) {
 	clr	c
 	mov	a,_dumpCODE_indirizzo_131072_58
 	subb	a,#0x10
 	mov	a,(_dumpCODE_indirizzo_131072_58 + 1)
 	subb	a,#0x00
 	jnc	00108$
-;	8052Explorer.c:259: printf_tiny("000%x  ", indirizzo);
+;	8052Explorer.c:261: printf_tiny("000%x  ", indirizzo);
 	push	ar7
 	push	ar6
 	push	ar5
@@ -1219,11 +1221,11 @@ _dumpCODE:
 	pop	ar7
 	sjmp	00136$
 00108$:
-;	8052Explorer.c:260: } else if (indirizzo < 0x100) {
+;	8052Explorer.c:262: } else if (indirizzo < 0x100) {
 	mov	a,#0x100 - 0x01
 	add	a,(_dumpCODE_indirizzo_131072_58 + 1)
 	jc	00105$
-;	8052Explorer.c:261: printf_tiny("00%x  ", indirizzo);
+;	8052Explorer.c:263: printf_tiny("00%x  ", indirizzo);
 	push	ar7
 	push	ar6
 	push	ar5
@@ -1242,11 +1244,11 @@ _dumpCODE:
 	pop	ar7
 	sjmp	00136$
 00105$:
-;	8052Explorer.c:262: } else if (indirizzo < 0x1000) {
+;	8052Explorer.c:264: } else if (indirizzo < 0x1000) {
 	mov	a,#0x100 - 0x10
 	add	a,(_dumpCODE_indirizzo_131072_58 + 1)
 	jc	00102$
-;	8052Explorer.c:263: printf_tiny("0%x  ", indirizzo);
+;	8052Explorer.c:265: printf_tiny("0%x  ", indirizzo);
 	push	ar7
 	push	ar6
 	push	ar5
@@ -1265,7 +1267,7 @@ _dumpCODE:
 	pop	ar7
 	sjmp	00136$
 00102$:
-;	8052Explorer.c:265: printf_tiny("%x  ", indirizzo);
+;	8052Explorer.c:267: printf_tiny("%x  ", indirizzo);
 	push	ar7
 	push	ar6
 	push	ar5
@@ -1282,7 +1284,7 @@ _dumpCODE:
 	pop	ar5
 	pop	ar6
 	pop	ar7
-;	8052Explorer.c:267: for (unsigned int posto = 0; posto < 16; posto++ ) {
+;	8052Explorer.c:269: for (unsigned int posto = 0; posto < 16; posto++ ) {
 00136$:
 	mov	ar0,r5
 	mov	ar1,r6
@@ -1297,7 +1299,7 @@ _dumpCODE:
 	mov	a,(_dumpCODE_posto_262144_64 + 1)
 	subb	a,#0x00
 	jnc	00112$
-;	8052Explorer.c:268: if ( *puntatore < 16 ) {
+;	8052Explorer.c:270: if ( *puntatore < 16 ) {
 	mov	dpl,r0
 	mov	dph,r1
 	mov	b,r2
@@ -1306,7 +1308,7 @@ _dumpCODE:
 	cjne	r4,#0x10,00193$
 00193$:
 	jnc	00111$
-;	8052Explorer.c:269: putchar('0');
+;	8052Explorer.c:271: putchar('0');
 	mov	dptr,#0x0030
 	push	ar2
 	push	ar1
@@ -1316,7 +1318,7 @@ _dumpCODE:
 	pop	ar1
 	pop	ar2
 00111$:
-;	8052Explorer.c:271: printf_tiny("%x ", *puntatore);
+;	8052Explorer.c:273: printf_tiny("%x ", *puntatore);
 	mov	dpl,r0
 	mov	dph,r1
 	mov	b,r2
@@ -1342,15 +1344,15 @@ _dumpCODE:
 	pop	ar0
 	pop	ar1
 	pop	ar2
-;	8052Explorer.c:272: puntatore++;
-;	8052Explorer.c:267: for (unsigned int posto = 0; posto < 16; posto++ ) {
+;	8052Explorer.c:274: puntatore++;
+;	8052Explorer.c:269: for (unsigned int posto = 0; posto < 16; posto++ ) {
 	inc	_dumpCODE_posto_262144_64
 	clr	a
 	cjne	a,_dumpCODE_posto_262144_64,00120$
 	inc	(_dumpCODE_posto_262144_64 + 1)
 	sjmp	00120$
 00112$:
-;	8052Explorer.c:274: printf_tiny(" |");
+;	8052Explorer.c:276: printf_tiny(" |");
 	push	ar2
 	push	ar1
 	push	ar0
@@ -1364,20 +1366,20 @@ _dumpCODE:
 	pop	ar0
 	pop	ar1
 	pop	ar2
-;	8052Explorer.c:275: puntatore -= 16;
+;	8052Explorer.c:277: puntatore -= 16;
 	mov	a,r0
 	add	a,#0xf0
 	mov	r4,a
 	mov	a,r1
 	addc	a,#0xff
 	mov	r3,a
-;	8052Explorer.c:276: for (unsigned char posto = 0; posto < 16; posto++ ) {
+;	8052Explorer.c:278: for (unsigned char posto = 0; posto < 16; posto++ ) {
 	mov	_dumpCODE_posto_262144_67,#0x00
 00123$:
 	mov	a,#0x100 - 0x10
 	add	a,_dumpCODE_posto_262144_67
 	jc	00142$
-;	8052Explorer.c:277: if ( *puntatore < 0x20 || *puntatore > 0x7E ) {
+;	8052Explorer.c:279: if ( *puntatore < 0x20 || *puntatore > 0x7E ) {
 	mov	dpl,r4
 	mov	dph,r3
 	mov	b,r2
@@ -1390,7 +1392,7 @@ _dumpCODE:
 	add	a,#0xff - 0x7e
 	jnc	00114$
 00113$:
-;	8052Explorer.c:278: putchar('.');
+;	8052Explorer.c:280: putchar('.');
 	mov	dptr,#0x002e
 	push	ar4
 	push	ar3
@@ -1401,7 +1403,7 @@ _dumpCODE:
 	pop	ar4
 	sjmp	00115$
 00114$:
-;	8052Explorer.c:280: printf_tiny("%c", *puntatore);
+;	8052Explorer.c:282: printf_tiny("%c", *puntatore);
 	mov	r1,#0x00
 	push	ar4
 	push	ar3
@@ -1420,31 +1422,31 @@ _dumpCODE:
 	pop	ar3
 	pop	ar4
 00115$:
-;	8052Explorer.c:282: puntatore++;
+;	8052Explorer.c:284: puntatore++;
 	inc	r4
 	cjne	r4,#0x00,00200$
 	inc	r3
 00200$:
-;	8052Explorer.c:276: for (unsigned char posto = 0; posto < 16; posto++ ) {
+;	8052Explorer.c:278: for (unsigned char posto = 0; posto < 16; posto++ ) {
 	inc	_dumpCODE_posto_262144_67
 	sjmp	00123$
 00142$:
 	mov	ar5,r4
 	mov	ar6,r3
 	mov	ar7,r2
-;	8052Explorer.c:284: putchar('|');
+;	8052Explorer.c:286: putchar('|');
 	mov	dptr,#0x007c
 	push	ar7
 	push	ar6
 	push	ar5
 	lcall	_putchar
-;	8052Explorer.c:285: putchar('\r');
+;	8052Explorer.c:287: putchar('\r');
 	mov	dptr,#0x000d
 	lcall	_putchar
 	pop	ar5
 	pop	ar6
 	pop	ar7
-;	8052Explorer.c:257: for (unsigned int indirizzo = 0; indirizzo <= CODESIZE; indirizzo += 16 ) {
+;	8052Explorer.c:259: for (unsigned int indirizzo = 0; indirizzo <= CODESIZE; indirizzo += 16 ) {
 	mov	a,#0x10
 	add	a,_dumpCODE_indirizzo_131072_58
 	mov	_dumpCODE_indirizzo_131072_58,a
@@ -1453,9 +1455,9 @@ _dumpCODE:
 	mov	(_dumpCODE_indirizzo_131072_58 + 1),a
 	ljmp	00126$
 00118$:
-;	8052Explorer.c:287: putchar('\r');
+;	8052Explorer.c:289: putchar('\r');
 	mov	dptr,#0x000d
-;	8052Explorer.c:289: }
+;	8052Explorer.c:291: }
 	ljmp	_putchar
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'dumpRAM'
@@ -1465,16 +1467,16 @@ _dumpCODE:
 ;posto                     Allocated with name '_dumpRAM_posto_262144_78'
 ;posto                     Allocated with name '_dumpRAM_posto_262144_81'
 ;------------------------------------------------------------
-;	8052Explorer.c:291: void dumpRAM () {
+;	8052Explorer.c:293: void dumpRAM () {
 ;	-----------------------------------------
 ;	 function dumpRAM
 ;	-----------------------------------------
 _dumpRAM:
-;	8052Explorer.c:292: unsigned char *puntatore = dati;
+;	8052Explorer.c:294: unsigned char *puntatore = dati;
 	mov	r5,#_dati
 	mov	r6,#0x00
 	mov	r7,#0x40
-;	8052Explorer.c:294: puts("Dumping ram memory:");
+;	8052Explorer.c:296: puts("Dumping ram memory:");
 	mov	dptr,#___str_84
 	mov	b,#0x80
 	push	ar7
@@ -1484,7 +1486,7 @@ _dumpRAM:
 	pop	ar5
 	pop	ar6
 	pop	ar7
-;	8052Explorer.c:295: for (unsigned int indirizzo = 0; indirizzo <= 0xFF; indirizzo += 16 ) {
+;	8052Explorer.c:297: for (unsigned int indirizzo = 0; indirizzo <= 0xFF; indirizzo += 16 ) {
 	clr	a
 	mov	_dumpRAM_indirizzo_131072_72,a
 	mov	(_dumpRAM_indirizzo_131072_72 + 1),a
@@ -1497,14 +1499,14 @@ _dumpRAM:
 	jnc	00188$
 	ljmp	00118$
 00188$:
-;	8052Explorer.c:296: if (indirizzo < 0x10) {
+;	8052Explorer.c:298: if (indirizzo < 0x10) {
 	clr	c
 	mov	a,_dumpRAM_indirizzo_131072_72
 	subb	a,#0x10
 	mov	a,(_dumpRAM_indirizzo_131072_72 + 1)
 	subb	a,#0x00
 	jnc	00108$
-;	8052Explorer.c:297: printf_tiny("000%x  ", indirizzo);
+;	8052Explorer.c:299: printf_tiny("000%x  ", indirizzo);
 	push	ar7
 	push	ar6
 	push	ar5
@@ -1523,11 +1525,11 @@ _dumpRAM:
 	pop	ar7
 	sjmp	00136$
 00108$:
-;	8052Explorer.c:298: } else if (indirizzo < 0x100) {
+;	8052Explorer.c:300: } else if (indirizzo < 0x100) {
 	mov	a,#0x100 - 0x01
 	add	a,(_dumpRAM_indirizzo_131072_72 + 1)
 	jc	00105$
-;	8052Explorer.c:299: printf_tiny("00%x  ", indirizzo);
+;	8052Explorer.c:301: printf_tiny("00%x  ", indirizzo);
 	push	ar7
 	push	ar6
 	push	ar5
@@ -1546,11 +1548,11 @@ _dumpRAM:
 	pop	ar7
 	sjmp	00136$
 00105$:
-;	8052Explorer.c:300: } else if (indirizzo < 0x1000) {
+;	8052Explorer.c:302: } else if (indirizzo < 0x1000) {
 	mov	a,#0x100 - 0x10
 	add	a,(_dumpRAM_indirizzo_131072_72 + 1)
 	jc	00102$
-;	8052Explorer.c:301: printf_tiny("0%x  ", indirizzo);
+;	8052Explorer.c:303: printf_tiny("0%x  ", indirizzo);
 	push	ar7
 	push	ar6
 	push	ar5
@@ -1569,7 +1571,7 @@ _dumpRAM:
 	pop	ar7
 	sjmp	00136$
 00102$:
-;	8052Explorer.c:303: printf_tiny("%x  ", indirizzo);
+;	8052Explorer.c:305: printf_tiny("%x  ", indirizzo);
 	push	ar7
 	push	ar6
 	push	ar5
@@ -1586,7 +1588,7 @@ _dumpRAM:
 	pop	ar5
 	pop	ar6
 	pop	ar7
-;	8052Explorer.c:305: for (unsigned int posto = 0; posto < 16; posto++ ) {
+;	8052Explorer.c:307: for (unsigned int posto = 0; posto < 16; posto++ ) {
 00136$:
 	mov	ar0,r5
 	mov	ar1,r6
@@ -1601,7 +1603,7 @@ _dumpRAM:
 	mov	a,(_dumpRAM_posto_262144_78 + 1)
 	subb	a,#0x00
 	jnc	00112$
-;	8052Explorer.c:306: if ( *puntatore < 16 ) {
+;	8052Explorer.c:308: if ( *puntatore < 16 ) {
 	mov	dpl,r0
 	mov	dph,r1
 	mov	b,r2
@@ -1610,7 +1612,7 @@ _dumpRAM:
 	cjne	r4,#0x10,00193$
 00193$:
 	jnc	00111$
-;	8052Explorer.c:307: putchar('0');
+;	8052Explorer.c:309: putchar('0');
 	mov	dptr,#0x0030
 	push	ar2
 	push	ar1
@@ -1620,7 +1622,7 @@ _dumpRAM:
 	pop	ar1
 	pop	ar2
 00111$:
-;	8052Explorer.c:309: printf_tiny("%x ", *puntatore);
+;	8052Explorer.c:311: printf_tiny("%x ", *puntatore);
 	mov	dpl,r0
 	mov	dph,r1
 	mov	b,r2
@@ -1646,15 +1648,15 @@ _dumpRAM:
 	pop	ar0
 	pop	ar1
 	pop	ar2
-;	8052Explorer.c:310: puntatore++;
-;	8052Explorer.c:305: for (unsigned int posto = 0; posto < 16; posto++ ) {
+;	8052Explorer.c:312: puntatore++;
+;	8052Explorer.c:307: for (unsigned int posto = 0; posto < 16; posto++ ) {
 	inc	_dumpRAM_posto_262144_78
 	clr	a
 	cjne	a,_dumpRAM_posto_262144_78,00120$
 	inc	(_dumpRAM_posto_262144_78 + 1)
 	sjmp	00120$
 00112$:
-;	8052Explorer.c:312: printf_tiny(" |");
+;	8052Explorer.c:314: printf_tiny(" |");
 	push	ar2
 	push	ar1
 	push	ar0
@@ -1668,20 +1670,20 @@ _dumpRAM:
 	pop	ar0
 	pop	ar1
 	pop	ar2
-;	8052Explorer.c:313: puntatore -= 16;
+;	8052Explorer.c:315: puntatore -= 16;
 	mov	a,r0
 	add	a,#0xf0
 	mov	r4,a
 	mov	a,r1
 	addc	a,#0xff
 	mov	r3,a
-;	8052Explorer.c:314: for (unsigned char posto = 0; posto < 16; posto++ ) {
+;	8052Explorer.c:316: for (unsigned char posto = 0; posto < 16; posto++ ) {
 	mov	_dumpRAM_posto_262144_81,#0x00
 00123$:
 	mov	a,#0x100 - 0x10
 	add	a,_dumpRAM_posto_262144_81
 	jc	00142$
-;	8052Explorer.c:315: if ( *puntatore < 0x20 || *puntatore > 0x7E ) {
+;	8052Explorer.c:317: if ( *puntatore < 0x20 || *puntatore > 0x7E ) {
 	mov	dpl,r4
 	mov	dph,r3
 	mov	b,r2
@@ -1694,7 +1696,7 @@ _dumpRAM:
 	add	a,#0xff - 0x7e
 	jnc	00114$
 00113$:
-;	8052Explorer.c:316: putchar('.');
+;	8052Explorer.c:318: putchar('.');
 	mov	dptr,#0x002e
 	push	ar4
 	push	ar3
@@ -1705,7 +1707,7 @@ _dumpRAM:
 	pop	ar4
 	sjmp	00115$
 00114$:
-;	8052Explorer.c:318: printf_tiny("%c", *puntatore);
+;	8052Explorer.c:320: printf_tiny("%c", *puntatore);
 	mov	r1,#0x00
 	push	ar4
 	push	ar3
@@ -1724,31 +1726,31 @@ _dumpRAM:
 	pop	ar3
 	pop	ar4
 00115$:
-;	8052Explorer.c:320: puntatore++;
+;	8052Explorer.c:322: puntatore++;
 	inc	r4
 	cjne	r4,#0x00,00200$
 	inc	r3
 00200$:
-;	8052Explorer.c:314: for (unsigned char posto = 0; posto < 16; posto++ ) {
+;	8052Explorer.c:316: for (unsigned char posto = 0; posto < 16; posto++ ) {
 	inc	_dumpRAM_posto_262144_81
 	sjmp	00123$
 00142$:
 	mov	ar5,r4
 	mov	ar6,r3
 	mov	ar7,r2
-;	8052Explorer.c:322: putchar('|');
+;	8052Explorer.c:324: putchar('|');
 	mov	dptr,#0x007c
 	push	ar7
 	push	ar6
 	push	ar5
 	lcall	_putchar
-;	8052Explorer.c:323: putchar('\r');
+;	8052Explorer.c:325: putchar('\r');
 	mov	dptr,#0x000d
 	lcall	_putchar
 	pop	ar5
 	pop	ar6
 	pop	ar7
-;	8052Explorer.c:295: for (unsigned int indirizzo = 0; indirizzo <= 0xFF; indirizzo += 16 ) {
+;	8052Explorer.c:297: for (unsigned int indirizzo = 0; indirizzo <= 0xFF; indirizzo += 16 ) {
 	mov	a,#0x10
 	add	a,_dumpRAM_indirizzo_131072_72
 	mov	_dumpRAM_indirizzo_131072_72,a
@@ -1757,9 +1759,9 @@ _dumpRAM:
 	mov	(_dumpRAM_indirizzo_131072_72 + 1),a
 	ljmp	00126$
 00118$:
-;	8052Explorer.c:325: putchar('\r');
+;	8052Explorer.c:327: putchar('\r');
 	mov	dptr,#0x000d
-;	8052Explorer.c:327: }
+;	8052Explorer.c:329: }
 	ljmp	_putchar
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'hexCODE'
@@ -1769,20 +1771,20 @@ _dumpRAM:
 ;indirizzo                 Allocated to registers r3 r4 
 ;posto                     Allocated to registers r0 
 ;------------------------------------------------------------
-;	8052Explorer.c:329: void hexCODE(){
+;	8052Explorer.c:331: void hexCODE(){
 ;	-----------------------------------------
 ;	 function hexCODE
 ;	-----------------------------------------
 _hexCODE:
-;	8052Explorer.c:330: unsigned char *puntatore = codice;
+;	8052Explorer.c:332: unsigned char *puntatore = codice;
 	mov	_hexCODE_puntatore_65536_85,#_codice
 	mov	(_hexCODE_puntatore_65536_85 + 1),#(_codice >> 8)
 	mov	(_hexCODE_puntatore_65536_85 + 2),#0x80
-;	8052Explorer.c:334: puts("Dumping code in hex file format:");
+;	8052Explorer.c:336: puts("Dumping code in hex file format:");
 	mov	dptr,#___str_85
 	mov	b,#0x80
 	lcall	_puts
-;	8052Explorer.c:337: for (unsigned int indirizzo = 0; indirizzo <= CODESIZE; indirizzo += 16 ) {
+;	8052Explorer.c:339: for (unsigned int indirizzo = 0; indirizzo <= CODESIZE; indirizzo += 16 ) {
 	mov	r3,#0x00
 	mov	r4,#0x00
 00120$:
@@ -1794,7 +1796,7 @@ _hexCODE:
 	jnc	00171$
 	ljmp	00115$
 00171$:
-;	8052Explorer.c:338: printf_tiny(":10");
+;	8052Explorer.c:340: printf_tiny(":10");
 	push	ar4
 	push	ar3
 	mov	a,#___str_74
@@ -1806,17 +1808,17 @@ _hexCODE:
 	dec	sp
 	pop	ar3
 	pop	ar4
-;	8052Explorer.c:339: checksum = 0x10;
+;	8052Explorer.c:341: checksum = 0x10;
 	mov	r1,#0x10
 	mov	r2,#0x00
-;	8052Explorer.c:340: if (indirizzo < 0x10) {
+;	8052Explorer.c:342: if (indirizzo < 0x10) {
 	clr	c
 	mov	a,r3
 	subb	a,#0x10
 	mov	a,r4
 	subb	a,#0x00
 	jnc	00108$
-;	8052Explorer.c:341: printf_tiny("000%x", indirizzo);
+;	8052Explorer.c:343: printf_tiny("000%x", indirizzo);
 	push	ar4
 	push	ar3
 	push	ar2
@@ -1837,11 +1839,11 @@ _hexCODE:
 	pop	ar4
 	ljmp	00109$
 00108$:
-;	8052Explorer.c:342: } else if (indirizzo < 0x100) {
+;	8052Explorer.c:344: } else if (indirizzo < 0x100) {
 	mov	a,#0x100 - 0x01
 	add	a,r4
 	jc	00105$
-;	8052Explorer.c:343: printf_tiny("00%x", indirizzo);
+;	8052Explorer.c:345: printf_tiny("00%x", indirizzo);
 	push	ar4
 	push	ar3
 	push	ar2
@@ -1862,11 +1864,11 @@ _hexCODE:
 	pop	ar4
 	sjmp	00109$
 00105$:
-;	8052Explorer.c:344: } else if (indirizzo < 0x1000) {
+;	8052Explorer.c:346: } else if (indirizzo < 0x1000) {
 	mov	a,#0x100 - 0x10
 	add	a,r4
 	jc	00102$
-;	8052Explorer.c:345: printf_tiny("0%x", indirizzo);
+;	8052Explorer.c:347: printf_tiny("0%x", indirizzo);
 	push	ar4
 	push	ar3
 	push	ar2
@@ -1887,7 +1889,7 @@ _hexCODE:
 	pop	ar4
 	sjmp	00109$
 00102$:
-;	8052Explorer.c:347: printf_tiny("%x", indirizzo);
+;	8052Explorer.c:349: printf_tiny("%x", indirizzo);
 	push	ar4
 	push	ar3
 	push	ar2
@@ -1907,7 +1909,7 @@ _hexCODE:
 	pop	ar3
 	pop	ar4
 00109$:
-;	8052Explorer.c:349: checksum += (indirizzo >> 8 ) & 0xFF ;
+;	8052Explorer.c:351: checksum += (indirizzo >> 8 ) & 0xFF ;
 	mov	ar0,r4
 	mov	ar7,r0
 	mov	r0,#0x00
@@ -1917,7 +1919,7 @@ _hexCODE:
 	mov	a,r0
 	addc	a,r2
 	mov	r0,a
-;	8052Explorer.c:350: checksum += (indirizzo & 0xFF);
+;	8052Explorer.c:352: checksum += (indirizzo & 0xFF);
 	mov	ar5,r3
 	mov	r6,#0x00
 	mov	a,r5
@@ -1926,7 +1928,7 @@ _hexCODE:
 	mov	a,r6
 	addc	a,r0
 	mov	(_hexCODE_checksum_65537_86 + 1),a
-;	8052Explorer.c:351: printf_tiny("00");
+;	8052Explorer.c:353: printf_tiny("00");
 	push	ar4
 	push	ar3
 	mov	a,#___str_79
@@ -1938,7 +1940,7 @@ _hexCODE:
 	dec	sp
 	pop	ar3
 	pop	ar4
-;	8052Explorer.c:353: for (unsigned char posto = 0; posto < 16; posto++ ) {
+;	8052Explorer.c:355: for (unsigned char posto = 0; posto < 16; posto++ ) {
 	mov	r5,_hexCODE_puntatore_65536_85
 	mov	r2,(_hexCODE_puntatore_65536_85 + 1)
 	mov	r1,(_hexCODE_puntatore_65536_85 + 2)
@@ -1949,7 +1951,7 @@ _hexCODE:
 	jc	00176$
 	ljmp	00133$
 00176$:
-;	8052Explorer.c:354: if ( *puntatore < 16 ) {
+;	8052Explorer.c:356: if ( *puntatore < 16 ) {
 	mov	dpl,r5
 	mov	dph,r2
 	mov	b,r1
@@ -1958,7 +1960,7 @@ _hexCODE:
 	cjne	r7,#0x10,00177$
 00177$:
 	jnc	00111$
-;	8052Explorer.c:355: putchar('0');
+;	8052Explorer.c:357: putchar('0');
 	mov	dptr,#0x0030
 	push	ar5
 	push	ar4
@@ -1974,7 +1976,7 @@ _hexCODE:
 	pop	ar4
 	pop	ar5
 00111$:
-;	8052Explorer.c:357: printf_tiny("%x", *puntatore);
+;	8052Explorer.c:359: printf_tiny("%x", *puntatore);
 	mov	dpl,r5
 	mov	dph,r2
 	mov	b,r1
@@ -2003,7 +2005,7 @@ _hexCODE:
 	pop	ar3
 	pop	ar4
 	pop	ar5
-;	8052Explorer.c:358: checksum += *puntatore;
+;	8052Explorer.c:360: checksum += *puntatore;
 	mov	dpl,r5
 	mov	dph,r2
 	mov	b,r1
@@ -2019,27 +2021,27 @@ _hexCODE:
 	mov	a,r6
 	addc	a,(_hexCODE_checksum_65537_86 + 1)
 	mov	(_hexCODE_checksum_65537_86 + 1),a
-;	8052Explorer.c:359: puntatore++;
-;	8052Explorer.c:353: for (unsigned char posto = 0; posto < 16; posto++ ) {
+;	8052Explorer.c:361: puntatore++;
+;	8052Explorer.c:355: for (unsigned char posto = 0; posto < 16; posto++ ) {
 	inc	r0
 	ljmp	00117$
 00133$:
 	mov	_hexCODE_puntatore_65536_85,r5
 	mov	(_hexCODE_puntatore_65536_85 + 1),r2
 	mov	(_hexCODE_puntatore_65536_85 + 2),r1
-;	8052Explorer.c:361: checksum = ((~checksum) & 0xFF);
+;	8052Explorer.c:363: checksum = ((~checksum) & 0xFF);
 	mov	a,_hexCODE_checksum_65537_86
 	cpl	a
 	mov	r6,a
 	mov	a,(_hexCODE_checksum_65537_86 + 1)
 	cpl	a
 	mov	r7,#0x00
-;	8052Explorer.c:362: checksum++;
+;	8052Explorer.c:364: checksum++;
 	inc	r6
 	cjne	r6,#0x00,00179$
 	inc	r7
 00179$:
-;	8052Explorer.c:363: if ( (checksum & 0xFF) < 16 ) {
+;	8052Explorer.c:365: if ( (checksum & 0xFF) < 16 ) {
 	mov	ar2,r6
 	mov	r5,#0x00
 	clr	c
@@ -2048,7 +2050,7 @@ _hexCODE:
 	mov	a,r5
 	subb	a,#0x00
 	jnc	00114$
-;	8052Explorer.c:364: putchar('0');
+;	8052Explorer.c:366: putchar('0');
 	mov	dptr,#0x0030
 	push	ar7
 	push	ar6
@@ -2060,7 +2062,7 @@ _hexCODE:
 	pop	ar6
 	pop	ar7
 00114$:
-;	8052Explorer.c:366: printf_tiny("%x\r", checksum & 0xFF);
+;	8052Explorer.c:368: printf_tiny("%x\r", checksum & 0xFF);
 	mov	r7,#0x00
 	push	ar4
 	push	ar3
@@ -2076,7 +2078,7 @@ _hexCODE:
 	mov	sp,a
 	pop	ar3
 	pop	ar4
-;	8052Explorer.c:337: for (unsigned int indirizzo = 0; indirizzo <= CODESIZE; indirizzo += 16 ) {
+;	8052Explorer.c:339: for (unsigned int indirizzo = 0; indirizzo <= CODESIZE; indirizzo += 16 ) {
 	mov	a,#0x10
 	add	a,r3
 	mov	r3,a
@@ -2085,7 +2087,7 @@ _hexCODE:
 	mov	r4,a
 	ljmp	00120$
 00115$:
-;	8052Explorer.c:368: printf_tiny("%s", ":00000001FF");
+;	8052Explorer.c:370: printf_tiny("%s", ":00000001FF");
 	mov	a,#___str_82
 	push	acc
 	mov	a,#(___str_82 >> 8)
@@ -2100,56 +2102,64 @@ _hexCODE:
 	mov	a,sp
 	add	a,#0xfb
 	mov	sp,a
-;	8052Explorer.c:370: putchar('\r');
+;	8052Explorer.c:372: putchar('\r');
 	mov	dptr,#0x000d
 	lcall	_putchar
-;	8052Explorer.c:371: putchar('\r');
+;	8052Explorer.c:373: putchar('\r');
 	mov	dptr,#0x000d
-;	8052Explorer.c:372: }
+;	8052Explorer.c:374: }
 	ljmp	_putchar
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'reset'
 ;------------------------------------------------------------
-;	8052Explorer.c:374: void reset( void ) {
+;	8052Explorer.c:376: void reset( void ) {
 ;	-----------------------------------------
 ;	 function reset
 ;	-----------------------------------------
 _reset:
-;	8052Explorer.c:375: puts("Resetting the micro.");
+;	8052Explorer.c:377: puts("Resetting the micro.");
 	mov	dptr,#___str_86
 	mov	b,#0x80
 	lcall	_puts
-;	8052Explorer.c:381: while ( 1 );
+;	8052Explorer.c:383: while ( 1 );
 00102$:
-;	8052Explorer.c:382: }
+;	8052Explorer.c:384: }
 	sjmp	00102$
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'start'
 ;------------------------------------------------------------
-;	8052Explorer.c:384: void start( void )
+;	8052Explorer.c:386: void start( void )
 ;	-----------------------------------------
 ;	 function start
 ;	-----------------------------------------
 _start:
-;	8052Explorer.c:386: WDTCON |= 0xE0; // 2048 ms at 12MHz
+;	8052Explorer.c:389: WDTCON |= 0xE0; // 2048 ms at 12MHz
 	orl	_WDTCON,#0xe0
-;	8052Explorer.c:387: WDTCON |= 0x8; // no hardware pin low on reset
+;	8052Explorer.c:390: WDTCON |= 0x8; // no hardware pin low on reset
 	orl	_WDTCON,#0x08
-;	8052Explorer.c:388: WDTCON |= 0x4; // enable Watchdog
+;	8052Explorer.c:391: WDTCON |= 0x4; // enable Watchdog
 	orl	_WDTCON,#0x04
-;	8052Explorer.c:389: WDTRST = 0x1E;
+;	8052Explorer.c:392: WDTRST = 0x1E;
 	mov	_WDTRST,#0x1e
-;	8052Explorer.c:390: WDTRST = 0xE1;
+;	8052Explorer.c:393: WDTRST = 0xE1;
 	mov	_WDTRST,#0xe1
-;	8052Explorer.c:392: CLKREG |= MYCLKREG;
+;	8052Explorer.c:402: CLKREG |= CLKREG_X2;
 	orl	_CLKREG,#0x01
-;	8052Explorer.c:394: init_ser(MYTH2, MYTL2);
-	mov	_init_ser_PARM_2,#0xca
+;	8052Explorer.c:407: P0=0xFF;
+	mov	_P0,#0xff
+;	8052Explorer.c:408: P1=0xFF;
+	mov	_P1,#0xff
+;	8052Explorer.c:409: P2=0xFF;
+	mov	_P2,#0xff
+;	8052Explorer.c:410: P3=0xFF;
+	mov	_P3,#0xff
+;	8052Explorer.c:411: init_ser(MYTH2, MYTL2);
+	mov	_init_ser_PARM_2,#0xfa
 	mov	dpl,#0xff
 	lcall	_init_ser
-;	8052Explorer.c:395: felix();
+;	8052Explorer.c:412: felix();
 	lcall	_felix
-;	8052Explorer.c:396: printf_tiny("Cpu %s running at %sMHz\r", CPU,  MHZ);
+;	8052Explorer.c:413: printf_tiny("Cpu %s running at %sMHz\r", CPU,  MHZ);
 	mov	a,#___str_89
 	push	acc
 	mov	a,#(___str_89 >> 8)
@@ -2170,44 +2180,36 @@ _start:
 	mov	a,sp
 	add	a,#0xf8
 	mov	sp,a
-;	8052Explorer.c:398: if (CLKREG & CLKREG_X2) {
+;	8052Explorer.c:415: if (CLKREG & CLKREG_X2) {
 	mov	a,_CLKREG
 	jnb	acc.0,00102$
-;	8052Explorer.c:399: puts("Double system clock");
+;	8052Explorer.c:416: puts("Double system clock");
 	mov	dptr,#___str_90
 	mov	b,#0x80
 	lcall	_puts
 00102$:
-;	8052Explorer.c:402: if (PCON & 0x10) {
+;	8052Explorer.c:420: if (PCON & 0x10) {
 	mov	a,_PCON
 	jnb	acc.4,00104$
-;	8052Explorer.c:403: puts("Cold reset");
+;	8052Explorer.c:421: puts("Cold reset");
 	mov	dptr,#___str_91
 	mov	b,#0x80
 	lcall	_puts
-;	8052Explorer.c:404: PCON &= ~0x10;
+;	8052Explorer.c:422: PCON &= ~0x10;
 	anl	_PCON,#0xef
 	sjmp	00105$
 00104$:
-;	8052Explorer.c:406: puts("Warm reset");
+;	8052Explorer.c:424: puts("Warm reset");
 	mov	dptr,#___str_92
 	mov	b,#0x80
 	lcall	_puts
 00105$:
-;	8052Explorer.c:408: puts("Enabled watchdog");
+;	8052Explorer.c:428: puts("Enabled watchdog");
 	mov	dptr,#___str_93
 	mov	b,#0x80
 	lcall	_puts
-;	8052Explorer.c:409: P0=0xFF;
-	mov	_P0,#0xff
-;	8052Explorer.c:410: P1=0xFF;
-	mov	_P1,#0xff
-;	8052Explorer.c:411: P2=0xFF;
-	mov	_P2,#0xff
-;	8052Explorer.c:412: P3=0xFF;
-	mov	_P3,#0xff
-;	8052Explorer.c:413: printf_tiny("Started timer 2 with th = %x and tl = %x\r",MYTH2, MYTL2);
-	mov	a,#0xca
+;	8052Explorer.c:430: printf_tiny("Started timer 2 with th = %x and tl = %x\r",MYTH2, MYTL2);
+	mov	a,#0xfa
 	push	acc
 	clr	a
 	push	acc
@@ -2223,7 +2225,7 @@ _start:
 	mov	a,sp
 	add	a,#0xfa
 	mov	sp,a
-;	8052Explorer.c:414: printf_tiny("Started serial at %s bps\r", BPS);
+;	8052Explorer.c:431: printf_tiny("Started serial at %s bps\r", BPS);
 	mov	a,#___str_96
 	push	acc
 	mov	a,#(___str_96 >> 8)
@@ -2238,11 +2240,11 @@ _start:
 	mov	a,sp
 	add	a,#0xfb
 	mov	sp,a
-;	8052Explorer.c:415: init_timer0(0xDE, 0xED);
+;	8052Explorer.c:432: init_timer0(0xDE, 0xED);
 	mov	_init_timer0_PARM_2,#0xed
 	mov	dpl,#0xde
 	lcall	_init_timer0
-;	8052Explorer.c:416: printf_tiny("Started timer 0 with th = %x and tl = %x\r", 0xDE, 0xED);
+;	8052Explorer.c:433: printf_tiny("Started timer 0 with th = %x and tl = %x\r", 0xDE, 0xED);
 	mov	a,#0xed
 	push	acc
 	clr	a
@@ -2259,14 +2261,14 @@ _start:
 	mov	a,sp
 	add	a,#0xfa
 	mov	sp,a
-;	8052Explorer.c:418: puts("Print a string from code memory:");
+;	8052Explorer.c:435: puts("Print a string from code memory:");
 	mov	dptr,#___str_100
 	mov	b,#0x80
 	lcall	_puts
-;	8052Explorer.c:419: puts(acTestString);
+;	8052Explorer.c:436: puts(acTestString); 
 	mov	dptr,#_acTestString
 	mov	b,#0x80
-;	8052Explorer.c:420: }
+;	8052Explorer.c:437: }
 	ljmp	_puts
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'p'
@@ -2275,20 +2277,20 @@ _start:
 ;pin                       Allocated with name '_p_pin_65537_110'
 ;action                    Allocated to registers r5 
 ;------------------------------------------------------------
-;	8052Explorer.c:422: void p( unsigned char porta ) {
+;	8052Explorer.c:439: void p( unsigned char porta ) {
 ;	-----------------------------------------
 ;	 function p
 ;	-----------------------------------------
 _p:
 	mov	r7,dpl
-;	8052Explorer.c:423: if (porta == 3 ) {
+;	8052Explorer.c:440: if (porta == 3 ) {
 	clr	a
 	cjne	r7,#0x03,00255$
 	inc	a
 00255$:
 	mov	r6,a
 	jz	00105$
-;	8052Explorer.c:424: printf_tiny("Which pin from 2 to 7 of port %u?\r", porta);
+;	8052Explorer.c:441: printf_tiny("Which pin from 2 to 7 of port %u?\r", porta);
 	mov	ar4,r7
 	mov	r5,#0x00
 	push	ar7
@@ -2307,9 +2309,9 @@ _p:
 	pop	ar7
 	sjmp	00107$
 00105$:
-;	8052Explorer.c:425: } else if (porta == 2 ) {
+;	8052Explorer.c:442: } else if (porta == 2 ) {
 	cjne	r7,#0x02,00102$
-;	8052Explorer.c:426: printf_tiny("Which pin from 3 to 7 of port %u?\r", porta);
+;	8052Explorer.c:443: printf_tiny("Which pin from 3 to 7 of port %u?\r", porta);
 	mov	ar4,r7
 	mov	r5,#0x00
 	push	ar7
@@ -2328,7 +2330,7 @@ _p:
 	pop	ar7
 	sjmp	00107$
 00102$:
-;	8052Explorer.c:428: printf_tiny("Which pin from 0 to 7 of port %u?\r", porta);
+;	8052Explorer.c:445: printf_tiny("Which pin from 0 to 7 of port %u?\r", porta);
 	mov	ar4,r7
 	mov	r5,#0x00
 	push	ar7
@@ -2345,7 +2347,7 @@ _p:
 	mov	sp,a
 	pop	ar6
 	pop	ar7
-;	8052Explorer.c:430: while (!ser_byte_avail()){
+;	8052Explorer.c:447: while (!ser_byte_avail()){
 00107$:
 	push	ar7
 	push	ar6
@@ -2354,18 +2356,18 @@ _p:
 	pop	ar6
 	pop	ar7
 	jz	00107$
-;	8052Explorer.c:433: unsigned char pin = getchar();
+;	8052Explorer.c:450: unsigned char pin = getchar();
 	push	ar7
 	push	ar6
 	lcall	_getchar
 	mov	r4,dpl
 	pop	ar6
 	pop	ar7
-;	8052Explorer.c:434: pin = pin - 48;
+;	8052Explorer.c:451: pin = pin - 48;
 	mov	a,r4
 	add	a,#0xd0
 	mov	_p_pin_65537_110,a
-;	8052Explorer.c:435: printf_tiny("Pin %u of port %u: ", pin, porta );
+;	8052Explorer.c:452: printf_tiny("Pin %u of port %u: ", pin, porta );
 	mov	ar3,r7
 	mov	r4,#0x00
 	mov	r1,_p_pin_65537_110
@@ -2394,13 +2396,13 @@ _p:
 	pop	ar4
 	pop	ar6
 	pop	ar7
-;	8052Explorer.c:436: if ( pin >= 0 && pin <= 8 ) {
+;	8052Explorer.c:453: if ( pin >= 0 && pin <= 8 ) {
 	mov	a,_p_pin_65537_110
 	add	a,#0xff - 0x08
 	jnc	00261$
 	ljmp	00150$
 00261$:
-;	8052Explorer.c:437: if ( !(porta == 3 && ( pin == 0 || pin == 1))) {
+;	8052Explorer.c:454: if ( !(porta == 3 && ( pin == 0 || pin == 1))) {
 	mov	a,r6
 	jz	00144$
 	mov	a,_p_pin_65537_110
@@ -2412,7 +2414,7 @@ _p:
 	ljmp	00145$
 00264$:
 00144$:
-;	8052Explorer.c:438: if ( !(porta == 2 && ( pin == 0 || pin == 1 || pin == 2))) {
+;	8052Explorer.c:455: if ( !(porta == 2 && ( pin == 0 || pin == 1 || pin == 2))) {
 	clr	a
 	cjne	r7,#0x02,00265$
 	inc	a
@@ -2432,7 +2434,7 @@ _p:
 	ljmp	00139$
 00270$:
 00138$:
-;	8052Explorer.c:439: puts("0 off, 1 on.");
+;	8052Explorer.c:456: puts("0 off, 1 on.");
 	mov	dptr,#___str_105
 	mov	b,#0x80
 	push	ar7
@@ -2448,7 +2450,7 @@ _p:
 	pop	ar4
 	pop	ar6
 	pop	ar7
-;	8052Explorer.c:440: while (!ser_byte_avail()){
+;	8052Explorer.c:457: while (!ser_byte_avail()){
 00110$:
 	push	ar7
 	push	ar6
@@ -2465,7 +2467,7 @@ _p:
 	pop	ar6
 	pop	ar7
 	jz	00110$
-;	8052Explorer.c:443: unsigned char action = getchar();
+;	8052Explorer.c:460: unsigned char action = getchar();
 	push	ar7
 	push	ar6
 	push	ar4
@@ -2480,10 +2482,10 @@ _p:
 	pop	ar4
 	pop	ar6
 	pop	ar7
-;	8052Explorer.c:444: action = action -48;
+;	8052Explorer.c:461: action = action -48;
 	mov	a,r0
 	add	a,#0xd0
-;	8052Explorer.c:445: if (action == 0 || action == 1) {
+;	8052Explorer.c:462: if (action == 0 || action == 1) {
 	mov	r5,a
 	jz	00134$
 	cjne	r5,#0x01,00273$
@@ -2492,9 +2494,9 @@ _p:
 	ljmp	00135$
 00274$:
 00134$:
-;	8052Explorer.c:446: if (action == 1) {
+;	8052Explorer.c:463: if (action == 1) {
 	cjne	r5,#0x01,00132$
-;	8052Explorer.c:447: action = action << pin;
+;	8052Explorer.c:464: action = action << pin;
 	mov	b,_p_pin_65537_110
 	inc	b
 	mov	a,r5
@@ -2503,10 +2505,10 @@ _p:
 	add	a,acc
 00279$:
 	djnz	b,00277$
-;	8052Explorer.c:448: action = ~action;
+;	8052Explorer.c:465: action = ~action;
 	cpl	a
 	mov	r5,a
-;	8052Explorer.c:450: printf_tiny("Setting pin %u of port %u on.\r", pin, porta );
+;	8052Explorer.c:467: printf_tiny("Setting pin %u of port %u on.\r", pin, porta );
 	push	ar7
 	push	ar6
 	push	ar5
@@ -2525,35 +2527,35 @@ _p:
 	pop	ar5
 	pop	ar6
 	pop	ar7
-;	8052Explorer.c:451: if (0 == porta) {
+;	8052Explorer.c:468: if (0 == porta) {
 	mov	a,r7
 	jnz	00120$
-;	8052Explorer.c:452: P0 &= action;
+;	8052Explorer.c:469: P0 &= action;
 	mov	a,r5
 	anl	_P0,a
 	ret
 00120$:
-;	8052Explorer.c:453: } else if (1 == porta) {
+;	8052Explorer.c:470: } else if (1 == porta) {
 	cjne	r7,#0x01,00117$
-;	8052Explorer.c:454: P1 &= action;
+;	8052Explorer.c:471: P1 &= action;
 	mov	a,r5
 	anl	_P1,a
 	ret
 00117$:
-;	8052Explorer.c:455: } else if (2 == porta) {
+;	8052Explorer.c:472: } else if (2 == porta) {
 	mov	a,r6
 	jz	00114$
-;	8052Explorer.c:456: P2 &= action;
+;	8052Explorer.c:473: P2 &= action;
 	mov	a,r5
 	anl	_P2,a
 	ret
 00114$:
-;	8052Explorer.c:458: P3 &= action;
+;	8052Explorer.c:475: P3 &= action;
 	mov	a,r5
 	anl	_P3,a
 	ret
 00132$:
-;	8052Explorer.c:463: action = action << pin;
+;	8052Explorer.c:480: action = action << pin;
 	mov	b,_p_pin_65537_110
 	inc	b
 	mov	a,#0x01
@@ -2563,7 +2565,7 @@ _p:
 00286$:
 	djnz	b,00284$
 	mov	r5,a
-;	8052Explorer.c:465: printf_tiny("Setting pin %u of port %u off.\r", pin, porta );
+;	8052Explorer.c:482: printf_tiny("Setting pin %u of port %u off.\r", pin, porta );
 	push	ar7
 	push	ar6
 	push	ar5
@@ -2582,220 +2584,239 @@ _p:
 	pop	ar5
 	pop	ar6
 	pop	ar7
-;	8052Explorer.c:466: if (0 == porta) {
+;	8052Explorer.c:483: if (0 == porta) {
 	mov	a,r7
 	jnz	00129$
-;	8052Explorer.c:467: P0 |= action;
+;	8052Explorer.c:484: P0 |= action;
 	mov	a,r5
 	orl	_P0,a
 	ret
 00129$:
-;	8052Explorer.c:468: } else if (1 == porta) {
+;	8052Explorer.c:485: } else if (1 == porta) {
 	cjne	r7,#0x01,00126$
-;	8052Explorer.c:469: P1 |= action;
+;	8052Explorer.c:486: P1 |= action;
 	mov	a,r5
 	orl	_P1,a
 	ret
 00126$:
-;	8052Explorer.c:470: } else if (2 == porta) {
+;	8052Explorer.c:487: } else if (2 == porta) {
 	mov	a,r6
 	jz	00123$
-;	8052Explorer.c:471: P2 |= action;
+;	8052Explorer.c:488: P2 |= action;
 	mov	a,r5
 	orl	_P2,a
 	ret
 00123$:
-;	8052Explorer.c:473: P3 |= action;
+;	8052Explorer.c:490: P3 |= action;
 	mov	a,r5
 	orl	_P3,a
 	ret
 00135$:
-;	8052Explorer.c:478: puts("Invalid action!");
+;	8052Explorer.c:495: puts("Invalid action!");
 	mov	dptr,#___str_108
 	mov	b,#0x80
 	ljmp	_puts
 00139$:
-;	8052Explorer.c:483: puts("the pin 2 is the serial character receive blink.");
+;	8052Explorer.c:500: puts("the pin 2 is the serial character receive blink.");
 	mov	dptr,#___str_115
 	mov	b,#0x80
 	ljmp	_puts
 00145$:
-;	8052Explorer.c:486: puts("Sorry the pins 0 and 1 of port 3 are used by serial port.");
+;	8052Explorer.c:503: puts("Sorry the pins 0 and 1 of port 3 are used by serial port.");
 	mov	dptr,#___str_112
 	mov	b,#0x80
 	ljmp	_puts
 00150$:
-;	8052Explorer.c:489: puts("Invalid pin!");
+;	8052Explorer.c:506: puts("Invalid pin!");
 	mov	dptr,#___str_113
 	mov	b,#0x80
-;	8052Explorer.c:491: }
+;	8052Explorer.c:508: }
 	ljmp	_puts
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'HELP'
 ;------------------------------------------------------------
-;	8052Explorer.c:493: void HELP ( void ) {
+;	8052Explorer.c:510: void HELP ( void ) {
 ;	-----------------------------------------
 ;	 function HELP
 ;	-----------------------------------------
 _HELP:
-;	8052Explorer.c:503: puts("H print this help.");
+;	8052Explorer.c:524: puts("H print this help.");
 	mov	dptr,#___str_134
 	mov	b,#0x80
-;	8052Explorer.c:504: }
+;	8052Explorer.c:525: }
 	ljmp	_puts
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'main'
 ;------------------------------------------------------------
 ;carattere                 Allocated to registers r6 
 ;------------------------------------------------------------
-;	8052Explorer.c:506: void main( void ) {
+;	8052Explorer.c:527: void main( void ) {
 ;	-----------------------------------------
 ;	 function main
 ;	-----------------------------------------
 _main:
-;	8052Explorer.c:507: start();
+;	8052Explorer.c:528: start();
 	lcall	_start
-;	8052Explorer.c:508: puts("Insert command, h for help.");
+;	8052Explorer.c:529: puts("Insert command, h for help.");
 	mov	dptr,#___str_135
 	mov	b,#0x80
 	lcall	_puts
-;	8052Explorer.c:510: while( 1 )							// forever.
-00125$:
-;	8052Explorer.c:512: watchdogRESET();
+;	8052Explorer.c:531: while( 1 )							// forever.
+00128$:
+;	8052Explorer.c:534: watchdogRESET();
 	lcall	_watchdogRESET
-;	8052Explorer.c:514: if ( ser_byte_avail() )	{				// if data coming in...
+;	8052Explorer.c:537: if ( ser_byte_avail() )	{				// if data coming in...
 	lcall	_ser_byte_avail
 	mov	a,dpl
-	jz	00125$
-;	8052Explorer.c:515: carattere = getchar();
+	jz	00128$
+;	8052Explorer.c:538: carattere = getchar();
 	lcall	_getchar
 	mov	r6,dpl
-	mov	r7,dph
-;	8052Explorer.c:521: switch (carattere)
-	cjne	r6,#0x30,00206$
-	sjmp	00110$
-00206$:
-	cjne	r6,#0x31,00207$
-	ljmp	00111$
-00207$:
-	cjne	r6,#0x32,00208$
-	ljmp	00112$
-00208$:
-	cjne	r6,#0x33,00209$
-	ljmp	00113$
-00209$:
-	cjne	r6,#0x43,00210$
-	sjmp	00102$
-00210$:
-	cjne	r6,#0x45,00211$
-	sjmp	00104$
-00211$:
-	cjne	r6,#0x48,00212$
-	sjmp	00109$
-00212$:
-	cjne	r6,#0x63,00213$
-	sjmp	00101$
-00213$:
-	cjne	r6,#0x65,00214$
-	sjmp	00103$
-00214$:
-	cjne	r6,#0x66,00215$
-	sjmp	00105$
-00215$:
-	cjne	r6,#0x68,00216$
-	sjmp	00109$
-00216$:
-	cjne	r6,#0x6d,00217$
-	sjmp	00106$
+;	8052Explorer.c:544: if ( carattere >= 0x30 && carattere <= 0x7A ) {
+	cjne	r6,#0x30,00217$
 00217$:
-;	8052Explorer.c:523: case 'c':
-	cjne	r6,#0x72,00114$
-	sjmp	00107$
-00101$:
-;	8052Explorer.c:524: dumpCODE();
-	lcall	_dumpCODE
-;	8052Explorer.c:525: break;
-;	8052Explorer.c:526: case 'C':
-	sjmp	00119$
-00102$:
-;	8052Explorer.c:527: hexCODE();
-	lcall	_hexCODE
-;	8052Explorer.c:528: break;
-;	8052Explorer.c:529: case 'e':
-	sjmp	00119$
-00103$:
-;	8052Explorer.c:530: dumpEEPROM();
-	lcall	_dumpEEPROM
-;	8052Explorer.c:531: break;
-;	8052Explorer.c:532: case 'E':
-	sjmp	00119$
-00104$:
-;	8052Explorer.c:533: hexEEPROM();
-	lcall	_hexEEPROM
-;	8052Explorer.c:534: break;
-;	8052Explorer.c:535: case 'f':
-	sjmp	00119$
-00105$:
-;	8052Explorer.c:536: felix();
-	lcall	_felix
-;	8052Explorer.c:537: break;
-;	8052Explorer.c:538: case 'm':
-	sjmp	00119$
-00106$:
-;	8052Explorer.c:539: dumpRAM();
-	lcall	_dumpRAM
-;	8052Explorer.c:540: break;
-;	8052Explorer.c:541: case 'r':
-	sjmp	00119$
-00107$:
-;	8052Explorer.c:542: reset();
-	lcall	_reset
-;	8052Explorer.c:543: break;
-;	8052Explorer.c:545: case 'H':
-	sjmp	00119$
-00109$:
-;	8052Explorer.c:546: HELP();
-	lcall	_HELP
-;	8052Explorer.c:547: break;
-;	8052Explorer.c:548: case '0':
-	sjmp	00119$
-00110$:
-;	8052Explorer.c:549: p(0);
-	mov	dpl,#0x00
-	lcall	_p
-;	8052Explorer.c:550: break;
-;	8052Explorer.c:551: case '1':
-	sjmp	00119$
-00111$:
-;	8052Explorer.c:552: p(1);
-	mov	dpl,#0x01
-	lcall	_p
-;	8052Explorer.c:553: break;
-;	8052Explorer.c:554: case '2':
-	sjmp	00119$
-00112$:
-;	8052Explorer.c:555: p(2);
-	mov	dpl,#0x02
-	lcall	_p
-;	8052Explorer.c:556: break;
-;	8052Explorer.c:557: case '3':
-	sjmp	00119$
-00113$:
-;	8052Explorer.c:558: p(3);
-	mov	dpl,#0x03
-	lcall	_p
-;	8052Explorer.c:559: break;
-;	8052Explorer.c:560: default:
-	sjmp	00119$
-00114$:
-;	8052Explorer.c:561: if ( carattere >= 0x30 && carattere <= 0x7A ) {
-	cjne	r6,#0x30,00219$
-00219$:
-	jc	00119$
+	mov	_main_sloc0_1_0,c
+	jc	00102$
 	mov	a,r6
 	add	a,#0xff - 0x7a
-	jc	00119$
-;	8052Explorer.c:562: printf_tiny("Invalid command %c.\r", carattere );
+	jc	00102$
+;	8052Explorer.c:545: putchar(carattere);
+	mov	ar5,r6
+	mov	r7,#0x00
+	mov	dpl,r5
+	mov	dph,r7
+	push	ar6
+	lcall	_putchar
+	pop	ar6
+00102$:
+;	8052Explorer.c:547: putchar('\r');
+	mov	dptr,#0x000d
+	push	ar6
+	lcall	_putchar
+	pop	ar6
+;	8052Explorer.c:548: switch (carattere)
+	cjne	r6,#0x30,00220$
+	sjmp	00113$
+00220$:
+	cjne	r6,#0x31,00221$
+	ljmp	00114$
+00221$:
+	cjne	r6,#0x32,00222$
+	ljmp	00115$
+00222$:
+	cjne	r6,#0x33,00223$
+	ljmp	00116$
+00223$:
+	cjne	r6,#0x43,00224$
+	sjmp	00105$
+00224$:
+	cjne	r6,#0x45,00225$
+	sjmp	00107$
+00225$:
+	cjne	r6,#0x48,00226$
+	sjmp	00112$
+00226$:
+	cjne	r6,#0x63,00227$
+	sjmp	00104$
+00227$:
+	cjne	r6,#0x65,00228$
+	sjmp	00106$
+00228$:
+	cjne	r6,#0x66,00229$
+	sjmp	00108$
+00229$:
+	cjne	r6,#0x68,00230$
+	sjmp	00112$
+00230$:
+	cjne	r6,#0x6d,00231$
+	sjmp	00109$
+00231$:
+;	8052Explorer.c:550: case 'c':
+	cjne	r6,#0x72,00117$
+	sjmp	00110$
+00104$:
+;	8052Explorer.c:551: dumpCODE();
+	lcall	_dumpCODE
+;	8052Explorer.c:552: break;
+;	8052Explorer.c:553: case 'C':
+	sjmp	00122$
+00105$:
+;	8052Explorer.c:554: hexCODE();
+	lcall	_hexCODE
+;	8052Explorer.c:555: break;
+;	8052Explorer.c:557: case 'e':
+	sjmp	00122$
+00106$:
+;	8052Explorer.c:558: dumpEEPROM();
+	lcall	_dumpEEPROM
+;	8052Explorer.c:559: break;
+;	8052Explorer.c:560: case 'E':
+	sjmp	00122$
+00107$:
+;	8052Explorer.c:561: hexEEPROM();
+	lcall	_hexEEPROM
+;	8052Explorer.c:562: break;
+;	8052Explorer.c:564: case 'f':
+	sjmp	00122$
+00108$:
+;	8052Explorer.c:565: felix();
+	lcall	_felix
+;	8052Explorer.c:566: break;
+;	8052Explorer.c:567: case 'm':
+	sjmp	00122$
+00109$:
+;	8052Explorer.c:568: dumpRAM();
+	lcall	_dumpRAM
+;	8052Explorer.c:569: break;
+;	8052Explorer.c:570: case 'r':
+	sjmp	00122$
+00110$:
+;	8052Explorer.c:571: reset();
+	lcall	_reset
+;	8052Explorer.c:572: break;
+;	8052Explorer.c:574: case 'H':
+	sjmp	00122$
+00112$:
+;	8052Explorer.c:575: HELP();
+	lcall	_HELP
+;	8052Explorer.c:576: break;
+;	8052Explorer.c:577: case '0':
+	sjmp	00122$
+00113$:
+;	8052Explorer.c:578: p(0);
+	mov	dpl,#0x00
+	lcall	_p
+;	8052Explorer.c:579: break;
+;	8052Explorer.c:580: case '1':
+	sjmp	00122$
+00114$:
+;	8052Explorer.c:581: p(1);
+	mov	dpl,#0x01
+	lcall	_p
+;	8052Explorer.c:582: break;
+;	8052Explorer.c:583: case '2':
+	sjmp	00122$
+00115$:
+;	8052Explorer.c:584: p(2);
+	mov	dpl,#0x02
+	lcall	_p
+;	8052Explorer.c:585: break;
+;	8052Explorer.c:586: case '3':
+	sjmp	00122$
+00116$:
+;	8052Explorer.c:587: p(3);
+	mov	dpl,#0x03
+	lcall	_p
+;	8052Explorer.c:588: break;
+;	8052Explorer.c:589: default:
+	sjmp	00122$
+00117$:
+;	8052Explorer.c:590: if ( carattere >= 0x30 && carattere <= 0x7A ) {
+	jb	_main_sloc0_1_0,00122$
+	mov	a,r6
+	add	a,#0xff - 0x7a
+	jc	00122$
+;	8052Explorer.c:591: printf_tiny("Invalid command %c.\r", carattere );
 	mov	r7,#0x00
 	push	ar6
 	push	ar7
@@ -2807,21 +2828,21 @@ _main:
 	mov	a,sp
 	add	a,#0xfc
 	mov	sp,a
-;	8052Explorer.c:565: while ( ser_byte_avail() )	{				// if data coming in...
-00119$:
+;	8052Explorer.c:594: while ( ser_byte_avail() )	{				// if data coming in...
+00122$:
 	lcall	_ser_byte_avail
 	mov	a,dpl
-	jz	00121$
-;	8052Explorer.c:566: carattere = getchar();
+	jz	00124$
+;	8052Explorer.c:595: carattere = getchar();
 	lcall	_getchar
-	sjmp	00119$
-00121$:
-;	8052Explorer.c:568: puts("Insert command, h for help:");
+	sjmp	00122$
+00124$:
+;	8052Explorer.c:597: puts("Insert command, h for help:");
 	mov	dptr,#___str_137
 	mov	b,#0x80
 	lcall	_puts
-;	8052Explorer.c:572: }
-	ljmp	00125$
+;	8052Explorer.c:601: }
+	ljmp	00128$
 	.area CSEG    (CODE)
 	.area CONST   (CODE)
 _acTestString:
@@ -3030,7 +3051,7 @@ ___str_88:
 	.area CSEG    (CODE)
 	.area CONST   (CODE)
 ___str_89:
-	.ascii "50"
+	.ascii "11.0592"
 	.db 0x00
 	.area CSEG    (CODE)
 	.area CONST   (CODE)
@@ -3067,7 +3088,7 @@ ___str_95:
 	.area CSEG    (CODE)
 	.area CONST   (CODE)
 ___str_96:
-	.ascii "57600"
+	.ascii "115200"
 	.db 0x00
 	.area CSEG    (CODE)
 	.area CONST   (CODE)

@@ -410,22 +410,22 @@
                                     410 ;	-----------------------------------------
                                     411 ;	 function readEepromAssembler
                                     412 ;	-----------------------------------------
-      000EED                        413 _readEepromAssembler:
+      000F0E                        413 _readEepromAssembler:
                                     414 ;	naked function: no prologue.
                                     415 ;	library/eeprom.c:25: __endasm;
-      000EED C0 E0            [24]  416 	push	acc
-      000EEF C0 F0            [24]  417 	push	b
-      000EF1 C0 82            [24]  418 	push	dpl
-      000EF3 C0 83            [24]  419 	push	dph
-      000EF5 85 08 82         [24]  420 	mov	dpl, _tempa
-      000EF8 85 09 83         [24]  421 	mov	dph, _tempb
-      000EFB E0               [24]  422 	movx	a, @dptr
-      000EFC F5 0A            [12]  423 	mov	_tempc, a
-      000EFE D0 83            [24]  424 	pop	dph
-      000F00 D0 82            [24]  425 	pop	dpl
-      000F02 D0 F0            [24]  426 	pop	b
-      000F04 D0 E0            [24]  427 	pop	acc
-      000F06 32               [24]  428 	reti
+      000F0E C0 E0            [24]  416 	push	acc
+      000F10 C0 F0            [24]  417 	push	b
+      000F12 C0 82            [24]  418 	push	dpl
+      000F14 C0 83            [24]  419 	push	dph
+      000F16 85 08 82         [24]  420 	mov	dpl, _tempa
+      000F19 85 09 83         [24]  421 	mov	dph, _tempb
+      000F1C E0               [24]  422 	movx	a, @dptr
+      000F1D F5 0A            [12]  423 	mov	_tempc, a
+      000F1F D0 83            [24]  424 	pop	dph
+      000F21 D0 82            [24]  425 	pop	dpl
+      000F23 D0 F0            [24]  426 	pop	b
+      000F25 D0 E0            [24]  427 	pop	acc
+      000F27 32               [24]  428 	reti
                                     429 ;	library/eeprom.c:26: }
                                     430 ;	naked function: no epilogue.
                                     431 ;------------------------------------------------------------
@@ -438,7 +438,7 @@
                                     438 ;	-----------------------------------------
                                     439 ;	 function readEeprom
                                     440 ;	-----------------------------------------
-      000F07                        441 _readEeprom:
+      000F28                        441 _readEeprom:
                            000007   442 	ar7 = 0x07
                            000006   443 	ar6 = 0x06
                            000005   444 	ar5 = 0x05
@@ -447,23 +447,23 @@
                            000002   447 	ar2 = 0x02
                            000001   448 	ar1 = 0x01
                            000000   449 	ar0 = 0x00
-      000F07 AE 82            [24]  450 	mov	r6,dpl
-      000F09 AF 83            [24]  451 	mov	r7,dph
+      000F28 AE 82            [24]  450 	mov	r6,dpl
+      000F2A AF 83            [24]  451 	mov	r7,dph
                                     452 ;	library/eeprom.c:37: EECON |= 8;
-      000F0B 43 96 08         [24]  453 	orl	_EECON,#0x08
+      000F2C 43 96 08         [24]  453 	orl	_EECON,#0x08
                                     454 ;	library/eeprom.c:39: tempa = (unsigned char) (addres & 255);
-      000F0E 8E 08            [24]  455 	mov	_tempa,r6
+      000F2F 8E 08            [24]  455 	mov	_tempa,r6
                                     456 ;	library/eeprom.c:40: tempb = (unsigned char) ((addres >> 8) & 255);
-      000F10 8F 09            [24]  457 	mov	_tempb,r7
+      000F31 8F 09            [24]  457 	mov	_tempb,r7
                                     458 ;	library/eeprom.c:43: readEepromAssembler();
-      000F12 12 0E ED         [24]  459 	lcall	_readEepromAssembler
+      000F33 12 0F 0E         [24]  459 	lcall	_readEepromAssembler
                                     460 ;	library/eeprom.c:45: returnvalue = tempc;
-      000F15 85 0A 82         [24]  461 	mov	dpl,_tempc
+      000F36 85 0A 82         [24]  461 	mov	dpl,_tempc
                                     462 ;	library/eeprom.c:49: EECON &= ~8;
-      000F18 53 96 F7         [24]  463 	anl	_EECON,#0xf7
+      000F39 53 96 F7         [24]  463 	anl	_EECON,#0xf7
                                     464 ;	library/eeprom.c:51: return returnvalue;
                                     465 ;	library/eeprom.c:52: }
-      000F1B 22               [24]  466 	ret
+      000F3C 22               [24]  466 	ret
                                     467 ;------------------------------------------------------------
                                     468 ;Allocation info for local variables in function 'writeEepromAssembler'
                                     469 ;------------------------------------------------------------
@@ -471,22 +471,22 @@
                                     471 ;	-----------------------------------------
                                     472 ;	 function writeEepromAssembler
                                     473 ;	-----------------------------------------
-      000F1C                        474 _writeEepromAssembler:
+      000F3D                        474 _writeEepromAssembler:
                                     475 ;	naked function: no prologue.
                                     476 ;	library/eeprom.c:72: __endasm;
-      000F1C C0 E0            [24]  477 	push	acc
-      000F1E C0 F0            [24]  478 	push	b
-      000F20 C0 82            [24]  479 	push	dpl
-      000F22 C0 83            [24]  480 	push	dph
-      000F24 85 08 82         [24]  481 	mov	dpl, _tempa
-      000F27 85 09 83         [24]  482 	mov	dph, _tempb
-      000F2A E5 0A            [12]  483 	mov	a, _tempc
-      000F2C F0               [24]  484 	movx	@dptr, a
-      000F2D D0 83            [24]  485 	pop	dph
-      000F2F D0 82            [24]  486 	pop	dpl
-      000F31 D0 F0            [24]  487 	pop	b
-      000F33 D0 E0            [24]  488 	pop	acc
-      000F35 32               [24]  489 	reti
+      000F3D C0 E0            [24]  477 	push	acc
+      000F3F C0 F0            [24]  478 	push	b
+      000F41 C0 82            [24]  479 	push	dpl
+      000F43 C0 83            [24]  480 	push	dph
+      000F45 85 08 82         [24]  481 	mov	dpl, _tempa
+      000F48 85 09 83         [24]  482 	mov	dph, _tempb
+      000F4B E5 0A            [12]  483 	mov	a, _tempc
+      000F4D F0               [24]  484 	movx	@dptr, a
+      000F4E D0 83            [24]  485 	pop	dph
+      000F50 D0 82            [24]  486 	pop	dpl
+      000F52 D0 F0            [24]  487 	pop	b
+      000F54 D0 E0            [24]  488 	pop	acc
+      000F56 32               [24]  489 	reti
                                     490 ;	library/eeprom.c:73: }
                                     491 ;	naked function: no epilogue.
                                     492 ;------------------------------------------------------------
@@ -499,37 +499,37 @@
                                     499 ;	-----------------------------------------
                                     500 ;	 function writeEeprom
                                     501 ;	-----------------------------------------
-      000F36                        502 _writeEeprom:
-      000F36 AF 82            [24]  503 	mov	r7,dpl
+      000F57                        502 _writeEeprom:
+      000F57 AF 82            [24]  503 	mov	r7,dpl
                                     504 ;	library/eeprom.c:79: EECON |= 8;
-      000F38 43 96 08         [24]  505 	orl	_EECON,#0x08
+      000F59 43 96 08         [24]  505 	orl	_EECON,#0x08
                                     506 ;	library/eeprom.c:83: EECON |= 16;
-      000F3B 43 96 10         [24]  507 	orl	_EECON,#0x10
+      000F5C 43 96 10         [24]  507 	orl	_EECON,#0x10
                                     508 ;	library/eeprom.c:89: tempa = (unsigned char) (addres & 255);
-      000F3E 85 0B 08         [24]  509 	mov	_tempa,_writeEeprom_PARM_2
+      000F5F 85 0B 08         [24]  509 	mov	_tempa,_writeEeprom_PARM_2
                                     510 ;	library/eeprom.c:90: tempb = (unsigned char) ((addres >> 8) & 255);
-      000F41 85 0C 09         [24]  511 	mov	_tempb,(_writeEeprom_PARM_2 + 1)
+      000F62 85 0C 09         [24]  511 	mov	_tempb,(_writeEeprom_PARM_2 + 1)
                                     512 ;	library/eeprom.c:91: tempc = datavalue;
-      000F44 8F 0A            [24]  513 	mov	_tempc,r7
+      000F65 8F 0A            [24]  513 	mov	_tempc,r7
                                     514 ;	library/eeprom.c:94: writeEepromAssembler();
-      000F46 12 0F 1C         [24]  515 	lcall	_writeEepromAssembler
+      000F67 12 0F 3D         [24]  515 	lcall	_writeEepromAssembler
                                     516 ;	library/eeprom.c:97: while ((EECON | 2) == 0);
                                     517 ;	library/eeprom.c:101: EECON &= ~16;
-      000F49 53 96 EF         [24]  518 	anl	_EECON,#0xef
+      000F6A 53 96 EF         [24]  518 	anl	_EECON,#0xef
                                     519 ;	library/eeprom.c:105: EECON &= ~8;
-      000F4C 53 96 F7         [24]  520 	anl	_EECON,#0xf7
+      000F6D 53 96 F7         [24]  520 	anl	_EECON,#0xf7
                                     521 ;	library/eeprom.c:108: while (readEeprom(addres) != datavalue);
-      000F4F                        522 00104$:
-      000F4F 85 0B 82         [24]  523 	mov	dpl,_writeEeprom_PARM_2
-      000F52 85 0C 83         [24]  524 	mov	dph,(_writeEeprom_PARM_2 + 1)
-      000F55 C0 07            [24]  525 	push	ar7
-      000F57 12 0F 07         [24]  526 	lcall	_readEeprom
-      000F5A AE 82            [24]  527 	mov	r6,dpl
-      000F5C D0 07            [24]  528 	pop	ar7
-      000F5E EE               [12]  529 	mov	a,r6
-      000F5F B5 07 ED         [24]  530 	cjne	a,ar7,00104$
+      000F70                        522 00104$:
+      000F70 85 0B 82         [24]  523 	mov	dpl,_writeEeprom_PARM_2
+      000F73 85 0C 83         [24]  524 	mov	dph,(_writeEeprom_PARM_2 + 1)
+      000F76 C0 07            [24]  525 	push	ar7
+      000F78 12 0F 28         [24]  526 	lcall	_readEeprom
+      000F7B AE 82            [24]  527 	mov	r6,dpl
+      000F7D D0 07            [24]  528 	pop	ar7
+      000F7F EE               [12]  529 	mov	a,r6
+      000F80 B5 07 ED         [24]  530 	cjne	a,ar7,00104$
                                     531 ;	library/eeprom.c:109: }
-      000F62 22               [24]  532 	ret
+      000F83 22               [24]  532 	ret
                                     533 	.area CSEG    (CODE)
                                     534 	.area CONST   (CODE)
                                     535 	.area XINIT   (CODE)

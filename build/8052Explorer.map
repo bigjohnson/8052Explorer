@@ -39,8 +39,8 @@ C:   00000001  l_BSEG_BYTES
 C:   00000001  s_PSEG                          
 C:   00000001  s_XISEG                         
 C:   00000001  s_XSEG                          
-C:   00000002  l_BSEG                          
 C:   00000002  l_OSEG                          
+C:   00000003  l_BSEG                          
 C:   00000003  l_GSFINAL                       
 C:   00000003  l_GSINIT0                       
 C:   00000008  l_REG_BANK_0                    
@@ -79,10 +79,10 @@ C:   00000082  s_GSINIT5
 C:   00000085  s_CSEG                          
 C:   000000A6  l_SSEG                          
 C:   00000100  l_IRAM                          
-C:   00000C96  l_CONST                         
-C:   00001233  l_CSEG                          
-C:   000012B8  s_CONST                         
-C:   00001F4E  s_XINIT                         
+C:   00000C9C  l_CONST                         
+C:   0000124B  l_CSEG                          
+C:   000012D0  s_CONST                         
+C:   00001F6C  s_XINIT                         
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 3.
 Hexadecimal  [32-Bits]
@@ -438,7 +438,7 @@ Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-CSEG                                00000085    00001233 =        4659. bytes (REL,CON,CODE)
+CSEG                                00000085    0000124B =        4683. bytes (REL,CON,CODE)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
@@ -454,36 +454,36 @@ C:   00000AD3  _start                             8052Explorer
 C:   00000BCE  _p                                 8052Explorer
 C:   00000E02  _HELP                              8052Explorer
 C:   00000E0B  _main                              8052Explorer
-C:   00000EED  _readEepromAssembler               eeprom
-C:   00000F07  _readEeprom                        eeprom
-C:   00000F1C  _writeEepromAssembler              eeprom
-C:   00000F36  _writeEeprom                       eeprom
-C:   00000F63  _init_ser                          serial
-C:   00000F96  _SerInt                            serial
-C:   00000FE7  _ser_write_byte                    serial
-C:   0000100C  _ser_byte_avail                    serial
-C:   00001023  _ser_read_byte                     serial
-C:   0000103D  _putchar                           serial
-C:   00001051  _getchar                           serial
-C:   00001059  _init_timer0                       timer0
-C:   0000106A  _millis                            timer0
-C:   00001071  _it_timer0                         timer0
-C:   00001102  _printf_tiny                       printf_tiny
-C:   0000120B  __moduint                          _moduint
-C:   00001258  _puts                              puts
-C:   00001298  __gptrget                          _gptrget
-C:   000012B4  __sdcc_external_startup            _startup
+C:   00000F0E  _readEepromAssembler               eeprom
+C:   00000F28  _readEeprom                        eeprom
+C:   00000F3D  _writeEepromAssembler              eeprom
+C:   00000F57  _writeEeprom                       eeprom
+C:   00000F84  _init_ser                          serial
+C:   00000FB4  _SerInt                            serial
+C:   00001005  _ser_write_byte                    serial
+C:   0000102A  _ser_byte_avail                    serial
+C:   00001041  _ser_read_byte                     serial
+C:   0000105B  _putchar                           serial
+C:   0000106F  _getchar                           serial
+C:   00001077  _init_timer0                       timer0
+C:   00001088  _millis                            timer0
+C:   0000108F  _it_timer0                         timer0
+C:   0000111A  _printf_tiny                       printf_tiny
+C:   00001223  __moduint                          _moduint
+C:   00001270  _puts                              puts
+C:   000012B0  __gptrget                          _gptrget
+C:   000012CC  __sdcc_external_startup            _startup
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 22.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-CONST                               000012B8    00000C96 =        3222. bytes (REL,CON,CODE)
+CONST                               000012D0    00000C9C =        3228. bytes (REL,CON,CODE)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-C:   000012B8  _acTestString                      8052Explorer
+C:   000012D0  _acTestString                      8052Explorer
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 23.
 

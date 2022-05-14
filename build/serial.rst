@@ -376,10 +376,10 @@
                                     376 ; bit data
                                     377 ;--------------------------------------------------------
                                     378 	.area BSEG    (BIT)
-      000000                        379 _is_txing:
-      000000                        380 	.ds 1
-      000001                        381 _ser_byte_avail_sloc0_1_0:
-      000001                        382 	.ds 1
+      000001                        379 _is_txing:
+      000001                        380 	.ds 1
+      000002                        381 _ser_byte_avail_sloc0_1_0:
+      000002                        382 	.ds 1
                                     383 ;--------------------------------------------------------
                                     384 ; paged external ram data
                                     385 ;--------------------------------------------------------
@@ -432,7 +432,7 @@
                                     432 ;	-----------------------------------------
                                     433 ;	 function init_ser
                                     434 ;	-----------------------------------------
-      000F63                        435 _init_ser:
+      000F84                        435 _init_ser:
                            000007   436 	ar7 = 0x07
                            000006   437 	ar6 = 0x06
                            000005   438 	ar5 = 0x05
@@ -441,293 +441,291 @@
                            000002   441 	ar2 = 0x02
                            000001   442 	ar1 = 0x01
                            000000   443 	ar0 = 0x00
-      000F63 AF 82            [24]  444 	mov	r7,dpl
-                                    445 ;	library/serial.c:21: P2 = 0;
-      000F65 75 A0 00         [24]  446 	mov	_P2,#0x00
-                                    447 ;	library/serial.c:22: rx_head = 0;                  	// Default head/tail pointers.
-      000F68 75 33 00         [24]  448 	mov	_rx_head,#0x00
-                                    449 ;	library/serial.c:23: rx_tail = 0;
-      000F6B 75 34 00         [24]  450 	mov	_rx_tail,#0x00
-                                    451 ;	library/serial.c:24: tx_tail = 0;
-      000F6E 75 32 00         [24]  452 	mov	_tx_tail,#0x00
-                                    453 ;	library/serial.c:25: tx_head = 0;
-      000F71 75 35 00         [24]  454 	mov	_tx_head,#0x00
-                                    455 ;	library/serial.c:26: is_txing = FALSE;				// Not transmitting.
-                                    456 ;	assignBit
-      000F74 C2 00            [12]  457 	clr	_is_txing
-                                    458 ;	library/serial.c:28: SER_RX_PORT = HIGH;          	// Set Txd & Rxd to high
-                                    459 ;	assignBit
-      000F76 D2 B0            [12]  460 	setb	_P3_0
-                                    461 ;	library/serial.c:29: SER_TX_PORT = HIGH;
-                                    462 ;	assignBit
-      000F78 D2 B1            [12]  463 	setb	_P3_1
-                                    464 ;	library/serial.c:31: SCON = 0x50;               		// Mode 1.
-      000F7A 75 98 50         [24]  465 	mov	_SCON,#0x50
-                                    466 ;	library/serial.c:37: T2CON &= 0xF0; /* EXEN2=0; TR2=0; C/T2#=0; CP/RL2#=0; */
-      000F7D 53 C8 F0         [24]  467 	anl	_T2CON,#0xf0
-                                    468 ;	library/serial.c:38: T2CON |= 0x30; /* RCLK = 1; TCLK=1; */
-      000F80 43 C8 30         [24]  469 	orl	_T2CON,#0x30
-                                    470 ;	library/serial.c:55: TH2 = th2; /* init value */
-      000F83 8F CD            [24]  471 	mov	_TH2,r7
-                                    472 ;	library/serial.c:56: TL2 = tl2; /* init value */
-      000F85 85 0E CC         [24]  473 	mov	_TL2,_init_ser_PARM_2
-                                    474 ;	library/serial.c:57: RCAP2H = th2; /* reload value, 115200 Bds at 11.059MHz */
-      000F88 8F CB            [24]  475 	mov	_RCAP2H,r7
-                                    476 ;	library/serial.c:58: RCAP2L = tl2; /* reload value, 115200 Bds at 11.059MHz */
-      000F8A 85 0E CA         [24]  477 	mov	_RCAP2L,_init_ser_PARM_2
-                                    478 ;	library/serial.c:60: TR2 = 1;                     		// Timer 2 run.
-                                    479 ;	assignBit
-      000F8D D2 CA            [12]  480 	setb	_TR2
-                                    481 ;	library/serial.c:64: PS = TRUE;                    	// Low priority.
-                                    482 ;	assignBit
-      000F8F D2 BC            [12]  483 	setb	_PS
-                                    484 ;	library/serial.c:66: EA = 1;													// Enable interrupts.
-                                    485 ;	assignBit
-      000F91 D2 AF            [12]  486 	setb	_EA
-                                    487 ;	library/serial.c:67: ES = TRUE;                     	// Enable serial interrupt.
-                                    488 ;	assignBit
-      000F93 D2 AC            [12]  489 	setb	_ES
-                                    490 ;	library/serial.c:68: }
-      000F95 22               [24]  491 	ret
+      000F84 AF 82            [24]  444 	mov	r7,dpl
+                                    445 ;	library/serial.c:22: rx_head = 0;                  	// Default head/tail pointers.
+      000F86 75 33 00         [24]  446 	mov	_rx_head,#0x00
+                                    447 ;	library/serial.c:23: rx_tail = 0;
+      000F89 75 34 00         [24]  448 	mov	_rx_tail,#0x00
+                                    449 ;	library/serial.c:24: tx_tail = 0;
+      000F8C 75 32 00         [24]  450 	mov	_tx_tail,#0x00
+                                    451 ;	library/serial.c:25: tx_head = 0;
+      000F8F 75 35 00         [24]  452 	mov	_tx_head,#0x00
+                                    453 ;	library/serial.c:26: is_txing = FALSE;				// Not transmitting.
+                                    454 ;	assignBit
+      000F92 C2 01            [12]  455 	clr	_is_txing
+                                    456 ;	library/serial.c:28: SER_RX_PORT = HIGH;          	// Set Txd & Rxd to high
+                                    457 ;	assignBit
+      000F94 D2 B0            [12]  458 	setb	_P3_0
+                                    459 ;	library/serial.c:29: SER_TX_PORT = HIGH;
+                                    460 ;	assignBit
+      000F96 D2 B1            [12]  461 	setb	_P3_1
+                                    462 ;	library/serial.c:31: SCON = 0x50;               		// Mode 1.
+      000F98 75 98 50         [24]  463 	mov	_SCON,#0x50
+                                    464 ;	library/serial.c:37: T2CON &= 0xF0; /* EXEN2=0; TR2=0; C/T2#=0; CP/RL2#=0; */
+      000F9B 53 C8 F0         [24]  465 	anl	_T2CON,#0xf0
+                                    466 ;	library/serial.c:38: T2CON |= 0x30; /* RCLK = 1; TCLK=1; */
+      000F9E 43 C8 30         [24]  467 	orl	_T2CON,#0x30
+                                    468 ;	library/serial.c:55: TH2 = th2; /* init value */
+      000FA1 8F CD            [24]  469 	mov	_TH2,r7
+                                    470 ;	library/serial.c:56: TL2 = tl2; /* init value */
+      000FA3 85 0E CC         [24]  471 	mov	_TL2,_init_ser_PARM_2
+                                    472 ;	library/serial.c:57: RCAP2H = th2; /* reload value, 115200 Bds at 11.059MHz */
+      000FA6 8F CB            [24]  473 	mov	_RCAP2H,r7
+                                    474 ;	library/serial.c:58: RCAP2L = tl2; /* reload value, 115200 Bds at 11.059MHz */
+      000FA8 85 0E CA         [24]  475 	mov	_RCAP2L,_init_ser_PARM_2
+                                    476 ;	library/serial.c:60: TR2 = 1;                     		// Timer 2 run.
+                                    477 ;	assignBit
+      000FAB D2 CA            [12]  478 	setb	_TR2
+                                    479 ;	library/serial.c:64: PS = TRUE;                    	// Low priority.
+                                    480 ;	assignBit
+      000FAD D2 BC            [12]  481 	setb	_PS
+                                    482 ;	library/serial.c:66: EA = 1;													// Enable interrupts.
+                                    483 ;	assignBit
+      000FAF D2 AF            [12]  484 	setb	_EA
+                                    485 ;	library/serial.c:67: ES = TRUE;                     	// Enable serial interrupt.
+                                    486 ;	assignBit
+      000FB1 D2 AC            [12]  487 	setb	_ES
+                                    488 ;	library/serial.c:68: }
+      000FB3 22               [24]  489 	ret
+                                    490 ;------------------------------------------------------------
+                                    491 ;Allocation info for local variables in function 'SerInt'
                                     492 ;------------------------------------------------------------
-                                    493 ;Allocation info for local variables in function 'SerInt'
-                                    494 ;------------------------------------------------------------
-                                    495 ;	library/serial.c:74: void SerInt( void ) __interrupt 4 __using 2
+                                    493 ;	library/serial.c:74: void SerInt( void ) __interrupt 4 __using 2
+                                    494 ;	-----------------------------------------
+                                    495 ;	 function SerInt
                                     496 ;	-----------------------------------------
-                                    497 ;	 function SerInt
-                                    498 ;	-----------------------------------------
-      000F96                        499 _SerInt:
-                           000017   500 	ar7 = 0x17
-                           000016   501 	ar6 = 0x16
-                           000015   502 	ar5 = 0x15
-                           000014   503 	ar4 = 0x14
-                           000013   504 	ar3 = 0x13
-                           000012   505 	ar2 = 0x12
-                           000011   506 	ar1 = 0x11
-                           000010   507 	ar0 = 0x10
-      000F96 C0 E0            [24]  508 	push	acc
-      000F98 C0 D0            [24]  509 	push	psw
-      000F9A 75 D0 10         [24]  510 	mov	psw,#0x10
-                                    511 ;	library/serial.c:76: if( RI )							// Receive character?
-                                    512 ;	library/serial.c:78: RI = 0;							// clear receive flag
-                                    513 ;	assignBit
-      000F9D 10 98 02         [24]  514 	jbc	_RI,00134$
-      000FA0 80 15            [24]  515 	sjmp	00104$
-      000FA2                        516 00134$:
-                                    517 ;	library/serial.c:79: rx_buf[ rx_head++ ] = SBUF;    	// Get character from serial port and put into fifo.
-      000FA2 E5 33            [12]  518 	mov	a,_rx_head
-      000FA4 FF               [12]  519 	mov	r7,a
-      000FA5 04               [12]  520 	inc	a
-      000FA6 F5 33            [12]  521 	mov	_rx_head,a
-      000FA8 EF               [12]  522 	mov	a,r7
-      000FA9 24 36            [12]  523 	add	a,#_rx_buf
-      000FAB F8               [12]  524 	mov	r0,a
-      000FAC A6 99            [24]  525 	mov	@r0,_SBUF
-                                    526 ;	library/serial.c:80: if( rx_head >= BUFFER_SIZE)		// Wrap pointer to beginning of buffer if at end.
-      000FAE 74 F0            [12]  527 	mov	a,#0x100 - 0x10
-      000FB0 25 33            [12]  528 	add	a,_rx_head
-      000FB2 50 03            [24]  529 	jnc	00104$
-                                    530 ;	library/serial.c:81: rx_head = 0;
-      000FB4 75 33 00         [24]  531 	mov	_rx_head,#0x00
-      000FB7                        532 00104$:
-                                    533 ;	library/serial.c:84: if( TI )							// Transmit character?
-                                    534 ;	library/serial.c:86: TI = 0;							// Clear transmitter flag.
-                                    535 ;	assignBit
-      000FB7 10 99 02         [24]  536 	jbc	_TI,00136$
-      000FBA 80 20            [24]  537 	sjmp	00111$
-      000FBC                        538 00136$:
-                                    539 ;	library/serial.c:87: if( tx_head == tx_tail )      	// Check to see if anymore characters to send?
-      000FBC E5 32            [12]  540 	mov	a,_tx_tail
-      000FBE B5 35 04         [24]  541 	cjne	a,_tx_head,00108$
-                                    542 ;	library/serial.c:88: is_txing = FALSE;         	// No, indicate to ser_write_byte to set TI next time.
-                                    543 ;	assignBit
-      000FC1 C2 00            [12]  544 	clr	_is_txing
-      000FC3 80 17            [24]  545 	sjmp	00111$
-      000FC5                        546 00108$:
-                                    547 ;	library/serial.c:91: is_txing = TRUE;          	// TI interrupt will occur at end of this character.
-                                    548 ;	assignBit
-      000FC5 D2 00            [12]  549 	setb	_is_txing
-                                    550 ;	library/serial.c:92: SBUF = tx_buf[ tx_tail++ ];	// Transmit character out serial port.
-      000FC7 E5 32            [12]  551 	mov	a,_tx_tail
-      000FC9 FF               [12]  552 	mov	r7,a
-      000FCA 04               [12]  553 	inc	a
-      000FCB F5 32            [12]  554 	mov	_tx_tail,a
-      000FCD EF               [12]  555 	mov	a,r7
-      000FCE 24 46            [12]  556 	add	a,#_tx_buf
-      000FD0 F9               [12]  557 	mov	r1,a
-      000FD1 87 99            [24]  558 	mov	_SBUF,@r1
-                                    559 ;	library/serial.c:93: if( tx_tail >= BUFFER_SIZE)	// Wrap pointer to beginning of buffer if at end.
-      000FD3 74 F0            [12]  560 	mov	a,#0x100 - 0x10
-      000FD5 25 32            [12]  561 	add	a,_tx_tail
-      000FD7 50 03            [24]  562 	jnc	00111$
-                                    563 ;	library/serial.c:94: tx_tail = 0;
-      000FD9 75 32 00         [24]  564 	mov	_tx_tail,#0x00
-      000FDC                        565 00111$:
-                                    566 ;	library/serial.c:97: WDTRST = 0x1E;
-      000FDC 75 A6 1E         [24]  567 	mov	_WDTRST,#0x1e
-                                    568 ;	library/serial.c:98: WDTRST = 0xE1;
-      000FDF 75 A6 E1         [24]  569 	mov	_WDTRST,#0xe1
-                                    570 ;	library/serial.c:99: }
-      000FE2 D0 D0            [24]  571 	pop	psw
-      000FE4 D0 E0            [24]  572 	pop	acc
-      000FE6 32               [24]  573 	reti
-                                    574 ;	eliminated unneeded push/pop dpl
-                                    575 ;	eliminated unneeded push/pop dph
-                                    576 ;	eliminated unneeded push/pop b
+      000FB4                        497 _SerInt:
+                           000017   498 	ar7 = 0x17
+                           000016   499 	ar6 = 0x16
+                           000015   500 	ar5 = 0x15
+                           000014   501 	ar4 = 0x14
+                           000013   502 	ar3 = 0x13
+                           000012   503 	ar2 = 0x12
+                           000011   504 	ar1 = 0x11
+                           000010   505 	ar0 = 0x10
+      000FB4 C0 E0            [24]  506 	push	acc
+      000FB6 C0 D0            [24]  507 	push	psw
+      000FB8 75 D0 10         [24]  508 	mov	psw,#0x10
+                                    509 ;	library/serial.c:76: if( RI )							// Receive character?
+                                    510 ;	library/serial.c:78: RI = 0;							// clear receive flag
+                                    511 ;	assignBit
+      000FBB 10 98 02         [24]  512 	jbc	_RI,00134$
+      000FBE 80 15            [24]  513 	sjmp	00104$
+      000FC0                        514 00134$:
+                                    515 ;	library/serial.c:79: rx_buf[ rx_head++ ] = SBUF;    	// Get character from serial port and put into fifo.
+      000FC0 E5 33            [12]  516 	mov	a,_rx_head
+      000FC2 FF               [12]  517 	mov	r7,a
+      000FC3 04               [12]  518 	inc	a
+      000FC4 F5 33            [12]  519 	mov	_rx_head,a
+      000FC6 EF               [12]  520 	mov	a,r7
+      000FC7 24 36            [12]  521 	add	a,#_rx_buf
+      000FC9 F8               [12]  522 	mov	r0,a
+      000FCA A6 99            [24]  523 	mov	@r0,_SBUF
+                                    524 ;	library/serial.c:80: if( rx_head >= BUFFER_SIZE)		// Wrap pointer to beginning of buffer if at end.
+      000FCC 74 F0            [12]  525 	mov	a,#0x100 - 0x10
+      000FCE 25 33            [12]  526 	add	a,_rx_head
+      000FD0 50 03            [24]  527 	jnc	00104$
+                                    528 ;	library/serial.c:81: rx_head = 0;
+      000FD2 75 33 00         [24]  529 	mov	_rx_head,#0x00
+      000FD5                        530 00104$:
+                                    531 ;	library/serial.c:84: if( TI )							// Transmit character?
+                                    532 ;	library/serial.c:86: TI = 0;							// Clear transmitter flag.
+                                    533 ;	assignBit
+      000FD5 10 99 02         [24]  534 	jbc	_TI,00136$
+      000FD8 80 20            [24]  535 	sjmp	00111$
+      000FDA                        536 00136$:
+                                    537 ;	library/serial.c:87: if( tx_head == tx_tail )      	// Check to see if anymore characters to send?
+      000FDA E5 32            [12]  538 	mov	a,_tx_tail
+      000FDC B5 35 04         [24]  539 	cjne	a,_tx_head,00108$
+                                    540 ;	library/serial.c:88: is_txing = FALSE;         	// No, indicate to ser_write_byte to set TI next time.
+                                    541 ;	assignBit
+      000FDF C2 01            [12]  542 	clr	_is_txing
+      000FE1 80 17            [24]  543 	sjmp	00111$
+      000FE3                        544 00108$:
+                                    545 ;	library/serial.c:91: is_txing = TRUE;          	// TI interrupt will occur at end of this character.
+                                    546 ;	assignBit
+      000FE3 D2 01            [12]  547 	setb	_is_txing
+                                    548 ;	library/serial.c:92: SBUF = tx_buf[ tx_tail++ ];	// Transmit character out serial port.
+      000FE5 E5 32            [12]  549 	mov	a,_tx_tail
+      000FE7 FF               [12]  550 	mov	r7,a
+      000FE8 04               [12]  551 	inc	a
+      000FE9 F5 32            [12]  552 	mov	_tx_tail,a
+      000FEB EF               [12]  553 	mov	a,r7
+      000FEC 24 46            [12]  554 	add	a,#_tx_buf
+      000FEE F9               [12]  555 	mov	r1,a
+      000FEF 87 99            [24]  556 	mov	_SBUF,@r1
+                                    557 ;	library/serial.c:93: if( tx_tail >= BUFFER_SIZE)	// Wrap pointer to beginning of buffer if at end.
+      000FF1 74 F0            [12]  558 	mov	a,#0x100 - 0x10
+      000FF3 25 32            [12]  559 	add	a,_tx_tail
+      000FF5 50 03            [24]  560 	jnc	00111$
+                                    561 ;	library/serial.c:94: tx_tail = 0;
+      000FF7 75 32 00         [24]  562 	mov	_tx_tail,#0x00
+      000FFA                        563 00111$:
+                                    564 ;	library/serial.c:98: WDTRST = 0x1E;
+      000FFA 75 A6 1E         [24]  565 	mov	_WDTRST,#0x1e
+                                    566 ;	library/serial.c:99: WDTRST = 0xE1;
+      000FFD 75 A6 E1         [24]  567 	mov	_WDTRST,#0xe1
+                                    568 ;	library/serial.c:101: }
+      001000 D0 D0            [24]  569 	pop	psw
+      001002 D0 E0            [24]  570 	pop	acc
+      001004 32               [24]  571 	reti
+                                    572 ;	eliminated unneeded push/pop dpl
+                                    573 ;	eliminated unneeded push/pop dph
+                                    574 ;	eliminated unneeded push/pop b
+                                    575 ;------------------------------------------------------------
+                                    576 ;Allocation info for local variables in function 'ser_write_byte'
                                     577 ;------------------------------------------------------------
-                                    578 ;Allocation info for local variables in function 'ser_write_byte'
-                                    579 ;------------------------------------------------------------
-                                    580 ;buf                       Allocated to registers r7 
-                                    581 ;next_head                 Allocated to registers r6 
-                                    582 ;------------------------------------------------------------
-                                    583 ;	library/serial.c:104: char ser_write_byte( unsigned char buf )
+                                    578 ;buf                       Allocated to registers r7 
+                                    579 ;next_head                 Allocated to registers r6 
+                                    580 ;------------------------------------------------------------
+                                    581 ;	library/serial.c:106: char ser_write_byte( unsigned char buf )
+                                    582 ;	-----------------------------------------
+                                    583 ;	 function ser_write_byte
                                     584 ;	-----------------------------------------
-                                    585 ;	 function ser_write_byte
-                                    586 ;	-----------------------------------------
-      000FE7                        587 _ser_write_byte:
-                           000007   588 	ar7 = 0x07
-                           000006   589 	ar6 = 0x06
-                           000005   590 	ar5 = 0x05
-                           000004   591 	ar4 = 0x04
-                           000003   592 	ar3 = 0x03
-                           000002   593 	ar2 = 0x02
-                           000001   594 	ar1 = 0x01
-                           000000   595 	ar0 = 0x00
-      000FE7 AF 82            [24]  596 	mov	r7,dpl
-                                    597 ;	library/serial.c:110: tx_buf[ tx_head ] = buf;
-      000FE9 E5 35            [12]  598 	mov	a,_tx_head
-      000FEB 24 46            [12]  599 	add	a,#_tx_buf
-      000FED F8               [12]  600 	mov	r0,a
-      000FEE A6 07            [24]  601 	mov	@r0,ar7
-                                    602 ;	library/serial.c:111: next_head = tx_head + 1;
-      000FF0 AE 35            [24]  603 	mov	r6,_tx_head
-      000FF2 0E               [12]  604 	inc	r6
-                                    605 ;	library/serial.c:113: if( next_head >= BUFFER_SIZE)
-      000FF3 BE 10 00         [24]  606 	cjne	r6,#0x10,00126$
-      000FF6                        607 00126$:
-      000FF6 40 02            [24]  608 	jc	00103$
-                                    609 ;	library/serial.c:114: next_head = 0;
-      000FF8 7E 00            [12]  610 	mov	r6,#0x00
-                                    611 ;	library/serial.c:118: while( next_head == tx_tail );
-      000FFA                        612 00103$:
-      000FFA EE               [12]  613 	mov	a,r6
-      000FFB B5 32 02         [24]  614 	cjne	a,_tx_tail,00128$
-      000FFE 80 FA            [24]  615 	sjmp	00103$
-      001000                        616 00128$:
-                                    617 ;	library/serial.c:120: tx_head = next_head;
-      001000 8E 35            [24]  618 	mov	_tx_head,r6
-                                    619 ;	library/serial.c:121: if( is_txing == FALSE )
-      001002 20 00 02         [24]  620 	jb	_is_txing,00107$
-                                    621 ;	library/serial.c:122: TI = TRUE;
-                                    622 ;	assignBit
-      001005 D2 99            [12]  623 	setb	_TI
-      001007                        624 00107$:
-                                    625 ;	library/serial.c:124: P2_1 = !P2_1;
-      001007 B2 A1            [12]  626 	cpl	_P2_1
-                                    627 ;	library/serial.c:125: return buf;
-      001009 8F 82            [24]  628 	mov	dpl,r7
-                                    629 ;	library/serial.c:126: }
-      00100B 22               [24]  630 	ret
+      001005                        585 _ser_write_byte:
+                           000007   586 	ar7 = 0x07
+                           000006   587 	ar6 = 0x06
+                           000005   588 	ar5 = 0x05
+                           000004   589 	ar4 = 0x04
+                           000003   590 	ar3 = 0x03
+                           000002   591 	ar2 = 0x02
+                           000001   592 	ar1 = 0x01
+                           000000   593 	ar0 = 0x00
+      001005 AF 82            [24]  594 	mov	r7,dpl
+                                    595 ;	library/serial.c:112: tx_buf[ tx_head ] = buf;
+      001007 E5 35            [12]  596 	mov	a,_tx_head
+      001009 24 46            [12]  597 	add	a,#_tx_buf
+      00100B F8               [12]  598 	mov	r0,a
+      00100C A6 07            [24]  599 	mov	@r0,ar7
+                                    600 ;	library/serial.c:113: next_head = tx_head + 1;
+      00100E AE 35            [24]  601 	mov	r6,_tx_head
+      001010 0E               [12]  602 	inc	r6
+                                    603 ;	library/serial.c:115: if( next_head >= BUFFER_SIZE)
+      001011 BE 10 00         [24]  604 	cjne	r6,#0x10,00126$
+      001014                        605 00126$:
+      001014 40 02            [24]  606 	jc	00103$
+                                    607 ;	library/serial.c:116: next_head = 0;
+      001016 7E 00            [12]  608 	mov	r6,#0x00
+                                    609 ;	library/serial.c:120: while( next_head == tx_tail );
+      001018                        610 00103$:
+      001018 EE               [12]  611 	mov	a,r6
+      001019 B5 32 02         [24]  612 	cjne	a,_tx_tail,00128$
+      00101C 80 FA            [24]  613 	sjmp	00103$
+      00101E                        614 00128$:
+                                    615 ;	library/serial.c:122: tx_head = next_head;
+      00101E 8E 35            [24]  616 	mov	_tx_head,r6
+                                    617 ;	library/serial.c:123: if( is_txing == FALSE )
+      001020 20 01 02         [24]  618 	jb	_is_txing,00107$
+                                    619 ;	library/serial.c:124: TI = TRUE;
+                                    620 ;	assignBit
+      001023 D2 99            [12]  621 	setb	_TI
+      001025                        622 00107$:
+                                    623 ;	library/serial.c:126: P2_1 = !P2_1;
+      001025 B2 A1            [12]  624 	cpl	_P2_1
+                                    625 ;	library/serial.c:127: return buf;
+      001027 8F 82            [24]  626 	mov	dpl,r7
+                                    627 ;	library/serial.c:128: }
+      001029 22               [24]  628 	ret
+                                    629 ;------------------------------------------------------------
+                                    630 ;Allocation info for local variables in function 'ser_byte_avail'
                                     631 ;------------------------------------------------------------
-                                    632 ;Allocation info for local variables in function 'ser_byte_avail'
-                                    633 ;------------------------------------------------------------
-                                    634 ;	library/serial.c:132: char ser_byte_avail( void )
+                                    632 ;	library/serial.c:134: char ser_byte_avail( void )
+                                    633 ;	-----------------------------------------
+                                    634 ;	 function ser_byte_avail
                                     635 ;	-----------------------------------------
-                                    636 ;	 function ser_byte_avail
-                                    637 ;	-----------------------------------------
-      00100C                        638 _ser_byte_avail:
-                                    639 ;	library/serial.c:134: WDTRST = 0x1E;
-      00100C 75 A6 1E         [24]  640 	mov	_WDTRST,#0x1e
-                                    641 ;	library/serial.c:135: WDTRST = 0xE1;
-      00100F 75 A6 E1         [24]  642 	mov	_WDTRST,#0xe1
-                                    643 ;	library/serial.c:136: return(rx_head != rx_tail);
-      001012 E5 34            [12]  644 	mov	a,_rx_tail
-      001014 B5 33 03         [24]  645 	cjne	a,_rx_head,00103$
-      001017 D3               [12]  646 	setb	c
-      001018 80 01            [24]  647 	sjmp	00104$
-      00101A                        648 00103$:
-      00101A C3               [12]  649 	clr	c
-      00101B                        650 00104$:
-      00101B B3               [12]  651 	cpl	c
-      00101C 92 01            [24]  652 	mov	_ser_byte_avail_sloc0_1_0,c
-      00101E E4               [12]  653 	clr	a
-      00101F 33               [12]  654 	rlc	a
-      001020 F5 82            [12]  655 	mov	dpl,a
-                                    656 ;	library/serial.c:143: }
-      001022 22               [24]  657 	ret
+      00102A                        636 _ser_byte_avail:
+                                    637 ;	library/serial.c:137: WDTRST = 0x1E;
+      00102A 75 A6 1E         [24]  638 	mov	_WDTRST,#0x1e
+                                    639 ;	library/serial.c:138: WDTRST = 0xE1;
+      00102D 75 A6 E1         [24]  640 	mov	_WDTRST,#0xe1
+                                    641 ;	library/serial.c:140: return(rx_head != rx_tail);
+      001030 E5 34            [12]  642 	mov	a,_rx_tail
+      001032 B5 33 03         [24]  643 	cjne	a,_rx_head,00103$
+      001035 D3               [12]  644 	setb	c
+      001036 80 01            [24]  645 	sjmp	00104$
+      001038                        646 00103$:
+      001038 C3               [12]  647 	clr	c
+      001039                        648 00104$:
+      001039 B3               [12]  649 	cpl	c
+      00103A 92 02            [24]  650 	mov	_ser_byte_avail_sloc0_1_0,c
+      00103C E4               [12]  651 	clr	a
+      00103D 33               [12]  652 	rlc	a
+      00103E F5 82            [12]  653 	mov	dpl,a
+                                    654 ;	library/serial.c:147: }
+      001040 22               [24]  655 	ret
+                                    656 ;------------------------------------------------------------
+                                    657 ;Allocation info for local variables in function 'ser_read_byte'
                                     658 ;------------------------------------------------------------
-                                    659 ;Allocation info for local variables in function 'ser_read_byte'
+                                    659 ;buf                       Allocated to registers r7 
                                     660 ;------------------------------------------------------------
-                                    661 ;buf                       Allocated to registers r7 
-                                    662 ;------------------------------------------------------------
-                                    663 ;	library/serial.c:149: unsigned char ser_read_byte( void )
+                                    661 ;	library/serial.c:153: unsigned char ser_read_byte( void )
+                                    662 ;	-----------------------------------------
+                                    663 ;	 function ser_read_byte
                                     664 ;	-----------------------------------------
-                                    665 ;	 function ser_read_byte
-                                    666 ;	-----------------------------------------
-      001023                        667 _ser_read_byte:
-                                    668 ;	library/serial.c:155: buf = rx_buf[ rx_tail++ ];
-      001023 E5 34            [12]  669 	mov	a,_rx_tail
-      001025 FF               [12]  670 	mov	r7,a
-      001026 04               [12]  671 	inc	a
-      001027 F5 34            [12]  672 	mov	_rx_tail,a
-      001029 EF               [12]  673 	mov	a,r7
-      00102A 24 36            [12]  674 	add	a,#_rx_buf
-      00102C F9               [12]  675 	mov	r1,a
-      00102D 87 07            [24]  676 	mov	ar7,@r1
-                                    677 ;	library/serial.c:157: if( rx_tail >= BUFFER_SIZE)		// rx_tail %= BUFFER_SIZE;
-      00102F 74 F0            [12]  678 	mov	a,#0x100 - 0x10
-      001031 25 34            [12]  679 	add	a,_rx_tail
-      001033 50 03            [24]  680 	jnc	00102$
-                                    681 ;	library/serial.c:158: rx_tail = 0;
-      001035 75 34 00         [24]  682 	mov	_rx_tail,#0x00
-      001038                        683 00102$:
-                                    684 ;	library/serial.c:160: P2_2 = !P2_2;
-      001038 B2 A2            [12]  685 	cpl	_P2_2
-                                    686 ;	library/serial.c:161: return( buf );
-      00103A 8F 82            [24]  687 	mov	dpl,r7
-                                    688 ;	library/serial.c:162: }
-      00103C 22               [24]  689 	ret
+      001041                        665 _ser_read_byte:
+                                    666 ;	library/serial.c:159: buf = rx_buf[ rx_tail++ ];
+      001041 E5 34            [12]  667 	mov	a,_rx_tail
+      001043 FF               [12]  668 	mov	r7,a
+      001044 04               [12]  669 	inc	a
+      001045 F5 34            [12]  670 	mov	_rx_tail,a
+      001047 EF               [12]  671 	mov	a,r7
+      001048 24 36            [12]  672 	add	a,#_rx_buf
+      00104A F9               [12]  673 	mov	r1,a
+      00104B 87 07            [24]  674 	mov	ar7,@r1
+                                    675 ;	library/serial.c:161: if( rx_tail >= BUFFER_SIZE)		// rx_tail %= BUFFER_SIZE;
+      00104D 74 F0            [12]  676 	mov	a,#0x100 - 0x10
+      00104F 25 34            [12]  677 	add	a,_rx_tail
+      001051 50 03            [24]  678 	jnc	00102$
+                                    679 ;	library/serial.c:162: rx_tail = 0;
+      001053 75 34 00         [24]  680 	mov	_rx_tail,#0x00
+      001056                        681 00102$:
+                                    682 ;	library/serial.c:164: P2_2 = !P2_2;
+      001056 B2 A2            [12]  683 	cpl	_P2_2
+                                    684 ;	library/serial.c:165: return( buf );
+      001058 8F 82            [24]  685 	mov	dpl,r7
+                                    686 ;	library/serial.c:166: }
+      00105A 22               [24]  687 	ret
+                                    688 ;------------------------------------------------------------
+                                    689 ;Allocation info for local variables in function 'putchar'
                                     690 ;------------------------------------------------------------
-                                    691 ;Allocation info for local variables in function 'putchar'
+                                    691 ;buf                       Allocated to registers r6 r7 
                                     692 ;------------------------------------------------------------
-                                    693 ;buf                       Allocated to registers r6 r7 
-                                    694 ;------------------------------------------------------------
-                                    695 ;	library/serial.c:164: int putchar(int buf) {
+                                    693 ;	library/serial.c:168: int putchar(int buf) {
+                                    694 ;	-----------------------------------------
+                                    695 ;	 function putchar
                                     696 ;	-----------------------------------------
-                                    697 ;	 function putchar
-                                    698 ;	-----------------------------------------
-      00103D                        699 _putchar:
-                                    700 ;	library/serial.c:165: ser_write_byte((char)buf);
-      00103D AE 82            [24]  701 	mov	r6,dpl
-      00103F AF 83            [24]  702 	mov	r7,dph
-      001041 C0 07            [24]  703 	push	ar7
-      001043 C0 06            [24]  704 	push	ar6
-      001045 12 0F E7         [24]  705 	lcall	_ser_write_byte
-      001048 D0 06            [24]  706 	pop	ar6
-      00104A D0 07            [24]  707 	pop	ar7
-                                    708 ;	library/serial.c:166: return buf;
-      00104C 8E 82            [24]  709 	mov	dpl,r6
-      00104E 8F 83            [24]  710 	mov	dph,r7
-                                    711 ;	library/serial.c:167: }
-      001050 22               [24]  712 	ret
+      00105B                        697 _putchar:
+                                    698 ;	library/serial.c:169: ser_write_byte((char)buf);
+      00105B AE 82            [24]  699 	mov	r6,dpl
+      00105D AF 83            [24]  700 	mov	r7,dph
+      00105F C0 07            [24]  701 	push	ar7
+      001061 C0 06            [24]  702 	push	ar6
+      001063 12 10 05         [24]  703 	lcall	_ser_write_byte
+      001066 D0 06            [24]  704 	pop	ar6
+      001068 D0 07            [24]  705 	pop	ar7
+                                    706 ;	library/serial.c:170: return buf;
+      00106A 8E 82            [24]  707 	mov	dpl,r6
+      00106C 8F 83            [24]  708 	mov	dph,r7
+                                    709 ;	library/serial.c:171: }
+      00106E 22               [24]  710 	ret
+                                    711 ;------------------------------------------------------------
+                                    712 ;Allocation info for local variables in function 'getchar'
                                     713 ;------------------------------------------------------------
-                                    714 ;Allocation info for local variables in function 'getchar'
+                                    714 ;buf                       Allocated to registers r7 r6 
                                     715 ;------------------------------------------------------------
-                                    716 ;buf                       Allocated to registers r7 r6 
-                                    717 ;------------------------------------------------------------
-                                    718 ;	library/serial.c:169: int getchar(void) {
+                                    716 ;	library/serial.c:173: int getchar(void) {
+                                    717 ;	-----------------------------------------
+                                    718 ;	 function getchar
                                     719 ;	-----------------------------------------
-                                    720 ;	 function getchar
-                                    721 ;	-----------------------------------------
-      001051                        722 _getchar:
-                                    723 ;	library/serial.c:170: int buf=ser_read_byte();
-      001051 12 10 23         [24]  724 	lcall	_ser_read_byte
-                                    725 ;	library/serial.c:171: return buf;
-      001054 7E 00            [12]  726 	mov	r6,#0x00
-      001056 8E 83            [24]  727 	mov	dph,r6
-                                    728 ;	library/serial.c:172: }
-      001058 22               [24]  729 	ret
-                                    730 	.area CSEG    (CODE)
-                                    731 	.area CONST   (CODE)
-                                    732 	.area XINIT   (CODE)
-                                    733 	.area CABS    (ABS,CODE)
+      00106F                        720 _getchar:
+                                    721 ;	library/serial.c:174: int buf=ser_read_byte();
+      00106F 12 10 41         [24]  722 	lcall	_ser_read_byte
+                                    723 ;	library/serial.c:175: return buf;
+      001072 7E 00            [12]  724 	mov	r6,#0x00
+      001074 8E 83            [24]  725 	mov	dph,r6
+                                    726 ;	library/serial.c:176: }
+      001076 22               [24]  727 	ret
+                                    728 	.area CSEG    (CODE)
+                                    729 	.area CONST   (CODE)
+                                    730 	.area XINIT   (CODE)
+                                    731 	.area CABS    (ABS,CODE)

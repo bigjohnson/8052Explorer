@@ -324,7 +324,7 @@ Symbol Table
     _SPDR                                                       =  000086 G
     _SPSR                                                       =  0000AA G
     _SS                                                         =  000094 G
- 18 _SerInt                                                        000033 GR
+ 18 _SerInt                                                        000030 GR
     _T0                                                         =  0000B4 G
     _T1                                                         =  0000B5 G
     _T2                                                         =  000090 G
@@ -365,18 +365,18 @@ Symbol Table
 
     _WDTRST                                                     =  0000A6 G
     _WR                                                         =  0000B6 G
- 18 _getchar                                                       0000EE GR
+ 18 _getchar                                                       0000EB GR
  18 _init_ser                                                      000000 GR
   7 _init_ser_PARM_2                                               000000 GR
   A _is_txing                                                      000000 R
- 18 _putchar                                                       0000DA GR
+ 18 _putchar                                                       0000D7 GR
   6 _rx_buf                                                        000004 R
   6 _rx_head                                                       000001 GR
   6 _rx_tail                                                       000002 GR
- 18 _ser_byte_avail                                                0000A9 GR
+ 18 _ser_byte_avail                                                0000A6 GR
   A _ser_byte_avail_sloc0_1_0                                      000001 R
- 18 _ser_read_byte                                                 0000C0 GR
- 18 _ser_write_byte                                                000084 GR
+ 18 _ser_read_byte                                                 0000BD GR
+ 18 _ser_write_byte                                                000081 GR
   6 _tx_buf                                                        000014 R
   6 _tx_head                                                       000003 GR
   6 _tx_tail                                                       000000 GR
@@ -609,7 +609,7 @@ Area Table
   15 GSINIT5                                    size      0   flags   20
   16 GSINIT                                     size      0   flags   20
   17 GSFINAL                                    size      0   flags   20
-  18 CSEG                                       size     F6   flags   20
+  18 CSEG                                       size     F3   flags   20
   19 CONST                                      size      0   flags   20
   1A XINIT                                      size      0   flags   20
   1B CABS                                       size      0   flags   28

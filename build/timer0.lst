@@ -497,71 +497,67 @@
       000030 C0 00            [24]  497 	push	(0+0)
       000032 C0 D0            [24]  498 	push	psw
       000034 75 D0 18         [24]  499 	mov	psw,#0x18
-                                    500 ;	library/timer0.c:29: WDTCON |= 0x8; // no hardware pin low on reset
-      000037 43 A7 08         [24]  501 	orl	_WDTCON,#0x08
-                                    502 ;	library/timer0.c:30: WDTCON |= 0x4; // enable Watchdog
-      00003A 43 A7 04         [24]  503 	orl	_WDTCON,#0x04
-                                    504 ;	library/timer0.c:31: millisx++;
-      00003D AE*00            [24]  505 	mov	r6,_millisx
-      00003F AF*01            [24]  506 	mov	r7,(_millisx + 1)
-      000041 74 01            [12]  507 	mov	a,#0x01
-      000043 2E               [12]  508 	add	a,r6
-      000044 F5*00            [12]  509 	mov	_millisx,a
-      000046 E4               [12]  510 	clr	a
-      000047 3F               [12]  511 	addc	a,r7
-      000048 F5*01            [12]  512 	mov	(_millisx + 1),a
-                                    513 ;	library/timer0.c:33: if ( millisx < prima ) {
-      00004A C3               [12]  514 	clr	c
-      00004B E5*00            [12]  515 	mov	a,_millisx
-      00004D 95*02            [12]  516 	subb	a,_prima
-      00004F E5*01            [12]  517 	mov	a,(_millisx + 1)
-      000051 95*03            [12]  518 	subb	a,(_prima + 1)
-      000053 50 06            [24]  519 	jnc	00102$
-                                    520 ;	library/timer0.c:34: prima = millisx;
-      000055 85*00*02         [24]  521 	mov	_prima,_millisx
-      000058 85*01*03         [24]  522 	mov	(_prima + 1),(_millisx + 1)
-      00005B                        523 00102$:
-                                    524 ;	library/timer0.c:36: if (millisx % ONE_SECOND_DIVISOR == 0 && millisx > prima) {
-      00005B 75*00 2E         [24]  525 	mov	__moduint_PARM_2,#0x2e
-      00005E 75*01 03         [24]  526 	mov	(__moduint_PARM_2 + 1),#0x03
-      000061 85*00 82         [24]  527 	mov	dpl,_millisx
-      000064 85*01 83         [24]  528 	mov	dph,(_millisx + 1)
-      000067 75 D0 00         [24]  529 	mov	psw,#0x00
-      00006A 12r00r00         [24]  530 	lcall	__moduint
-      00006D 75 D0 18         [24]  531 	mov	psw,#0x18
-      000070 E5 82            [12]  532 	mov	a,dpl
-      000072 85 83 F0         [24]  533 	mov	b,dph
-      000075 45 F0            [12]  534 	orl	a,b
-      000077 70 13            [24]  535 	jnz	00106$
-      000079 C3               [12]  536 	clr	c
-      00007A E5*02            [12]  537 	mov	a,_prima
-      00007C 95*00            [12]  538 	subb	a,_millisx
-      00007E E5*03            [12]  539 	mov	a,(_prima + 1)
-      000080 95*01            [12]  540 	subb	a,(_millisx + 1)
-      000082 50 08            [24]  541 	jnc	00106$
-                                    542 ;	library/timer0.c:37: prima = millisx;
-      000084 85*00*02         [24]  543 	mov	_prima,_millisx
-      000087 85*01*03         [24]  544 	mov	(_prima + 1),(_millisx + 1)
-                                    545 ;	library/timer0.c:38: P2_0 = !P2_0;
-      00008A B2 A0            [12]  546 	cpl	_P2_0
-      00008C                        547 00106$:
-                                    548 ;	library/timer0.c:41: }
-      00008C D0 D0            [24]  549 	pop	psw
-      00008E D0 00            [24]  550 	pop	(0+0)
-      000090 D0 01            [24]  551 	pop	(0+1)
-      000092 D0 02            [24]  552 	pop	(0+2)
-      000094 D0 03            [24]  553 	pop	(0+3)
-      000096 D0 04            [24]  554 	pop	(0+4)
-      000098 D0 05            [24]  555 	pop	(0+5)
-      00009A D0 06            [24]  556 	pop	(0+6)
-      00009C D0 07            [24]  557 	pop	(0+7)
-      00009E D0 83            [24]  558 	pop	dph
-      0000A0 D0 82            [24]  559 	pop	dpl
-      0000A2 D0 F0            [24]  560 	pop	b
-      0000A4 D0 E0            [24]  561 	pop	acc
-      0000A6 D0*00            [24]  562 	pop	bits
-      0000A8 32               [24]  563 	reti
-                                    564 	.area CSEG    (CODE)
-                                    565 	.area CONST   (CODE)
-                                    566 	.area XINIT   (CODE)
-                                    567 	.area CABS    (ABS,CODE)
+                                    500 ;	library/timer0.c:33: millisx++;
+      000037 AE*00            [24]  501 	mov	r6,_millisx
+      000039 AF*01            [24]  502 	mov	r7,(_millisx + 1)
+      00003B 74 01            [12]  503 	mov	a,#0x01
+      00003D 2E               [12]  504 	add	a,r6
+      00003E F5*00            [12]  505 	mov	_millisx,a
+      000040 E4               [12]  506 	clr	a
+      000041 3F               [12]  507 	addc	a,r7
+      000042 F5*01            [12]  508 	mov	(_millisx + 1),a
+                                    509 ;	library/timer0.c:35: if ( millisx < prima ) {
+      000044 C3               [12]  510 	clr	c
+      000045 E5*00            [12]  511 	mov	a,_millisx
+      000047 95*02            [12]  512 	subb	a,_prima
+      000049 E5*01            [12]  513 	mov	a,(_millisx + 1)
+      00004B 95*03            [12]  514 	subb	a,(_prima + 1)
+      00004D 50 06            [24]  515 	jnc	00102$
+                                    516 ;	library/timer0.c:36: prima = millisx;
+      00004F 85*00*02         [24]  517 	mov	_prima,_millisx
+      000052 85*01*03         [24]  518 	mov	(_prima + 1),(_millisx + 1)
+      000055                        519 00102$:
+                                    520 ;	library/timer0.c:38: if (millisx % ONE_SECOND_DIVISOR == 0 && millisx > prima) {
+      000055 75*00 97         [24]  521 	mov	__moduint_PARM_2,#0x97
+      000058 75*01 01         [24]  522 	mov	(__moduint_PARM_2 + 1),#0x01
+      00005B 85*00 82         [24]  523 	mov	dpl,_millisx
+      00005E 85*01 83         [24]  524 	mov	dph,(_millisx + 1)
+      000061 75 D0 00         [24]  525 	mov	psw,#0x00
+      000064 12r00r00         [24]  526 	lcall	__moduint
+      000067 75 D0 18         [24]  527 	mov	psw,#0x18
+      00006A E5 82            [12]  528 	mov	a,dpl
+      00006C 85 83 F0         [24]  529 	mov	b,dph
+      00006F 45 F0            [12]  530 	orl	a,b
+      000071 70 13            [24]  531 	jnz	00106$
+      000073 C3               [12]  532 	clr	c
+      000074 E5*02            [12]  533 	mov	a,_prima
+      000076 95*00            [12]  534 	subb	a,_millisx
+      000078 E5*03            [12]  535 	mov	a,(_prima + 1)
+      00007A 95*01            [12]  536 	subb	a,(_millisx + 1)
+      00007C 50 08            [24]  537 	jnc	00106$
+                                    538 ;	library/timer0.c:39: prima = millisx;
+      00007E 85*00*02         [24]  539 	mov	_prima,_millisx
+      000081 85*01*03         [24]  540 	mov	(_prima + 1),(_millisx + 1)
+                                    541 ;	library/timer0.c:40: P2_0 = !P2_0;
+      000084 B2 A0            [12]  542 	cpl	_P2_0
+      000086                        543 00106$:
+                                    544 ;	library/timer0.c:43: }
+      000086 D0 D0            [24]  545 	pop	psw
+      000088 D0 00            [24]  546 	pop	(0+0)
+      00008A D0 01            [24]  547 	pop	(0+1)
+      00008C D0 02            [24]  548 	pop	(0+2)
+      00008E D0 03            [24]  549 	pop	(0+3)
+      000090 D0 04            [24]  550 	pop	(0+4)
+      000092 D0 05            [24]  551 	pop	(0+5)
+      000094 D0 06            [24]  552 	pop	(0+6)
+      000096 D0 07            [24]  553 	pop	(0+7)
+      000098 D0 83            [24]  554 	pop	dph
+      00009A D0 82            [24]  555 	pop	dpl
+      00009C D0 F0            [24]  556 	pop	b
+      00009E D0 E0            [24]  557 	pop	acc
+      0000A0 D0*00            [24]  558 	pop	bits
+      0000A2 32               [24]  559 	reti
+                                    560 	.area CSEG    (CODE)
+                                    561 	.area CONST   (CODE)
+                                    562 	.area XINIT   (CODE)
+                                    563 	.area CABS    (ABS,CODE)

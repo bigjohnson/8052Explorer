@@ -26,8 +26,10 @@ unsigned int millis(void) {
 void it_timer0(void) __interrupt 1 __using 3 /* interrupt address is 0x000b */
 {
   //TF0 = 0; /* reset interrupt flag (already done by hardware)*/
-  WDTCON |= 0x8; // no hardware pin low on reset
-  WDTCON |= 0x4; // enable Watchdog
+  /*
+  WDTCON |= 0x8;
+  WDTCON |= 0x4;
+  */
   millisx++;
   //BLINKLED = !BLINKLED;
   if ( millisx < prima ) {
