@@ -8,7 +8,7 @@ You need also the gnu make command to compile the firmware.
 
 Sdcc binary and make must be in command path.
 
-If you want burn a micro with the copiled file, without compiling yourelf, use the firmware build/8052Explorer.hex
+If you want burn a micro with the copiled file, without compiling yourelf, use the firmwares in prebuildhex folder.
 
 You should connect three led to: 
 
