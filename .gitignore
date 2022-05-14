@@ -1,3 +1,4 @@
 # Vscode files
 seriale_eeprom.code-workspace
 .vscode/
+build/
