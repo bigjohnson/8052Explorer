@@ -2,4 +2,4 @@
 
 ## DIP version
 
-![This is an image](https://myoctocat.com/assets/images/base-octocat.svg)
+![This is an image](8052Explorer_DIP.png)
