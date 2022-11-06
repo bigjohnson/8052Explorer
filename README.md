@@ -6,7 +6,8 @@ In the software there is a Visual Studio Code eide SDCC project with a sample fi
 
 In the hardware dir the EasyEDA schematics for DIP and PLCC board, also a JOLLY board for both PLCC and DIP packages.
 
-![8052Explorer_DIP](hardware/8052Explorer_DIP_PIC.png)
+![8052Explorer_DIP](hardware/8052Explorer.mp4)
 
+![8052Explorer_DIP](hardware/8052Explorer_DIP_PIC.png)
 
 ![8052Explorer_LED](hardware/8052Explorer_LED_P.png)
