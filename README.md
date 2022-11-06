@@ -8,4 +8,4 @@ In the hardware dir the EasyEDA schematics for DIP and PLCC board, also a JOLLY 
 
 ## JOLLY version ( DIP and PLCC )
 
-![8052Explorer_DIP](hardware/8052Explorer_DIP_PIC.PNG)
+![8052Explorer_DIP](hardware/8052Explorer_DIP_PIC.png)
