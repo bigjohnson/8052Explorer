@@ -2,4 +2,4 @@
 
 ## DIP version
 
-![This is an image](8052Explorer_DIP.png)
+![This is an image](8052Explorer_DIP.PNG)
