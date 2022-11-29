@@ -1,3 +1,5 @@
+Full info on https://oshwlab.com/bigjohnson?tab=project&page=1
+
 # 8052Explorer board
 
 ## DIP version
