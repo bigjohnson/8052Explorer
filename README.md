@@ -16,3 +16,5 @@ https://user-images.githubusercontent.com/2248402/200202080-bca16a68-9036-43b2-a
 ![8052Explorer_LED](hardware/8052Explorer_LED_P.png)
 
 ![history](hardware/history.png)
+
+![ledhistory](hardware/ledhist.jpg)
