@@ -24,4 +24,4 @@ https://oshwlab.com/bigjohnson?tab=project&page=1
 
 ## JOLLY LED BOARD
 
-![8052Explorer_LED(PCB_PCB_8051_led_2023-10-08.png)
+![8052Explorer_LED](PCB_PCB_8051_led_2023-10-08.png)
