@@ -1,4 +1,8 @@
-Full info on https://oshwlab.com/bigjohnson?tab=project&page=1
+Full info on:
+https://oshwlab.com/bigjohnson/ds89c450_1_copy_copy_copy
+https://oshwlab.com/bigjohnson/ds89c450_1_copy_copy_copy_copy_copy
+https://oshwlab.com/bigjohnson/ds89c450_1_copy_copy_copy_copy
+https://oshwlab.com/bigjohnson?tab=project&page=1
 
 # 8052Explorer board
 
