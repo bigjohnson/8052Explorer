@@ -1,4 +1,12 @@
-Full info on https://oshwlab.com/bigjohnson?tab=project&page=1
+Full info on:
+
+https://oshwlab.com/bigjohnson/ds89c450_1_copy_copy_copy
+
+https://oshwlab.com/bigjohnson/ds89c450_1_copy_copy_copy_copy_copy
+
+https://oshwlab.com/bigjohnson/ds89c450_1_copy_copy_copy_copy
+
+https://oshwlab.com/bigjohnson?tab=project&page=1
 
 # 8052Explorer board
 
@@ -13,3 +21,7 @@ Full info on https://oshwlab.com/bigjohnson?tab=project&page=1
 ## JOLLY version ( DIP and PLCC )
 
 ![8052Explorer_JOLLY](8052Explorer_JOLLY.PNG)
+
+## JOLLY LED BOARD
+
+![8052Explorer_LED](PCB_PCB_8051_led_2023-10-08.png)
