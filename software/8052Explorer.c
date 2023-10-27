@@ -169,7 +169,7 @@ void fourclockmultiplier(void) {
             delay_1000ms();
             delay_1000ms(); */
         }
-
+#warning four clock multiplier activated
 #endif
 
 //------------------------------------------------------------------
