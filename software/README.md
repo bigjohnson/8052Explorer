@@ -14,6 +14,9 @@ Writed in c program language and compiled with SDCC 4.2.0, the cpu selection, os
 
 You need also the gnu make command to compile the firmware.
 
+You can select alternatives of micro, clock frequency and serial port speed choosing the line in Makefile with the correct SDCCFLAGS that you need.
+Comment the not used lines.
+
 Sdcc binary and make must be in command path.
 
 If you want burn a micro with the copiled file, without compiling yourelf, use the firmwares in prebuildhex folder.
