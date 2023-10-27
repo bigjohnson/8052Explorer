@@ -2,13 +2,13 @@
 
 ## An 8052 firmware to gain experiences with the micro, for 
 
-#Atmel
+### Atmel
 
-#89s8252, 89s8253, at89c52
+### 9s8252, 89s8253, at89c52
 
-#Dallas
+### Dallas
 
-#DS89C420, DS89C440, DS89C450  with 4 x pll clock multiplier enabled
+### DS89C420, DS89C440, DS89C450  with 4 x pll clock multiplier enabled
 
 Writed in c program language and compiled with SDCC 4.2.0, the cpu selection, oscillator clock and serial speed are choosed in the makefile.
 
