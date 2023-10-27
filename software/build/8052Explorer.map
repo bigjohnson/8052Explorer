@@ -71,18 +71,18 @@ C:   0000002C  s_GSINIT1
 C:   0000002C  s_GSINIT2                       
 C:   00000036  s_GSINIT3                       
 C:   00000058  s_GSINIT4                       
-C:   0000005A  s_SSEG                          
+C:   00000061  s_SSEG                          
 C:   00000080  l_DSEG                          
 C:   00000082  s_GSFINAL                       
 C:   00000082  s_GSINIT                        
 C:   00000082  s_GSINIT5                       
 C:   00000085  s_CSEG                          
-C:   000000A6  l_SSEG                          
+C:   0000009F  l_SSEG                          
 C:   00000100  l_IRAM                          
-C:   00000C9C  l_CONST                         
-C:   00001240  l_CSEG                          
-C:   000012C5  s_CONST                         
-C:   00001F61  s_XINIT                         
+C:   00000BD3  l_CONST                         
+C:   00000E0A  l_CSEG                          
+C:   00000E8F  s_CONST                         
+C:   00001A62  s_XINIT                         
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 3.
 Hexadecimal  [32-Bits]
@@ -93,7 +93,7 @@ Area                                    Addr        Size        Decimal Bytes (A
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00000000  .__.ABS.                           _startup
+     00000000  .__.ABS.                           _gptrget
      00000000  _codice                            8052Explorer
      00000000  _dati                              8052Explorer
      00000080  _P0                                timer0
@@ -107,11 +107,14 @@ Area                                    Addr        Size        Decimal Bytes (A
      00000083  _DPH                               timer0
      00000083  _P0_3                              timer0
      00000084  _DP1L                              timer0
+     00000084  _DPL1                              timer0
      00000084  _P0_4                              timer0
      00000085  _DP1H                              timer0
+     00000085  _DPH1                              timer0
      00000085  _P0_5                              timer0
+     00000086  _DPS                               timer0
      00000086  _P0_6                              timer0
-     00000086  _SPDR                              timer0
+     00000086  _SPDR                              eeprom
      00000087  _P0_7                              timer0
      00000087  _PCON                              timer0
      00000088  _IT0                               timer0
@@ -126,23 +129,20 @@ Area                                    Addr        Size        Decimal Bytes (A
      0000008C  _TR0                               timer0
      0000008D  _TF0                               timer0
      0000008D  _TH1                               timer0
-     0000008E  _ALE                               timer0
-     0000008E  _AUXR                              timer0
+     0000008E  _ALE                               eeprom
+     0000008E  _AUXR                              eeprom
+     0000008E  _CKCON                             timer0
      0000008E  _TR1                               timer0
-     0000008F  _CLKREG                            timer0
+     0000008F  _CLKREG                            eeprom
      0000008F  _TF1                               timer0
      00000090  _P1                                timer0
      00000090  _P1_0                              timer0
      00000090  _T2                                timer0
+     00000091  _EXIF                              timer0
      00000091  _P1_1                              timer0
      00000091  _T2EX                              timer0
      00000092  _P1_2                              timer0
-     00000093  _P1_3                              timer0
-     00000094  _P1_4                              timer0
-     00000094  _SS                                timer0
-     00000095  _MOSI                              timer0
-     00000095  _P1_5                              timer0
-     00000096  _EECON                             timer0
+     00000092  _RXD1                              timer0
 ASxxxx Linker V03.00 + NoICE + sdld,  page 4.
 Hexadecimal  [32-Bits]
 
@@ -152,20 +152,45 @@ Area                                    Addr        Size        Decimal Bytes (A
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00000096  _MISO                              timer0
+     00000093  _P1_3                              timer0
+     00000093  _TXD1                              timer0
+     00000094  _INT2                              timer0
+     00000094  _P1_4                              timer0
+     00000094  _SS                                eeprom
+     00000095  _INT3                              timer0
+     00000095  _MOSI                              eeprom
+     00000095  _P1_5                              timer0
+     00000096  _CKMOD                             timer0
+     00000096  _EECON                             eeprom
+     00000096  _INT4                              timer0
+     00000096  _MISO                              eeprom
      00000096  _P1_6                              timer0
+     00000097  _INT5                              timer0
      00000097  _P1_7                              timer0
-     00000097  _SCK                               timer0
+     00000097  _SCK                               eeprom
      00000098  _RI                                timer0
+     00000098  _RI_0                              timer0
      00000098  _SCON                              timer0
+     00000098  _SCON0                             timer0
      00000099  _SBUF                              timer0
+     00000099  _SBUF0                             timer0
      00000099  _TI                                timer0
+     00000099  _TI_0                              timer0
      0000009A  _RB8                               timer0
+     0000009A  _RB8_0                             timer0
      0000009B  _TB8                               timer0
+     0000009B  _TB8_0                             timer0
      0000009C  _REN                               timer0
+     0000009C  _REN_0                             timer0
+     0000009D  _ACON                              timer0
      0000009D  _SM2                               timer0
+     0000009D  _SM2_0                             timer0
      0000009E  _SM1                               timer0
+     0000009E  _SM1_0                             timer0
+     0000009F  _FE_0                              timer0
      0000009F  _SM0                               timer0
+     0000009F  _SM0_0                             timer0
+     0000009F  _SM0_FE_0                          timer0
      000000A0  _P2                                timer0
      000000A0  _P2_0                              timer0
      000000A0  __XPAGE                            
@@ -175,24 +200,40 @@ Area                                    Addr        Size        Decimal Bytes (A
      000000A4  _P2_4                              timer0
      000000A5  _P2_5                              timer0
      000000A6  _P2_6                              timer0
-     000000A6  _WDTRST                            timer0
+     000000A6  _WDTRST                            eeprom
      000000A7  _P2_7                              timer0
-     000000A7  _WDTCON                            timer0
+     000000A7  _WDTCON                            eeprom
+ASxxxx Linker V03.00 + NoICE + sdld,  page 5.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+.  .ABS.                            00000000    00000000 =           0. bytes (ABS,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
      000000A8  _EX0                               timer0
      000000A8  _IE                                timer0
      000000A9  _ET0                               timer0
-     000000A9  _SADDR                             timer0
+     000000A9  _SADDR                             eeprom
+     000000A9  _SADDR0                            timer0
      000000AA  _EX1                               timer0
-     000000AA  _SPSR                              timer0
+     000000AA  _SADDR1                            timer0
+     000000AA  _SPSR                              eeprom
      000000AB  _ET1                               timer0
      000000AC  _ES                                timer0
+     000000AC  _ES0                               timer0
      000000AD  _ET2                               timer0
+     000000AE  _ES1                               timer0
      000000AF  _EA                                timer0
      000000B0  _P3                                timer0
      000000B0  _P3_0                              timer0
      000000B0  _RXD                               timer0
+     000000B0  _RXD0                              timer0
+     000000B1  _IP1                               timer0
      000000B1  _P3_1                              timer0
      000000B1  _TXD                               timer0
+     000000B1  _TXD0                              timer0
      000000B2  _INT0                              timer0
      000000B2  _P3_2                              timer0
      000000B3  _INT1                              timer0
@@ -203,7 +244,26 @@ Area                                    Addr        Size        Decimal Bytes (A
      000000B5  _T1                                timer0
      000000B6  _P3_6                              timer0
      000000B6  _WR                                timer0
-ASxxxx Linker V03.00 + NoICE + sdld,  page 5.
+     000000B7  _IPH                               eeprom
+     000000B7  _P3_7                              timer0
+     000000B7  _RD                                timer0
+     000000B8  _IP                                timer0
+     000000B8  _IP0                               timer0
+     000000B8  _LPX0                              timer0
+     000000B8  _PX0                               timer0
+     000000B9  _LPT0                              timer0
+     000000B9  _PT0                               timer0
+     000000B9  _SADEN                             eeprom
+     000000B9  _SADEN0                            timer0
+     000000BA  _LPX1                              timer0
+     000000BA  _PX1                               timer0
+     000000BA  _SADEN1                            timer0
+     000000BB  _LPT1                              timer0
+     000000BB  _PT1                               timer0
+     000000BC  _LPS0                              timer0
+     000000BC  _PS                                timer0
+     000000BD  _LPT2                              timer0
+ASxxxx Linker V03.00 + NoICE + sdld,  page 6.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
@@ -212,17 +272,25 @@ Area                                    Addr        Size        Decimal Bytes (A
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     000000B7  _IPH                               timer0
-     000000B7  _P3_7                              timer0
-     000000B7  _RD                                timer0
-     000000B8  _IP                                timer0
-     000000B8  _PX0                               timer0
-     000000B9  _PT0                               timer0
-     000000B9  _SADEN                             timer0
-     000000BA  _PX1                               timer0
-     000000BB  _PT1                               timer0
-     000000BC  _PS                                timer0
      000000BD  _PT2                               timer0
+     000000BE  _LPS1                              timer0
+     000000BE  _PS1                               timer0
+     000000C0  _RI_1                              timer0
+     000000C0  _SCON1                             timer0
+     000000C1  _SBUF1                             timer0
+     000000C1  _TI_1                              timer0
+     000000C2  _RB8_1                             timer0
+     000000C2  _ROMSIZE                           timer0
+     000000C3  _TB8_1                             timer0
+     000000C4  _PMR                               timer0
+     000000C4  _REN_1                             timer0
+     000000C5  _SM2_1                             timer0
+     000000C5  _STATUS                            timer0
+     000000C6  _SM1_1                             timer0
+     000000C7  _FE_1                              timer0
+     000000C7  _SM0_1                             timer0
+     000000C7  _SM0_FE_1                          timer0
+     000000C7  _TA                                timer0
      000000C8  _CP_RL2                            timer0
      000000C8  _T2CON                             timer0
      000000C8  _T2CON_0                           timer0
@@ -247,23 +315,15 @@ Area                                    Addr        Size        Decimal Bytes (A
      000000CF  _TF2                               timer0
      000000D0  _P                                 timer0
      000000D0  _PSW                               timer0
-     000000D1  _FL                                timer0
+     000000D1  _F1                                timer0
+     000000D1  _FL                                eeprom
      000000D2  _OV                                timer0
      000000D3  _RS0                               timer0
      000000D4  _RS1                               timer0
      000000D5  _F0                                timer0
-     000000D5  _SPCR                              timer0
-     000000D6  _AC                                timer0
-     000000D7  _CY                                timer0
-     000000E0  _A                                 timer0
-     000000E0  _ACC                               timer0
-     000000F0  _B                                 timer0
-     000000F0  _BREG_F0                           timer0
-     000000F1  _BREG_F1                           timer0
-     000000F2  _BREG_F2                           timer0
-     000000F3  _BREG_F3                           timer0
-     000000F4  _BREG_F4                           timer0
-ASxxxx Linker V03.00 + NoICE + sdld,  page 6.
+     000000D5  _FCNTL                             timer0
+     000000D5  _SPCR                              eeprom
+ASxxxx Linker V03.00 + NoICE + sdld,  page 7.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
@@ -272,14 +332,49 @@ Area                                    Addr        Size        Decimal Bytes (A
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
+     000000D6  _AC                                timer0
+     000000D7  _CY                                timer0
+     000000D8  _RWT                               timer0
+     000000D8  _WDCON                             timer0
+     000000D9  _EWT                               timer0
+     000000DA  _WTRF                              timer0
+     000000DB  _WDIF                              timer0
+     000000DC  _PFI                               timer0
+     000000DD  _EPFI                              timer0
+     000000DE  _POR                               timer0
+     000000DF  _SMOD_1                            timer0
+     000000E0  _A                                 eeprom
+     000000E0  _ACC                               timer0
+     000000E8  _EIE                               timer0
+     000000E8  _EX2                               timer0
+     000000E9  _EX3                               timer0
+     000000E9  _MD0                               timer0
+     000000EA  _EX4                               timer0
+     000000EA  _MD1                               timer0
+     000000EB  _EX5                               timer0
+     000000EB  _MD2                               timer0
+     000000EC  _EWDI                              timer0
+     000000F0  _B                                 timer0
+     000000F0  _BREG_F0                           timer0
+     000000F1  _BREG_F1                           timer0
+     000000F1  _EIP1                              timer0
+     000000F2  _BREG_F2                           timer0
+     000000F3  _BREG_F3                           timer0
+     000000F4  _BREG_F4                           timer0
      000000F5  _BREG_F5                           timer0
      000000F5  _B_5                               _gptrget
      000000F6  _BREG_F6                           timer0
      000000F6  _B_6                               _gptrget
      000000F7  _BREG_F7                           timer0
      000000F7  _B_7                               _gptrget
+     000000F8  _EIP0                              timer0
+     000000F8  _LPX2                              timer0
+     000000F9  _LPX3                              timer0
+     000000FA  _LPX4                              timer0
+     000000FB  _LPX5                              timer0
+     000000FC  _LPWDI                             timer0
 
-ASxxxx Linker V03.00 + NoICE + sdld,  page 7.
+ASxxxx Linker V03.00 + NoICE + sdld,  page 8.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
@@ -288,7 +383,7 @@ BSEG_BYTES                          00000020    00000001 =           1. bytes (R
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-ASxxxx Linker V03.00 + NoICE + sdld,  page 8.
+ASxxxx Linker V03.00 + NoICE + sdld,  page 9.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
@@ -297,7 +392,7 @@ REG_BANK_0                          00000000    00000008 =           8. bytes (R
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-ASxxxx Linker V03.00 + NoICE + sdld,  page 9.
+ASxxxx Linker V03.00 + NoICE + sdld,  page 10.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
@@ -306,7 +401,7 @@ REG_BANK_2                          00000010    00000008 =           8. bytes (R
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-ASxxxx Linker V03.00 + NoICE + sdld,  page 10.
+ASxxxx Linker V03.00 + NoICE + sdld,  page 11.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
@@ -315,7 +410,7 @@ REG_BANK_3                          00000018    00000008 =           8. bytes (R
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-ASxxxx Linker V03.00 + NoICE + sdld,  page 11.
+ASxxxx Linker V03.00 + NoICE + sdld,  page 12.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
@@ -324,7 +419,7 @@ BIT_BANK                            00000021    00000001 =           1. bytes (R
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-ASxxxx Linker V03.00 + NoICE + sdld,  page 12.
+ASxxxx Linker V03.00 + NoICE + sdld,  page 13.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
@@ -338,14 +433,14 @@ DSEG                                00000000    00000080 =         128. bytes (R
      0000000A  _tempc                             eeprom
      0000000B  _writeEeprom_PARM_2                eeprom
      0000000D  _bp                                _bp
-     00000032  _tx_tail                           serial
-     00000033  _rx_head                           serial
-     00000034  _rx_tail                           serial
-     00000035  _tx_head                           serial
-     00000056  _millisx                           timer0
-     00000058  _prima                             timer0
+     00000039  _tx_tail                           serial
+     0000003A  _rx_head                           serial
+     0000003B  _rx_tail                           serial
+     0000003C  _tx_head                           serial
+     0000005D  _millisx                           timer0
+     0000005F  _prima                             timer0
 
-ASxxxx Linker V03.00 + NoICE + sdld,  page 13.
+ASxxxx Linker V03.00 + NoICE + sdld,  page 14.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
@@ -359,18 +454,18 @@ OSEG                                0000000E    00000002 =           2. bytes (R
      0000000E  _init_ser_PARM_2                   serial
      0000000E  _init_timer0_PARM_2                timer0
 
-ASxxxx Linker V03.00 + NoICE + sdld,  page 14.
+ASxxxx Linker V03.00 + NoICE + sdld,  page 15.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-SSEG                                0000005A    000000A6 =         166. bytes (REL,OVR)
+SSEG                                00000061    0000009F =         159. bytes (REL,OVR)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     0000005A  __start__stack                     8052Explorer
+     00000061  __start__stack                     8052Explorer
 
-ASxxxx Linker V03.00 + NoICE + sdld,  page 15.
+ASxxxx Linker V03.00 + NoICE + sdld,  page 16.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
@@ -381,7 +476,7 @@ HOME                                00000000    00000029 =          41. bytes (R
       -----  --------------------------------   ------------------------
 C:   00000026  __sdcc_program_startup             8052Explorer
 
-ASxxxx Linker V03.00 + NoICE + sdld,  page 16.
+ASxxxx Linker V03.00 + NoICE + sdld,  page 17.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
@@ -392,7 +487,7 @@ GSINIT0                             00000029    00000003 =           3. bytes (R
       -----  --------------------------------   ------------------------
 C:   00000029  __sdcc_gsinit_startup              
 
-ASxxxx Linker V03.00 + NoICE + sdld,  page 17.
+ASxxxx Linker V03.00 + NoICE + sdld,  page 18.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
@@ -401,7 +496,7 @@ GSINIT2                             0000002C    0000000A =          10. bytes (R
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-ASxxxx Linker V03.00 + NoICE + sdld,  page 18.
+ASxxxx Linker V03.00 + NoICE + sdld,  page 19.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
@@ -412,7 +507,7 @@ GSINIT3                             00000036    00000022 =          34. bytes (R
       -----  --------------------------------   ------------------------
 C:   00000036  __mcs51_genXINIT                   
 
-ASxxxx Linker V03.00 + NoICE + sdld,  page 19.
+ASxxxx Linker V03.00 + NoICE + sdld,  page 20.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
@@ -424,7 +519,7 @@ GSINIT4                             00000058    0000002A =          42. bytes (R
 C:   00000058  __mcs51_genRAMCLEAR                
 C:   0000005E  __mcs51_genXRAMCLEAR               
 
-ASxxxx Linker V03.00 + NoICE + sdld,  page 20.
+ASxxxx Linker V03.00 + NoICE + sdld,  page 21.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
@@ -433,59 +528,57 @@ GSFINAL                             00000082    00000003 =           3. bytes (R
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-ASxxxx Linker V03.00 + NoICE + sdld,  page 21.
-Hexadecimal  [32-Bits]
-
-Area                                    Addr        Size        Decimal Bytes (Attributes)
---------------------------------        ----        ----        ------- ----- ------------
-CSEG                                00000085    00001240 =        4672. bytes (REL,CON,CODE)
-
-      Value  Global                              Global Defined In Module
-      -----  --------------------------------   ------------------------
-C:   00000085  _watchdogRESET                     8052Explorer
-C:   0000008C  _felix                             8052Explorer
-C:   000000A1  _dumpEEPROM                        8052Explorer
-C:   0000026E  _hexEEPROM                         8052Explorer
-C:   000004A9  _dumpCODE                          8052Explorer
-C:   0000069D  _dumpRAM                           8052Explorer
-C:   00000890  _hexCODE                           8052Explorer
-C:   00000AC8  _reset                             8052Explorer
-C:   00000AD3  _start                             8052Explorer
-C:   00000BCE  _p                                 8052Explorer
-C:   00000E02  _HELP                              8052Explorer
-C:   00000E0B  _main                              8052Explorer
-C:   00000F0E  _readEepromAssembler               eeprom
-C:   00000F28  _readEeprom                        eeprom
-C:   00000F3D  _writeEepromAssembler              eeprom
-C:   00000F57  _writeEeprom                       eeprom
-C:   00000F79  _init_ser                          serial
-C:   00000FA9  _SerInt                            serial
-C:   00000FFA  _ser_write_byte                    serial
-C:   0000101F  _ser_byte_avail                    serial
-C:   00001036  _ser_read_byte                     serial
-C:   00001050  _putchar                           serial
-C:   00001064  _getchar                           serial
-C:   0000106C  _init_timer0                       timer0
-C:   0000107D  _millis                            timer0
-C:   00001084  _it_timer0                         timer0
-C:   0000110F  _printf_tiny                       printf_tiny
-C:   00001218  __moduint                          _moduint
-C:   00001265  _puts                              puts
-C:   000012A5  __gptrget                          _gptrget
-C:   000012C1  __sdcc_external_startup            _startup
-
 ASxxxx Linker V03.00 + NoICE + sdld,  page 22.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-CONST                               000012C5    00000C9C =        3228. bytes (REL,CON,CODE)
+CSEG                                00000085    00000E0A =        3594. bytes (REL,CON,CODE)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-C:   000012C5  _acTestString                      8052Explorer
+C:   00000085  __sdcc_external_startup            8052Explorer
+C:   0000008C  _fourclockmultiplier               8052Explorer
+C:   0000009B  _felix                             8052Explorer
+C:   000000B0  _dumpCODE                          8052Explorer
+C:   000002E5  _dumpRAM                           8052Explorer
+C:   000004D9  _hexCODE                           8052Explorer
+C:   000006FF  _reset                             8052Explorer
+C:   0000070A  _start                             8052Explorer
+C:   000007CC  _p                                 8052Explorer
+C:   00000A00  _HELP                              8052Explorer
+C:   00000A09  _main                              8052Explorer
+C:   00000AE8  _readEepromAssembler               eeprom
+C:   00000B02  _readEeprom                        eeprom
+C:   00000B17  _writeEepromAssembler              eeprom
+C:   00000B31  _writeEeprom                       eeprom
+C:   00000B53  _init_ser                          serial
+C:   00000B83  _SerInt                            serial
+C:   00000BCE  _ser_write_byte                    serial
+C:   00000BF3  _ser_byte_avail                    serial
+C:   00000C04  _ser_read_byte                     serial
+C:   00000C1E  _putchar                           serial
+C:   00000C32  _getchar                           serial
+C:   00000C3A  _init_timer0                       timer0
+C:   00000C4B  _millis                            timer0
+C:   00000C52  _it_timer0                         timer0
+C:   00000CDD  _printf_tiny                       printf_tiny
+C:   00000DE6  __moduint                          _moduint
+C:   00000E33  _puts                              puts
+C:   00000E73  __gptrget                          _gptrget
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 23.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CONST                               00000E8F    00000BD3 =        3027. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+C:   00000E8F  _acTestString                      8052Explorer
+
+ASxxxx Linker V03.00 + NoICE + sdld,  page 24.
 
 Files Linked                              [ module(s) ]
 
@@ -517,10 +610,8 @@ c:\Program Files\SDCC\bin\..\lib\small/mcs51.lib
                                           [ crtstart.rel ]
 c:\Program Files\SDCC\bin\..\lib\small/libsdcc.lib
                                           [ _gptrget.rel ]
-c:\Program Files\SDCC\bin\..\lib\small/libsdcc.lib
-                                          [ _startup.rel ]
 
-ASxxxx Linker V03.00 + NoICE + sdld,  page 24.
+ASxxxx Linker V03.00 + NoICE + sdld,  page 25.
 
 User Base Address Definitions
 

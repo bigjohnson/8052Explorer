@@ -1,8 +1,57 @@
+#ifdef MICRO_DS89C420
+  #define MICRO_DS89C4X0
+  #define MICROCONTROLLER_DS89C420
+  #define MCS51REG_ENABLE_WARNINGS
+  #include <mcs51reg.h>
+  //#include <at89S8253.h>
+  #define RAMSIZE 0X3FF
+  #define CODESIZE 0x3FFF
+  #define USERSIZE 0x3F
+  #define ATMELSIZE 0x3F
+  #define CPU "DS89C420"
+  #ifdef MAINFILE
+    #warning setup DS89C420 microcontroller
+  #endif
+#endif
+
+#ifdef MICRO_DS89C440
+  #define MICRO_DS89C4X0
+  #define MICROCONTROLLER_DS89C420
+  #define MCS51REG_ENABLE_WARNINGS
+  #include <mcs51reg.h>
+  //#include <at89S8253.h>
+  #define RAMSIZE 0X3FF
+  #define CODESIZE 0x7FFF
+  #define USERSIZE 0x3F
+  #define ATMELSIZE 0x3F
+  #define CPU "DS89C440"
+  #ifdef MAINFILE
+    #warning setup DS89C440 microcontroller
+  #endif
+#endif
+
+#ifdef MICRO_DS89C450
+  #define MICRO_DS89C4X0
+  #define MICROCONTROLLER_DS89C420
+  #define MCS51REG_ENABLE_WARNINGS
+  #include <mcs51reg.h>
+  //#include <at89S8253.h>
+  #define RAMSIZE 0X3FF
+  #define CODESIZE 0xFFFF
+  #define USERSIZE 0x3F
+  #define ATMELSIZE 0x3F
+  #define CPU "DS89C450"
+  #ifdef MAINFILE
+    #warning setup DS89C450 microcontroller
+  #endif
+#endif
+
 // AT89S8253 tested max clock speed 50MMHz with double data rate
 // over 50MHZ double data rate serial hang
 #ifdef MICRO_AT89S8253
 
   #include <at89S8253.h>
+  #define RAMSIZE 0XFF
   #define EEPROMSIZE 0x7FF
   #define CODESIZE 0x2FFF
   #define USERSIZE 0x3F
@@ -21,6 +70,7 @@
 // at 44.9MHZ program run but the program memory read fail
 // during programming test
 #ifdef MICRO_AT89S8252
+  #define RAMSIZE 0XFF
   #define EEPROMSIZE 0x7FF
   #define CODESIZE 0x1FFF
   #include <at89S8252.h>
@@ -32,13 +82,14 @@
 #endif
 
 #ifdef MICRO_AT89X52
+  #define RAMSIZE 0XFF
   #define EEPROMSIZE 0x7FF
   #define CODESIZE 0x1FFF
   #define MICROCONTROLLER_AT89X52
   #include <mcs51reg.h>
   #define CPU "89C52"
   #ifdef MAINFILE
-    #warning setup AT89S8252 microcontroller
+    #warning setup AT89X52 microcontroller
   #endif
 #endif
 
@@ -49,53 +100,53 @@
       #warning setup 11.0592MHz clock
     #endif
     
-#ifdef DOUBLECLOCK
-    #define MYCLKREG CLKREG_X2
-    #define ONE_SECOND_DIVISOR 407
-    #ifdef MAINFILE
-      #warning setup DOUBLE clock
-    #endif
+    #ifdef DOUBLECLOCK
+      #define MYCLKREG CLKREG_X2
+      #define ONE_SECOND_DIVISOR 407
+      #ifdef MAINFILE
+        #warning setup DOUBLE clock
+      #endif
     
-    #ifdef BPS115200
-      #define MYTH2 0xFF
-      #define MYTL2 0xFA
-      #define BPS "115200"
-      #ifdef MAINFILE
-        #warning setup serial at 115200 bps
+      #ifdef BPS115200
+        #define MYTH2 0xFF
+        #define MYTL2 0xFA
+        #define BPS "115200"
+        #ifdef MAINFILE
+          #warning setup serial at 115200 bps
+        #endif
       #endif
-    #endif
 
-        #ifdef BPS57600
-      #define MYTH2 0xFF
-      #define MYTL2 0xF4
-      #define BPS "57600"
-      #ifdef MAINFILE
-        #warning setup serial at 57600 bps
+      #ifdef BPS57600
+        #define MYTH2 0xFF
+        #define MYTL2 0xF4
+        #define BPS "57600"
+        #ifdef MAINFILE
+          #warning setup serial at 57600 bps
+        #endif
       #endif
-    #endif
 
-   #ifdef BPS38800
-      #define MYTH2 0xFF
-      #define MYTL2 0xE8
-      #define BPS "38800"
-      #ifdef MAINFILE
-        #warning setup serial at 38800 bps
+      #ifdef BPS38800
+        #define MYTH2 0xFF
+        #define MYTL2 0xE8
+        #define BPS "38800"
+        #ifdef MAINFILE
+          #warning setup serial at 38800 bps
+        #endif
       #endif
-    #endif
 
-  #ifdef BPS28800
-      #define MYTH2 0xFF
-      #define MYTL2 0xE8
-      #define BPS "28800"
-      #ifdef MAINFILE
-        #warning setup serial at 28800 bps
+      #ifdef BPS28800
+        #define MYTH2 0xFF
+        #define MYTL2 0xE8
+        #define BPS "28800"
+        #ifdef MAINFILE
+          #warning setup serial at 28800 bps
+        #endif
       #endif
-    #endif
 
-    #ifdef BPS19200
-      #define MYTH2 0xFF
-      #define MYTL2 0xDC
-      #define BPS "19200"
+      #ifdef BPS19200
+        #define MYTH2 0xFF
+        #define MYTL2 0xDC
+        #define BPS "19200"
       #ifdef MAINFILE
         #warning setup serial at 19200 bps
       #endif
